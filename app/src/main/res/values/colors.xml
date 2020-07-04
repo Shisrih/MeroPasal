@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff5b60</color>
+    <color name="colorPrimaryDark">#ff5b60</color>
+    <color name="colorAccent">#000000</color>
+    <color name="redprimaryAccent">#ff5b60</color>
+    <color name="redsecondaryAccent">#e6262b</color>
+    <color name="blueAccent">#1f8ed7</color>
+    <color name="alwayswhite">#FFFFFF</color>
+    <color name="facebook">#3b5998</color>
+    <color name="userloginbtn">#F6D4D5</color>
+
+</resources>
