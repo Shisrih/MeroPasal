@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.meropasal_designs"
+    package="com.example.meropasal"
     >
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+
+
 
     <application
         android:allowBackup="true"
@@ -10,13 +17,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         >
-        <activity android:name=".MainLogin"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Logindashboard"
-            android:screenOrientation="portrait"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
         <activity
-            android:name=".Splashscreen"
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.meropasal.ui.auth.MainLogin"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name="com.example.meropasal.ui.auth.Logindashboard"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name="com.example.meropasal.ui.splashscreen.Splashscreen"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -26,7 +53,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Dashboard" android:screenOrientation="portrait"/>
+        <activity android:name="com.example.meropasal.ui.home.Dashboard" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

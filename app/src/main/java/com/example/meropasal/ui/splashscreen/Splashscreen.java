@@ -1,4 +1,4 @@
-package com.example.meropasal_designs;
+package com.example.meropasal.ui.splashscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,9 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.example.meropasal.ui.home.Dashboard;
+import com.example.meropasal.R;
 
 public class Splashscreen extends AppCompatActivity {
     ImageView logo,clipart;

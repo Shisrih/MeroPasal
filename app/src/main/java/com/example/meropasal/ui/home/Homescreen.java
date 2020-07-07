@@ -1,4 +1,4 @@
-package com.example.meropasal_designs;
+package com.example.meropasal.ui.home;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.meropasal.R;
 
 
 public class Homescreen extends Fragment {

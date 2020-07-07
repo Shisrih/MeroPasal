@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainLogin">
+    tools:context=".ui.auth.MainLogin">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -25,11 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Username or Phone number"
-                android:inputType="textPersonName"
+                android:hint="Enter Email"
+                android:inputType="textEmailAddress"
+                android:id="@+id/lgnemail"
                 android:padding="15dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -40,12 +41,13 @@
             android:layout_marginTop="10dp"
             app:passwordToggleEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordtxtfield"
+            <EditText
+                android:id="@+id/lgnpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your passcode"
                 android:inputType="textPassword"
+
                 android:padding="15dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -53,7 +55,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/lgnbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -74,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/lgnbtn" />
 
     <TextView
         android:id="@+id/textView3"
@@ -86,49 +88,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/lgnbtn" />
 
-    <Button
-        android:id="@+id/facebookbtn2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Sign in with facebbok"
-        android:background="@drawable/facebookbtn"
-        android:textColor="@color/alwayswhite"
-        android:drawableLeft="@drawable/ic_facebook"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/gmailbtn2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="sign in with google"
-        android:drawableLeft="@drawable/ic_google"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/facebookbtn2"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OR"
-        app:layout_constraintBottom_toTopOf="@+id/facebookbtn2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.777" />
+
 
     <ImageView
         android:id="@+id/imageView"

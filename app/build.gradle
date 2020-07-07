@@ -41,4 +41,18 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    //retrofit//
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    //rxjava
+    def rxcalladapter_version = '2.5.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxcalladapter_version"
+
+    //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+
+    //google
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
 }

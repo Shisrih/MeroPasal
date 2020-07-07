@@ -1,4 +1,4 @@
-package com.example.meropasal_designs;
+package com.example.meropasal;
 
 import android.content.Context;
 

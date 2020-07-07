@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Logindashboard">
+    tools:context=".ui.auth.Logindashboard">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/facebooksignin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,14 +28,49 @@
             android:text="Sign in with facebook "
             android:textColor="@color/alwayswhite" />
 
-        <Button
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/googlesignin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+
             android:text="Sign in with google"
             android:drawableLeft="@drawable/ic_google"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tvText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Or"
+                android:textColor="#A5A5A5"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toLeftOf="@id/tvText"
+                android:background="#A5A5A5"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_toRightOf="@id/tvText"
+                android:background="#A5A5A5"
+                />
+
+        </RelativeLayout>
         <Button
             android:id="@+id/passwordsignin"
             android:layout_width="match_parent"
