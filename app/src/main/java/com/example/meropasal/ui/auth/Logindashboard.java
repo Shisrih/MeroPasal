@@ -27,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.shobhitpuri.custombuttons.GoogleSignInButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ import java.util.Arrays;
 public class Logindashboard extends AppCompatActivity implements View.OnClickListener {
 
     private LoginButton fbbtn;
-    private SignInButton googlebtn;
+    private GoogleSignInButton googlebtn;
     private Button pwdbtn;
     private static final String EMAIL = "email";
     private static final int RC_SIGN_IN = 1;
@@ -68,8 +69,9 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         fbbtn = (LoginButton) findViewById(R.id.facebooksignin);
 
 
+
         googlebtn = findViewById(R.id.googlesignin);
-        googlebtn.setSize(SignInButton.SIZE_STANDARD);
+
         googlebtn.setOnClickListener(this);
 
 

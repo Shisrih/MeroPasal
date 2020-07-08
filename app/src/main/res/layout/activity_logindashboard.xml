@@ -17,25 +17,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/facebooksignin"
+        <FrameLayout
+            android:id="@+id/FrameLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/facebookbtn"
-            android:drawableLeft="@drawable/ic_facebook"
-            android:gravity="center"
-            android:text="Sign in with facebook "
-            android:textColor="@color/alwayswhite" />
+            android:layout_height="wrap_content">
 
-        <com.google.android.gms.common.SignInButton
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebooksignin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/facebookbtn"
+                android:drawableLeft="@drawable/ic_facebook"
+                android:gravity="center"
+                android:visibility="gone"
+
+                android:textColor="@color/alwayswhite" />
+
+            <Button
+                android:id="@+id/fb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#416BC1"
+                android:layout_margin="10dp"
+                android:paddingLeft="10dp"
+                android:onClick="onClick"
+                android:text="SIGN IN with FaceBook"
+                    android:drawableLeft="@drawable/ic_facebook"
+                android:textColor="#ffffff"
+               />
+        </FrameLayout>
+
+        <com.shobhitpuri.custombuttons.GoogleSignInButton
             android:id="@+id/googlesignin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
 
-            android:text="Sign in with google"
-            android:drawableLeft="@drawable/ic_google"/>
+
+            android:text="SIGN IN WITH GOOGLE"
+         />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +70,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Or"
+                android:text="OR"
                 android:textColor="#A5A5A5"/>
 
             <View

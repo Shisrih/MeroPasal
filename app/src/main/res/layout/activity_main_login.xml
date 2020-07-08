@@ -45,7 +45,7 @@
                 android:id="@+id/lgnpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your passcode"
+                android:hint="Enter Password"
                 android:inputType="textPassword"
 
                 android:padding="15dp" />

@@ -54,5 +54,10 @@ dependencies {
 
     //google
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    //Custom google btn
+    implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
+
+    //Custom Facebook button
+    implementation 'com.github.medyo:fancybuttons:1.9.1'
 
 }
