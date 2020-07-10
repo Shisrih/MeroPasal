@@ -11,26 +11,28 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="316dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:passwordToggleDrawable="@drawable/ic_account">
 
             <EditText
+                android:id="@+id/lgnemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Email"
+                android:hint="Enter E-mail Address"
+                android:drawableRight="@drawable/ic_account"
                 android:inputType="textEmailAddress"
-                android:id="@+id/lgnemail"
                 android:padding="15dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -47,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
-
+                android:drawableLeft="@drawable/ic_password"
                 android:padding="15dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,18 +93,31 @@
         app:layout_constraintTop_toBottomOf="@+id/lgnbtn" />
 
 
-
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="92dp"
-        android:layout_height="84dp"
+    <TextView
+        android:id="@+id/mainlogintxt"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fredoka_one"
+        android:text="Login to start your mobile shopping experience."
+        android:textColor="@color/textoverlay"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <ImageView
+        android:id="@+id/mainloginclip"
+        android:layout_width="239dp"
+        android:layout_height="277dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginLeft="196dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.003"
         app:srcCompat="@drawable/login" />
 
 
