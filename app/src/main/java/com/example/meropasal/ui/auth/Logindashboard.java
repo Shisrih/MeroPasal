@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
@@ -37,6 +38,7 @@ import java.util.Arrays;
 public class Logindashboard extends AppCompatActivity implements View.OnClickListener {
 
     private LoginButton fbbtn;
+    private TextView signuptxt;
     private GoogleSignInButton googlebtn;
     private Button pwdbtn, fbbutton;
     private static final String EMAIL = "email";
@@ -56,11 +58,20 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logindashboard);
         pwdbtn = findViewById(R.id.passwordsignin);
+        signuptxt = findViewById(R.id.Signuptxt);
 
         pwdbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Logindashboard.this, MainLogin.class);
+                startActivity(intent);
+            }
+        });
+
+        signuptxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Logindashboard.this,Signup.class);
                 startActivity(intent);
             }
         });

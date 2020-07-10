@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
@@ -19,6 +23,8 @@ public class MainLogin extends AppCompatActivity implements AuthContract.View, V
             private LoginPresenter presenter;
             private EditText emailtxt, passwordtxt;
             private Button lgnbtn;
+            private TextView logintxt;
+            private ImageView clipart;
             private SharedPreferences sharedPreferences;
 
     @Override
@@ -29,11 +35,18 @@ public class MainLogin extends AppCompatActivity implements AuthContract.View, V
 
         presenter = new LoginPresenter(this, sharedPreferences);
 
+        Animation logintext = AnimationUtils.loadAnimation(this,R.anim.zoomout);
+        logintxt.startAnimation(logintext);
+
+        Animation loginclipart = AnimationUtils.loadAnimation(this,R.anim.blink);
+        clipart.startAnimation(loginclipart);
 
 
     }
 
     private void viewInit(){
+        logintxt = findViewById(R.id.mainlogintxt);
+        clipart = findViewById(R.id.mainloginclip);
         emailtxt = findViewById(R.id.lgnemail);
         passwordtxt = findViewById(R.id.lgnpassword);
         lgnbtn = findViewById(R.id.lgnbtn);

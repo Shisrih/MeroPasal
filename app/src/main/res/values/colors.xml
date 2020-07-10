@@ -7,6 +7,7 @@
     <color name="redsecondaryAccent">#e6262b</color>
     <color name="blueAccent">#1f8ed7</color>
     <color name="alwayswhite">#FFFFFF</color>
+    <color name="textoverlay">#F8F0F0</color>
     <color name="facebook">#3b5998</color>
     <color name="userloginbtn">#F6D4D5</color>
 
