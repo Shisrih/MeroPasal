@@ -38,7 +38,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
 
     private LoginButton fbbtn;
     private GoogleSignInButton googlebtn;
-    private Button pwdbtn;
+    private Button pwdbtn, fbbutton;
     private static final String EMAIL = "email";
     private static final int RC_SIGN_IN = 1;
 
@@ -67,12 +67,13 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
 
 
         fbbtn = (LoginButton) findViewById(R.id.facebooksignin);
-
+        fbbutton = findViewById(R.id.fb);
 
 
         googlebtn = findViewById(R.id.googlesignin);
 
         googlebtn.setOnClickListener(this);
+        fbbtn.setOnClickListener(this);
 
 
         //Facebook login
@@ -149,6 +150,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
 
 
 
+    //facebook login success
     private void loadUserProfile(AccessToken newAccessToken){
 
         GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
@@ -160,7 +162,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
                     String email = object.getString("email");
                     String id = object.getString("id");
                     String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
-
+                    
                     Toast.makeText(Logindashboard.this, first_name, Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
@@ -180,7 +182,9 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             case R.id.googlesignin:
                 signInWithGoogle();
                 break;
-
+            case R.id.fb:
+                fbbtn.performClick();
+                break;
         }
     }
 
