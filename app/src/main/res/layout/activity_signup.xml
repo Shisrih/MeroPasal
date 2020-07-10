@@ -2,6 +2,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:scrollbars="none"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -55,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="First Name"
+                    android:drawableRight="@drawable/ic_account"
                     android:inputType="text"
                     android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
