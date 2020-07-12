@@ -17,6 +17,15 @@ public class User {
     private String message;
     private String token;
 
+    public User(String firstname, String lastname, String location, String phone, String email, String password){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.location = location;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+    }
+
     public User(String id, String firstname, String lastname, String location, String phone, String email, String password){
         this._id = id;
         this.firstname = firstname;

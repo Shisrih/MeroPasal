@@ -4,10 +4,19 @@ import com.example.meropasal.models.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface AuthApi {
     @POST("auth/login")
     Call<User> login(@Body User user);
+
+    @POST("auth/register")
+    Call<User> register(@Body User user);
+
+    @FormUrlEncoded
+    @POST("auth/checkemail")
+    Call<User> checkEmail(@Field("email") String email);
 
 }

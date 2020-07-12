@@ -32,6 +32,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:id="@+id/addresssign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_address"
@@ -55,6 +56,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/fname"
                     android:hint="First Name"
                     android:drawableRight="@drawable/ic_account"
                     android:inputType="text"
@@ -70,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Last Name"
+                    android:id="@+id/lname"
                     android:drawableRight="@drawable/ic_account"
                     android:inputType="text"
                     android:padding="15dp" />
@@ -84,6 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number"
+                android:id="@+id/phonesign"
                 android:drawableRight="@drawable/ic_phone"
                 android:inputType="number"
                 android:drawablePadding="10dp"
@@ -101,23 +105,52 @@
                 android:hint="E-mail Address"
                 android:drawableRight="@drawable/ic_email"
                 android:drawablePadding="10dp"
+                android:id="@+id/emaisign"
                 android:inputType="textEmailAddress"
                 android:padding="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            android:orientation="horizontal">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="15dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:id="@+id/signpassinp"
+                android:layout_weight="1"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/passwordsign"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/signcpassinp"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/cpasswordsign"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -239,7 +272,7 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.204"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.152" />
