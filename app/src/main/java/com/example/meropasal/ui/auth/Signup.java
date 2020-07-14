@@ -2,6 +2,7 @@ package com.example.meropasal.ui.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -21,11 +22,13 @@ import android.widget.Toast;
 
 import com.example.meropasal.R;
 import com.example.meropasal.models.User;
-import com.example.meropasal.presenters.CheckEmailPresenter;
-import com.example.meropasal.presenters.SignupPresenter;
+import com.example.meropasal.presenters.auth.CheckEmailPresenter;
+import com.example.meropasal.presenters.auth.SignupPresenter;
+import com.example.meropasal.presenters.auth.VerificationPresenter;
 import com.example.meropasal.utiils.Validator;
 import com.example.meropasal.views.AuthContract;
 import com.example.meropasal.views.CheckEmailContract;
+import com.example.meropasal.views.VerificationContract;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -49,14 +52,18 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class Signup extends AppCompatActivity implements AuthContract.View, View.OnClickListener, CheckEmailContract.View {
+public class Signup extends AppCompatActivity implements AuthContract.View, View.OnClickListener, CheckEmailContract.View, VerificationContract.View
+{
+            private String sid  = "";
+            private String fname, lname, address, phone, email, password, cpassword;
 
             private TextView signuptxt;
             private ImageView signupclip;
             private SignupPresenter presenter;
             private CheckEmailPresenter emailpresenter;
-            private EditText addresstxt, fnametxt, lnametxt, phonetxt, emailtxt, passwordtxt, cpasswordtxt;
-            private Button registerbtn, fbbutton;
+            private VerificationPresenter verificationPresenter;
+            private EditText addresstxt, fnametxt, lnametxt, phonetxt, emailtxt, passwordtxt, cpasswordtxt, vcode;
+            private Button registerbtn, fbbutton, btnverify;
             private TextInputLayout passwordinp, cpasswordinp;
             private SharedPreferences sharedPreferences;
             private boolean emailAvailable = true;
@@ -64,7 +71,8 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
             private LoginButton fbbtn;
             private static final String EMAIL = "email";
             private static final int RC_SIGN_IN = 1;
-
+            //Phone Verification Dialog
+             private Dialog dialog;
             private static final String TAG = "Signup";
             //googlesignin client
             GoogleSignInClient mGoogleSignInClient;
@@ -87,6 +95,8 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
         signupclip.startAnimation(clip);
 
         emailpresenter = new CheckEmailPresenter(this);
+
+        verificationPresenter = new VerificationPresenter(this);
 
         emailtxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -122,17 +132,27 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
         cpasswordtxt = findViewById(R.id.cpasswordsign);
         registerbtn = findViewById(R.id.registerbtn);
 
+
+
         passwordinp = findViewById(R.id.signpassinp);
         cpasswordinp = findViewById(R.id.signcpassinp);
 
         fbbtn = (LoginButton) findViewById(R.id.facebooksignin);
         fbbutton = findViewById(R.id.fb);
 
+        dialog = new Dialog(this,R.style.AppTheme_ModalTheme);
+        dialog.setContentView(R.layout.phone_verification);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        vcode = dialog.findViewById(R.id.vcode);
+        btnverify = dialog.findViewById(R.id.btnverify);
+
 
         googlebtn = findViewById(R.id.googlesignin);
 
         googlebtn.setOnClickListener(this);
         fbbtn.setOnClickListener(this);
+        btnverify.setOnClickListener(this);
 
 
         //Facebook login
@@ -181,12 +201,13 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
         });
     }
     private void facebookLogin(){
-        fbbtn.setReadPermissions(Arrays.asList(EMAIL));
         callbackManager = CallbackManager.Factory.create();
 
         fbbtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                finish();
+
             }
 
             @Override
@@ -201,17 +222,9 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
             }
         });
 
-        AccessTokenTracker tokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if(currentAccessToken == null){
 
-                }else{
-                    loadUserProfile(currentAccessToken);
-                }
-            }
-        };
     }
+
 
     private void googleLogin(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -245,31 +258,6 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
 
 
 
-    //facebook login success
-    private void loadUserProfile(AccessToken newAccessToken){
-
-        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    String first_name = object.getString("first_name");
-                    String last_name = object.getString("last_name");
-                    String email = object.getString("email");
-                    String id = object.getString("id");
-                    String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
-
-                    Toast.makeText(Signup.this, first_name, Toast.LENGTH_SHORT).show();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "first_name, last_name, email, id");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
 
 
 
@@ -306,6 +294,7 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
 
     @Override
     public void onSuccess() {
+        dialog.dismiss();
         Toast.makeText(this, "Successfully Registered!", Toast.LENGTH_SHORT).show();
     }
 
@@ -326,6 +315,17 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
     }
 
     @Override
+    public void onCodeSent(String sid) {
+        this.sid = sid;
+    }
+
+    @Override
+    public void onVerified() {
+        vcode.setText("");
+        register();
+    }
+
+    @Override
     public void onFailed(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -336,17 +336,26 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
             case R.id.registerbtn:
                 authenticate();
                 break;
+            case R.id.googlesignin:
+                signInWithGoogle();
+                break;
+            case R.id.fb:
+                fbbtn.performClick();
+                break;
+            case R.id.btnverify:
+                    verifyCode();
+                break;
         }
     }
 
     private void authenticate(){
-        String address = addresstxt.getText().toString();
-        String fname = fnametxt.getText().toString();
-        String lname  = lnametxt.getText().toString();
-        String phone = phonetxt.getText().toString();
-        String email = emailtxt.getText().toString();
-        String password = passwordtxt.getText().toString();
-        String cpassword = cpasswordtxt.getText().toString();
+         address = addresstxt.getText().toString();
+         fname = fnametxt.getText().toString();
+         lname  = lnametxt.getText().toString();
+         phone = phonetxt.getText().toString();
+         email = emailtxt.getText().toString();
+         password = passwordtxt.getText().toString();
+         cpassword = cpasswordtxt.getText().toString();
 
 
 
@@ -414,14 +423,29 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
             emailtxt.requestFocus();
         }
         if(err == 0){
-            register(address, fname, lname, phone, email, password);
+            phoneVerification();
         }
 
 
     }
 
 
-    private void register(String address, String fname, String lname, String phone, String email, String password){
+    private void phoneVerification(){
+       verificationPresenter.sendVerificationCode(phone);
+        dialog.show();
+
+    }
+
+    private void verifyCode(){
+        String code = vcode.getText().toString();
+        if (!Validator.validateFields(code)) {
+            vcode.setError("Enter Verification Code");
+        }else{
+            verificationPresenter.verifyCode(sid, phone, code);
+        }
+    }
+
+    private void register(){
         presenter.register(new User(fname, lname, address, phone, email, password));
     }
 }

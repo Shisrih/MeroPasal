@@ -3,7 +3,6 @@ package com.example.meropasal.ui.auth;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.meropasal.R;
 import com.example.meropasal.models.User;
-import com.example.meropasal.presenters.LoginPresenter;
+import com.example.meropasal.presenters.auth.LoginPresenter;
 import com.example.meropasal.utiils.Validator;
 import com.example.meropasal.views.AuthContract;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,6 +33,7 @@ public class MainLogin extends AppCompatActivity implements AuthContract.View, V
             private SharedPreferences sharedPreferences;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +47,8 @@ public class MainLogin extends AppCompatActivity implements AuthContract.View, V
 
         Animation loginclipart = AnimationUtils.loadAnimation(this,R.anim.blink);
         clipart.startAnimation(loginclipart);
+
+
 
 
         passwordtxt.addTextChangedListener(new TextWatcher() {

@@ -1,6 +1,7 @@
 package com.example.meropasal.network.API;
 
 import com.example.meropasal.models.User;
+import com.example.meropasal.models.VerificationResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,5 +19,18 @@ public interface AuthApi {
     @FormUrlEncoded
     @POST("auth/checkemail")
     Call<User> checkEmail(@Field("email") String email);
+
+
+    @FormUrlEncoded
+    @POST("auth/sendverificationcode")
+    Call<VerificationResponse> sendVerificationCode(@Field("phone") String phone);
+
+
+    @FormUrlEncoded
+    @POST("auth/verifycode")
+    Call<VerificationResponse> verifyCode(@Field("sid") String sid,
+                                          @Field("phone") String phone,
+                                          @Field("code")String code);
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.meropasal.presenters;
+package com.example.meropasal.presenters.auth;
 
 import android.content.SharedPreferences;
 

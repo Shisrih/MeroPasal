@@ -1,4 +1,4 @@
-package com.example.meropasal.presenters;
+package com.example.meropasal.presenters.auth;
 
 import com.example.meropasal.data.interactors.CheckEmailInteractor;
 import com.example.meropasal.views.CheckEmailContract;

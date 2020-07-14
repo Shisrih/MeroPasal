@@ -17,6 +17,8 @@ public class User {
     private String message;
     private String token;
 
+    private User user;
+
     public User(String firstname, String lastname, String location, String phone, String email, String password){
         this.firstname = firstname;
         this.lastname = lastname;
@@ -37,17 +39,20 @@ public class User {
 
     }
 
-    public User(boolean success, String message, String token){
+    public User(boolean success, String message, String token, User user){
         this.success = success;
         this.message = message;
         this.token = token;
+        this.user = user;
     }
     public User (String email, String password){
         this.email = email;
         this.password = password;
     }
 
-
+    public User getUser() {
+        return user;
+    }
 
     public boolean isSuccess() {
         return success;

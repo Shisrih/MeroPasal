@@ -10,6 +10,7 @@ import com.example.meropasal.network.RetrofitIniti;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.views.AuthContract;
 import com.facebook.share.Share;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +48,7 @@ public class LoginInteractor {
                 if(response.isSuccessful()){
 
                     editor.putString(Constants.TOKEN, response.body().getToken());
+
                     editor.commit();
                     authentication(true);
                 }else{

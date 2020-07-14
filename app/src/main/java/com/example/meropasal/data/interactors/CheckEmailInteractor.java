@@ -5,7 +5,7 @@ import android.util.Log;
 import com.example.meropasal.models.User;
 import com.example.meropasal.network.API.AuthApi;
 import com.example.meropasal.network.RetrofitIniti;
-import com.example.meropasal.presenters.CheckEmailPresenter;
+import com.example.meropasal.presenters.auth.CheckEmailPresenter;
 
 import retrofit2.Call;
 import retrofit2.Callback;

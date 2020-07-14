@@ -3,6 +3,7 @@ package com.example.meropasal.ui.auth;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
+import com.example.meropasal.utiils.Constants;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -21,6 +23,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.Share;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -43,6 +46,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
     private Button pwdbtn, fbbutton;
     private static final String EMAIL = "email";
     private static final int RC_SIGN_IN = 1;
+    private SharedPreferences sharedPreferences;
 
     private static final String TAG = "Logindashboard";
 
@@ -60,6 +64,8 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         pwdbtn = findViewById(R.id.passwordsignin);
         signuptxt = findViewById(R.id.Signuptxt);
 
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+
         pwdbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +79,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             public void onClick(View view) {
                 Intent intent = new Intent(Logindashboard.this,Signup.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -103,6 +110,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         fbbtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                finish();
             }
 
             @Override
@@ -117,16 +125,8 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        AccessTokenTracker tokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if(currentAccessToken == null){
 
-                }else{
-                    loadUserProfile(currentAccessToken);
-                }
-            }
-        };
+
     }
 
     private void googleLogin(){
@@ -136,12 +136,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        updateUI(account);
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,31 +156,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
 
 
 
-    //facebook login success
-    private void loadUserProfile(AccessToken newAccessToken){
 
-        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    String first_name = object.getString("first_name");
-                    String last_name = object.getString("last_name");
-                    String email = object.getString("email");
-                    String id = object.getString("id");
-                    String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
-                    
-                    Toast.makeText(Logindashboard.this, first_name, Toast.LENGTH_SHORT).show();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "first_name, last_name, email, id");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
 
     @Override
     public void onClick(View view) {
@@ -209,24 +180,15 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            updateUI(account);
+            finish();
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.d(TAG, "handleSignInResult: " + e.toString());
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
+
         }
     }
 
-    private void updateUI(GoogleSignInAccount account){
-        if(account != null){
-            String personName = account.getDisplayName();
-            String personGivenName = account.getGivenName();
-            String personFamilyName = account.getFamilyName();
-            String personEmail = account.getEmail();
-            String personId = account.getId();
-            Uri personPhoto = account.getPhotoUrl();
-            Toast.makeText(this, personName, Toast.LENGTH_SHORT).show();
-        }
-    }
+
 }
