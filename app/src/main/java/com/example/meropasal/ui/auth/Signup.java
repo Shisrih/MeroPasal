@@ -279,6 +279,7 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
     @Override
     public void onSuccess() {
         dialog.dismiss();
+        finish();
         Toast.makeText(this, "Successfully Registered!", Toast.LENGTH_SHORT).show();
     }
 
@@ -424,6 +425,7 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
         String code = vcode.getText().toString();
         if (!Validator.validateFields(code)) {
             vcode.setError("Enter Verification Code");
+            vcode.requestFocus();
         }else{
             verificationPresenter.verifyCode(sid, phone, code);
         }

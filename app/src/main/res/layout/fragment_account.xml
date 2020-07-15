@@ -44,6 +44,7 @@
                     android:background="@drawable/loginsignupbtn"
                     android:gravity="center"
                     android:text="Login or Register"
+
                     android:textColor="@color/alwayswhite" />
                 <TextView
                     android:id="@+id/fullname"
@@ -53,9 +54,22 @@
                     android:textSize="15dp"
                     android:textStyle="bold"
                     android:visibility="gone"
-
+                    android:text=""
 
                     android:textColor="@color/alwaysblack" />
+
+                <TextView
+                    android:id="@+id/acclink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="13dp"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:text="Manage Account Details"
+
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
 
@@ -82,9 +96,10 @@
             android:layout_width="match_parent"
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
+             android:background="@color/blueAccent"
             android:visibility="gone"
-
             android:gravity="center"
+            android:textColor="@color/alwayswhite"
             android:text="Sign Out"
              />
         <Button
@@ -93,7 +108,8 @@
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
             android:visibility="gone"
-
+            android:background="@color/userloginbtn"
+            android:textColor="@color/redprimaryAccent"
             android:gravity="center"
             android:text="LogOut"
             />

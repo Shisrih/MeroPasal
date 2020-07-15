@@ -46,7 +46,7 @@ public class Account extends Fragment implements ProfileContract.View {
         private Button registerbtn, googlelogout, accountlogout;
         private AccessToken accessToken;
         private CircleImageView profileimg;
-        private TextView fullname;
+        private TextView fullname,acclink;
         private LoginButton fblgn;
         private GoogleSignInClient mGoogleSignInClient;
         private ProfilePresenter profilePresenter;
@@ -79,6 +79,7 @@ public class Account extends Fragment implements ProfileContract.View {
         fullname = root.findViewById(R.id.fullname);
         accountlogout = root.findViewById(R.id.accountlogout);
         googlelogout = root.findViewById(R.id.googlelogout);
+        acclink = root.findViewById(R.id.acclink);
 
         sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
 
@@ -174,14 +175,17 @@ public class Account extends Fragment implements ProfileContract.View {
             registerbtn.setVisibility(View.GONE);
             fblgn.setVisibility(View.VISIBLE);
             fullname.setVisibility(View.VISIBLE);
+            acclink.setVisibility(View.VISIBLE);
         }else if(account == GOOGLE){
             registerbtn.setVisibility(View.GONE);
             googlelogout.setVisibility(View.VISIBLE);
             fullname.setVisibility(View.VISIBLE);
+            acclink.setVisibility(View.VISIBLE);
         }else if(account == ACCOUNT){
             registerbtn.setVisibility(View.GONE);
             accountlogout.setVisibility(View.VISIBLE);
             fullname.setVisibility(View.VISIBLE);
+            acclink.setVisibility(View.VISIBLE);
         }
 
 
@@ -248,6 +252,7 @@ public class Account extends Fragment implements ProfileContract.View {
         accountlogout.setVisibility(View.GONE);
         googlelogout.setVisibility(View.GONE);
         fullname.setVisibility(View.GONE);
+        acclink.setVisibility(View.GONE);
         registerbtn.setVisibility(View.VISIBLE);
         profileimg.setImageResource(R.drawable.fox);
     }

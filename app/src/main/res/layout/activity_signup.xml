@@ -38,7 +38,7 @@
                 android:drawableRight="@drawable/ic_address"
                 android:drawablePadding="10dp"
                 android:hint="Contact Address"
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:padding="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +59,7 @@
                     android:id="@+id/fname"
                     android:hint="First Name"
                     android:drawableRight="@drawable/ic_account"
-                    android:inputType="text"
+                    android:inputType="textCapWords"
                     android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
                     android:hint="Last Name"
                     android:id="@+id/lname"
                     android:drawableRight="@drawable/ic_account"
-                    android:inputType="text"
+                    android:inputType="textCapWords"
                     android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
