@@ -2,10 +2,9 @@ package com.example.meropasal.presenters.auth;
 
 import android.content.SharedPreferences;
 
-import com.example.meropasal.data.interactors.SignupInteractor;
+import com.example.meropasal.data.interactors.auth.SignupInteractor;
 import com.example.meropasal.models.User;
 import com.example.meropasal.views.AuthContract;
-import com.facebook.share.Share;
 
 public class SignupPresenter implements AuthContract.Presenter {
 

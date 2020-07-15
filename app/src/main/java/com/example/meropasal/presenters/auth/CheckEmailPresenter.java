@@ -1,6 +1,6 @@
 package com.example.meropasal.presenters.auth;
 
-import com.example.meropasal.data.interactors.CheckEmailInteractor;
+import com.example.meropasal.data.interactors.auth.CheckEmailInteractor;
 import com.example.meropasal.views.CheckEmailContract;
 
 public class CheckEmailPresenter implements CheckEmailContract.Presenter {

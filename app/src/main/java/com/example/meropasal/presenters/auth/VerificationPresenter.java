@@ -1,6 +1,6 @@
 package com.example.meropasal.presenters.auth;
 
-import com.example.meropasal.data.interactors.VerificationInteractor;
+import com.example.meropasal.data.interactors.auth.VerificationInteractor;
 import com.example.meropasal.views.VerificationContract;
 
 public class VerificationPresenter implements VerificationContract.Presenter {

@@ -1,5 +1,7 @@
 package com.example.meropasal.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
 
 
@@ -15,44 +17,54 @@ public class User {
     //Response
     private boolean success;
     private String message;
+
+    @SerializedName("token")
     private String token;
 
-    private User user;
 
-    public User(String firstname, String lastname, String location, String phone, String email, String password){
+    public User(boolean success, String message, String firstname, String lastname, String location, String phone, String email){
+      this.success = success;
+      this.message = message;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.location = location;
+        this.phone = phone;
+        this.email = email;
+
+    }
+    public User( String firstname, String lastname, String location, String phone, String email){
+
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.location = location;
+        this.phone = phone;
+        this.email = email;
+
+
+    }
+    public User( String firstname, String lastname, String location, String phone, String email, String password){
+
         this.firstname = firstname;
         this.lastname = lastname;
         this.location = location;
         this.phone = phone;
         this.email = email;
         this.password = password;
-    }
-
-    public User(String id, String firstname, String lastname, String location, String phone, String email, String password){
-        this._id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.location = location;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
 
     }
 
-    public User(boolean success, String message, String token, User user){
+    public User(boolean success, String message, String token){
         this.success = success;
         this.message = message;
         this.token = token;
-        this.user = user;
     }
+
     public User (String email, String password){
         this.email = email;
         this.password = password;
     }
 
-    public User getUser() {
-        return user;
-    }
+
 
     public boolean isSuccess() {
         return success;

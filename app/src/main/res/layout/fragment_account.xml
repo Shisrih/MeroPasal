@@ -26,7 +26,7 @@
                 android:layout_height="80dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:src="@drawable/blank_avatar"
+                android:src="@drawable/fox"
                   />
 
             <LinearLayout
@@ -87,7 +87,16 @@
             android:gravity="center"
             android:text="Sign Out"
              />
+        <Button
+            android:id="@+id/accountlogout"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
 
+            android:gravity="center"
+            android:text="LogOut"
+            />
 
     </LinearLayout>
 

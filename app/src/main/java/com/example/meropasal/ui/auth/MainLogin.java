@@ -84,16 +84,18 @@ public class MainLogin extends AppCompatActivity implements AuthContract.View, V
     }
     @Override
     public void onSuccess() {
+        finish();
         Toast.makeText(this, "Logged In", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFailed(String message) {
+        emailtxt.setError(message);
         emailtxt.setText("");
         passwordtxt.setText("");
         emailtxt.requestFocus();
         passwordinp.setPasswordVisibilityToggleEnabled(false);
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

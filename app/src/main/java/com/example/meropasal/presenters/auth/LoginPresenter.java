@@ -2,7 +2,7 @@ package com.example.meropasal.presenters.auth;
 
 import android.content.SharedPreferences;
 
-import com.example.meropasal.data.interactors.LoginInteractor;
+import com.example.meropasal.data.interactors.auth.LoginInteractor;
 import com.example.meropasal.models.User;
 import com.example.meropasal.views.AuthContract;
 

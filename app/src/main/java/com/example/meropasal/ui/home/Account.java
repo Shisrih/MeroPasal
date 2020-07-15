@@ -1,12 +1,15 @@
 package com.example.meropasal.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
+import com.example.meropasal.models.User;
+import com.example.meropasal.presenters.ProfilePresenter;
 import com.example.meropasal.ui.auth.Logindashboard;
+import com.example.meropasal.utiils.Constants;
+import com.example.meropasal.views.ProfileContract;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
@@ -35,15 +42,19 @@ import org.json.JSONObject;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class Account extends Fragment {
-        private Button registerbtn, googlelogout;
+public class Account extends Fragment implements ProfileContract.View {
+        private Button registerbtn, googlelogout, accountlogout;
         private AccessToken accessToken;
         private CircleImageView profileimg;
         private TextView fullname;
         private LoginButton fblgn;
         private GoogleSignInClient mGoogleSignInClient;
+        private ProfilePresenter profilePresenter;
+        private SharedPreferences sharedPreferences;
         private final int FACEBOOK = 1;
         private final int GOOGLE = 2;
+        private final int ACCOUNT = 3;
+    private static final String TAG = "Account";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,7 +77,10 @@ public class Account extends Fragment {
         registerbtn = root.findViewById(R.id.Loginbtn);
         fblgn = root.findViewById(R.id.facebooksignin);
         fullname = root.findViewById(R.id.fullname);
+        accountlogout = root.findViewById(R.id.accountlogout);
         googlelogout = root.findViewById(R.id.googlelogout);
+
+        sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -80,6 +94,20 @@ public class Account extends Fragment {
                 startActivity(intent);
             }
         });
+
+        accountlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor  = sharedPreferences.edit();
+                editor.remove(Constants.TOKEN);
+                editor.commit();
+                unLoadUserProfile();
+            }
+        });
+
+        profilePresenter = new ProfilePresenter(this);
+
+
 
         googlelogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +176,11 @@ public class Account extends Fragment {
             fullname.setVisibility(View.VISIBLE);
         }else if(account == GOOGLE){
             registerbtn.setVisibility(View.GONE);
-            fblgn.setVisibility(View.VISIBLE);
+            googlelogout.setVisibility(View.VISIBLE);
+            fullname.setVisibility(View.VISIBLE);
+        }else if(account == ACCOUNT){
+            registerbtn.setVisibility(View.GONE);
+            accountlogout.setVisibility(View.VISIBLE);
             fullname.setVisibility(View.VISIBLE);
         }
 
@@ -199,19 +231,47 @@ public class Account extends Fragment {
         request.executeAsync();
     }
 
+    //Checking App Account Login
+    private void checkAccountLogin(){
+        String token = sharedPreferences.getString(Constants.TOKEN, null);
 
+        if(token != null){
+            profilePresenter.getProfile(token);
+        }else{
+
+        }
+    }
+
+    //Unloading UI to default
     private void unLoadUserProfile(){
         fblgn.setVisibility(View.GONE);
+        accountlogout.setVisibility(View.GONE);
+        googlelogout.setVisibility(View.GONE);
         fullname.setVisibility(View.GONE);
         registerbtn.setVisibility(View.VISIBLE);
-        profileimg.setImageResource(R.drawable.blank_avatar);
+        profileimg.setImageResource(R.drawable.fox);
     }
 
     @Override
     public void onStart() {
         checkAccessToken();
         checkGoogleLogin();
+        checkAccountLogin();
 
         super.onStart();
+    }
+
+    @Override
+    public void getUser(User user) {
+
+        updateUI(ACCOUNT);
+
+        fullname.setText(user.getFirstname() + " " + user.getLastname());
+
+    }
+
+    @Override
+    public void onFailed(String message) {
+        unLoadUserProfile();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.meropasal.data.interactors;
+package com.example.meropasal.data.interactors.auth;
 
 import android.util.Log;
 

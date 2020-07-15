@@ -71,6 +71,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             public void onClick(View view) {
                 Intent intent = new Intent(Logindashboard.this, MainLogin.class);
                 startActivity(intent);
+                finish();
             }
         });
 
