@@ -46,6 +46,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.shobhitpuri.custombuttons.GoogleSignInButton;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,7 +57,7 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
 {
             private String sid  = "";
             private String fname, lname, address, phone, email, password, cpassword;
-
+            private AccessToken accessToken;
             private TextView signuptxt;
             private ImageView signupclip;
             private SignupPresenter presenter;
@@ -200,14 +201,19 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
             }
         });
     }
+
     private void facebookLogin(){
         callbackManager = CallbackManager.Factory.create();
 
         fbbtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                finish();
+                accessToken = AccessToken.getCurrentAccessToken();
+                if(accessToken == null){
 
+                }else{
+                    facebookLoadUserProfile(accessToken);
+                }
             }
 
             @Override
@@ -266,7 +272,7 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-         finish();
+         googleLoadUserProfile(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -413,7 +419,54 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
 
 
     }
+    private void facebookLoadUserProfile(AccessToken newAccessToken){
 
+        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String first_name = object.getString("first_name");
+                    String last_name = object.getString("last_name");
+                    String email = object.getString("email");
+                    String id = object.getString("id");
+                    String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                    String location = "";
+                    try {
+                        JSONObject jsonobject_location = object.getJSONObject("location");
+                        location = jsonobject_location.getString("name");
+
+                    } catch (Exception e) {
+                        location = "";
+                        e.printStackTrace();
+                    }
+                    register(first_name, last_name, location, "Facebook", email);
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "first_name, last_name, email, id, location{location}");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+    private void googleLoadUserProfile(GoogleSignInAccount account){
+
+
+        String personName = account.getDisplayName();
+        String personGivenName = account.getGivenName();
+        String personFamilyName = account.getFamilyName();
+        String personEmail = account.getEmail();
+        String personId = account.getId();
+        Uri profile_imgURL = account.getPhotoUrl();
+
+        register(personGivenName, personFamilyName, "", "Google", personEmail);
+
+
+    }
 
     private void phoneVerification(){
        verificationPresenter.sendVerificationCode(phone);
@@ -432,6 +485,10 @@ public class Signup extends AppCompatActivity implements AuthContract.View, View
     }
 
     private void register(){
-        presenter.register(new User(fname, lname, address, phone, email, password));
+        presenter.register(new User(fname, lname, address, phone, email, "Account", password));
+    }
+
+    private void register(String fname, String lname, String address, String type, String email){
+        presenter.register(new User(fname, lname, address, "", email, type, "password"));
     }
 }

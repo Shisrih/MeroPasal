@@ -12,6 +12,7 @@ public class User {
     private String location;
     private String phone;
     private String email;
+    private String type;
     private String password;
 
     //Response
@@ -22,7 +23,7 @@ public class User {
     private String token;
 
 
-    public User(boolean success, String message, String firstname, String lastname, String location, String phone, String email){
+    public User(boolean success, String message, String firstname, String lastname, String location, String phone, String email, String type){
       this.success = success;
       this.message = message;
         this.firstname = firstname;
@@ -30,25 +31,28 @@ public class User {
         this.location = location;
         this.phone = phone;
         this.email = email;
+        this.type = type;
 
     }
-    public User( String firstname, String lastname, String location, String phone, String email){
+    public User( String firstname, String lastname, String location, String phone, String email, String type){
 
         this.firstname = firstname;
         this.lastname = lastname;
         this.location = location;
         this.phone = phone;
         this.email = email;
+        this.type = type;
 
 
     }
-    public User( String firstname, String lastname, String location, String phone, String email, String password){
+    public User( String firstname, String lastname, String location, String phone, String email, String type, String password){
 
         this.firstname = firstname;
         this.lastname = lastname;
         this.location = location;
         this.phone = phone;
         this.email = email;
+        this.type = type;
         this.password = password;
 
     }
@@ -64,7 +68,9 @@ public class User {
         this.password = password;
     }
 
-
+    public String getType() {
+        return type;
+    }
 
     public boolean isSuccess() {
         return success;

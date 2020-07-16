@@ -32,10 +32,15 @@ public class SignupInteractor {
         signupresponse.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Log.d(TAG, "onResponse: " + response.message());
+                Log.d(TAG, "onResponse: " + response.body().getMessage() );
                 if(response.isSuccessful()){
 
                     editor.putString(Constants.TOKEN, response.body().getToken());
+                    if(!response.body().getMessage().equals("Account Already Exists")){
+                        editor.putString(Constants.ACCOUNT, "ACCOUNT");
+                    }else{
+
+                    }
                     editor.commit();
                     authentication(true);
                 }else{

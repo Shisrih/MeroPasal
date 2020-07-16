@@ -35,8 +35,9 @@ public class ProfileInteractor {
                     String location = response.body().getLocation();
                     String phone = response.body().getPhone();
                     String email = response.body().getEmail();
+                    String type = response.body().getType();
 
-                    presenter.getUser(new User(fname,lname,location,phone,email));
+                    presenter.getUser(new User(fname,lname,location,phone,email, type));
                 }else{
                     presenter.onFailed("User Not Logged in!");
                 }

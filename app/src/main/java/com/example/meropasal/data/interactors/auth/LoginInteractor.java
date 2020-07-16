@@ -49,7 +49,7 @@ public class LoginInteractor {
                 if(response.isSuccessful()){
 
                     editor.putString(Constants.TOKEN, response.body().getToken());
-
+                    editor.putString(Constants.ACCOUNT, "ACCOUNT");
                     editor.commit();
                     authentication(true);
                 }else{

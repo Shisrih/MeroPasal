@@ -13,7 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
+import com.example.meropasal.models.User;
+import com.example.meropasal.presenters.auth.SignupPresenter;
 import com.example.meropasal.utiils.Constants;
+import com.example.meropasal.views.AuthContract;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -32,14 +35,15 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.shobhitpuri.custombuttons.GoogleSignInButton;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class Logindashboard extends AppCompatActivity implements View.OnClickListener {
-
+public class Logindashboard extends AppCompatActivity implements View.OnClickListener, AuthContract.View {
+    private AccessToken accessToken;
     private LoginButton fbbtn;
     private TextView signuptxt;
     private GoogleSignInButton googlebtn;
@@ -47,7 +51,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
     private static final String EMAIL = "email";
     private static final int RC_SIGN_IN = 1;
     private SharedPreferences sharedPreferences;
-
+    private SignupPresenter presenter;
     private static final String TAG = "Logindashboard";
 
 
@@ -84,7 +88,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-
+         presenter = new SignupPresenter( this , sharedPreferences);
         fbbtn = (LoginButton) findViewById(R.id.facebooksignin);
         fbbutton = findViewById(R.id.fb);
 
@@ -111,7 +115,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         fbbtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                finish();
+                checkAccessToken();
             }
 
             @Override
@@ -129,7 +133,62 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
 
 
     }
+    //Checking Facebook Login Status
+    private void checkAccessToken(){
+        accessToken = AccessToken.getCurrentAccessToken();
 
+        if(accessToken == null){
+
+        }else{
+            facebookLoadUserProfile(accessToken);
+        }
+
+        AccessTokenTracker tokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                if(currentAccessToken == null){
+
+                }else{
+                    facebookLoadUserProfile(currentAccessToken);
+                }
+            }
+        };
+    }
+
+    private void facebookLoadUserProfile(AccessToken newAccessToken){
+
+        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String first_name = object.getString("first_name");
+                    String last_name = object.getString("last_name");
+                    String email = object.getString("email");
+                    String id = object.getString("id");
+                    String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                    String location = "";
+                    try {
+                        JSONObject jsonobject_location = object.getJSONObject("location");
+                        location = jsonobject_location.getString("name");
+
+                    } catch (Exception e) {
+                        location = "";
+                        e.printStackTrace();
+                    }
+                    register(first_name, last_name, location, "Facebook", email);
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "first_name, last_name, email, id, location{location}");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
     private void googleLogin(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -137,6 +196,22 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
+    private void googleLoadUserProfile(GoogleSignInAccount account){
+
+
+
+        String personName = account.getDisplayName();
+        String personGivenName = account.getGivenName();
+        String personFamilyName = account.getFamilyName();
+        String personEmail = account.getEmail();
+        String personId = account.getId();
+        Uri profile_imgURL = account.getPhotoUrl();
+
+        register(personGivenName, personFamilyName, "", "Google", personEmail);
+
+
+
+    }
 
 
     @Override
@@ -181,7 +256,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            finish();
+            googleLoadUserProfile(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -192,4 +267,18 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    @Override
+    public void onSuccess() {
+    finish();
+    }
+
+    @Override
+    public void onFailed(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void register(String fname, String lname, String address, String type, String email){
+        presenter.register(new User(fname, lname, address, "", email, type, "password"));
+    }
 }

@@ -101,6 +101,8 @@ public class Account extends Fragment implements ProfileContract.View {
             public void onClick(View view) {
                 SharedPreferences.Editor editor  = sharedPreferences.edit();
                 editor.remove(Constants.TOKEN);
+                editor.remove(Constants.ACCOUNT);
+
                 editor.commit();
                 unLoadUserProfile();
             }
@@ -174,11 +176,13 @@ public class Account extends Fragment implements ProfileContract.View {
         if(account == FACEBOOK){
             registerbtn.setVisibility(View.GONE);
             fblgn.setVisibility(View.VISIBLE);
+            accountlogout.setVisibility(View.GONE);
             fullname.setVisibility(View.VISIBLE);
             acclink.setVisibility(View.VISIBLE);
         }else if(account == GOOGLE){
             registerbtn.setVisibility(View.GONE);
             googlelogout.setVisibility(View.VISIBLE);
+            accountlogout.setVisibility(View.GONE);
             fullname.setVisibility(View.VISIBLE);
             acclink.setVisibility(View.VISIBLE);
         }else if(account == ACCOUNT){
@@ -238,9 +242,11 @@ public class Account extends Fragment implements ProfileContract.View {
     //Checking App Account Login
     private void checkAccountLogin(){
         String token = sharedPreferences.getString(Constants.TOKEN, null);
+        String account = sharedPreferences.getString(Constants.ACCOUNT, null);
+        Log.d(TAG, "checkAccountLogin: " + account);
+        if(token != null  && account != null ){
+                profilePresenter.getProfile(token);
 
-        if(token != null){
-            profilePresenter.getProfile(token);
         }else{
 
         }
