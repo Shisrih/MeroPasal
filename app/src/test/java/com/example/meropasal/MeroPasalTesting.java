@@ -24,4 +24,19 @@ public class MeroPasalTesting {
             e.printStackTrace();
         }
     }
+    @Test
+    public void signup_test(){
+        Call<User> userCall = authInterface.register(new User("Hemant","Chand","Dillibazar","9841577822","hemantchand72@gmail.com","Account", "password"));
+        try{
+            Response<User> signUpReponse = userCall.execute();
+            assertTrue(signUpReponse.isSuccessful());
+        }catch (Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 }
