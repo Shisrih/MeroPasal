@@ -13,6 +13,7 @@
         android:id="@+id/Fragment"
         android:layout_above="@id/dashboardnavigation"/>
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
         android:layout_height="60dp"

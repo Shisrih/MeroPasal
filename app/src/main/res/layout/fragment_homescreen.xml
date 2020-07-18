@@ -1,34 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
 
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+//Fixed Search Bar in Homescreen//
+    <LinearLayout
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/redprimaryAccent"
+        android:layout_alignParentTop="true"
+        android:padding="15dp"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Search for products"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_search"
+            android:background="@drawable/textfields"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="8">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_filter"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:scrollbars="none"
+        android:layout_below="@id/search"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
-
-
-//Search bar//
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <include
-                android:id="@+id/searchbar"
-                layout="@layout/toolbar"/>
-        </LinearLayout>
 
        //Image slider//
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     app:cardCornerRadius="20dp">
@@ -37,6 +64,7 @@
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            app:sliderIndicatorEnabled="false"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
@@ -202,6 +230,24 @@
                         android:text="Home Appliances" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/categoryrow2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="More Categories"
+                    android:textStyle="italic"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/ic_next"
+                    android:drawablePadding="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"/>
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -235,9 +281,13 @@
         //Exclusive Items Horizantalscroll view//
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="700dp"
+            android:layout_height="500dp"
             android:background="@color/blueAccent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exclusiveitems_stack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
 
@@ -250,3 +300,4 @@
 
 
 </ScrollView>
+</RelativeLayout>
