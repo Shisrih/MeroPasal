@@ -64,7 +64,7 @@
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:sliderIndicatorEnabled="false"
+
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
@@ -279,19 +279,20 @@
 
 
         //Exclusive Items Horizantalscroll view//
-        <HorizontalScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:background="@color/blueAccent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/exclusiveitems_stack"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+
+                android:layout_height="match_parent"/>
 
 
 
-        </HorizontalScrollView>
+        </LinearLayout>
 
 
 

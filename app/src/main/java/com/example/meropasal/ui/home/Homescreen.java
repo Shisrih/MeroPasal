@@ -51,8 +51,13 @@ public class Homescreen extends Fragment {
         sliderview.startAutoCycle();
 
         //Exclusive products horizontal scroll view (Instanciating Adapter)//
-        ExclusiveProductAdapter exadpter = new ExclusiveProductAdapter(root.getContext(),exclusiveProductScrollModelList);
+        ExclusiveProductAdapter exadpter = new ExclusiveProductAdapter(root.getContext(), exclusiveProductScrollModelList);
         exclusiveProductScrollModelList.add(new ExclusiveProductScrollModel(R.drawable.mobilephones,"Iphone 8 Plus(8GB RAM 256GB )","Rs.2000","Rs.3000"));
+        exclusiveProductScrollModelList.add(new ExclusiveProductScrollModel(R.drawable.mobilephones,"Iphone 8 Plus(8GB RAM 256GB )","Rs.2000","Rs.3000"));
+        exclusiveProductScrollModelList.add(new ExclusiveProductScrollModel(R.drawable.mobilephones,"Iphone 8 Plus(8GB RAM 256GB )","Rs.2000","Rs.3000"));
+        exclusiveProductScrollModelList.add(new ExclusiveProductScrollModel(R.drawable.mobilephones,"Iphone 8 Plus(8GB RAM 256GB )","Rs.2000","Rs.3000"));
+
+        exclusiveproductsrecycler.setLayoutManager(new LinearLayoutManager( getContext(), LinearLayoutManager.HORIZONTAL, false));
         exclusiveproductsrecycler.setAdapter(exadpter);
 
 
