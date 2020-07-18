@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MeroPasal_Designs</string>
+    <string name="app_name">MeroPasal</string>
     <string name="title_home">Home</string>
 
     <string name="title_cart">Cart</string>
@@ -12,4 +12,6 @@
 
     <string name="facebook_app_id">2697478583909638</string>
     <string name="fb_login_protocol_scheme">fb2697478583909638</string>
+
+    <string name="server_client_id">558453872618-smjndq39gsau3o4u8fqiusgll7dvv4nr.apps.googleusercontent.com</string>
 </resources>

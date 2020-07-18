@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "445374320080",
+    "firebase_url": "https://meropasal-e33ba.firebaseio.com",
+    "project_id": "meropasal-e33ba",
+    "storage_bucket": "meropasal-e33ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445374320080:android:0e42aaee976e75f4dbbdd5",
+        "android_client_info": {
+          "package_name": "com.example.meropasal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445374320080-2j8qcrkr43ps9irkjtpqfvqoqk6qa3mc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meropasal",
+            "certificate_hash": "fcb6d542947bb0748dabb4e905719036dc16c34e"
+          }
+        },
+        {
+          "client_id": "445374320080-fk5rgrbqd51gv2ief8opgaqu3klm0sct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp3k_VyNxQ4TbNksvOj8RxdpSRL0--wLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445374320080-fk5rgrbqd51gv2ief8opgaqu3klm0sct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

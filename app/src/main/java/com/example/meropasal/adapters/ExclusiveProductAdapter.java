@@ -1,6 +1,7 @@
 package com.example.meropasal.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meropasal.R;
-import com.example.meropasal.models.ExclusiveProductScrollModel;
+import com.example.meropasal.models.products.ExclusiveProductScrollModel;
+import com.example.meropasal.models.products.Product;
+import com.example.meropasal.utiils.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProductAdapter.MyHolder> {
     Context context;
-    List<ExclusiveProductScrollModel> exclusiveProductScrollModelList;
+    List<Product> exclusiveProductScrollModelList;
 
-    public ExclusiveProductAdapter(Context context, List<ExclusiveProductScrollModel> exclusiveProductScrollModelList) {
+    public ExclusiveProductAdapter(Context context, List<Product> exclusiveProductScrollModelList) {
         this.context = context;
         this.exclusiveProductScrollModelList = exclusiveProductScrollModelList;
     }
@@ -37,12 +41,18 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        final ExclusiveProductScrollModel expsm = exclusiveProductScrollModelList.get(position);
+        final Product expsm = exclusiveProductScrollModelList.get(position);
 
-        holder.productimg.setImageResource(expsm.getExlusiveproductimg());
-        holder.productname.setText(expsm.getExclusiveproductname());
-        holder.oldprice.setText(expsm.getPreviousprice());
-        holder.newprice.setText(expsm.getExclusiveprice());
+        String product_img = expsm.getImage()[0];
+        String imgurl = Constants.IMAGE_URL + "products/" + expsm.get_id() + "/" + product_img;
+
+//        Log.d("TAG", "onBindViewHolder: " + imgurl);
+
+        Picasso.get().load(imgurl).into(holder.productimg);
+
+        holder.productname.setText(expsm.getName());
+        holder.oldprice.setText("Rs " + expsm.getPrice());
+        holder.newprice.setText("Rs " + expsm.getPrice());
 
         holder.cartbtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
+
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#FFFFFF"
-        android:layout_marginTop="30dp"
+
         android:elevation="2dp">
 
         <LinearLayout
@@ -22,12 +23,13 @@
             android:padding="15dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Userimg"
+                android:id="@+id/userimg"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:src="@drawable/blank_avatar" />
+                android:src="@drawable/fox"
+                  />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,12 +40,38 @@
                 <Button
                     android:id="@+id/Loginbtn"
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:background="@drawable/loginsignupbtn"
                     android:gravity="center"
                     android:text="Login or Register"
+
                     android:textColor="@color/alwayswhite" />
+                <TextView
+                    android:id="@+id/fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:text=""
+
+                    android:textColor="@color/alwaysblack" />
+
+                <TextView
+                    android:id="@+id/acclink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="13dp"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:text="Manage Account Details"
+
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
 
@@ -53,9 +81,40 @@
         </LinearLayout>
 
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebooksignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/facebookbtn"
+            android:drawableLeft="@drawable/ic_facebook"
+            android:gravity="center"
+            android:visibility="gone"
 
+            android:textColor="@color/alwayswhite" />
 
-
+        <Button
+            android:id="@+id/googlelogout"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+             android:background="@color/blueAccent"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textColor="@color/alwayswhite"
+            android:text="Sign Out"
+             />
+        <Button
+            android:id="@+id/accountlogout"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@color/userloginbtn"
+            android:textColor="@color/redprimaryAccent"
+            android:gravity="center"
+            android:text="LogOut"
+            />
 
     </LinearLayout>
 

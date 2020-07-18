@@ -3,6 +3,7 @@ package com.example.meropasal.ui.auth;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
+import com.example.meropasal.models.user.User;
+import com.example.meropasal.presenters.auth.SignupPresenter;
+import com.example.meropasal.views.AuthContract;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -25,7 +29,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.shobhitpuri.custombuttons.GoogleSignInButton;
@@ -35,15 +38,16 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class Logindashboard extends AppCompatActivity implements View.OnClickListener {
-
+public class Logindashboard extends AppCompatActivity implements View.OnClickListener, AuthContract.View {
+    private AccessToken accessToken;
     private LoginButton fbbtn;
     private TextView signuptxt;
     private GoogleSignInButton googlebtn;
-    private Button pwdbtn;
+    private Button pwdbtn, fbbutton;
     private static final String EMAIL = "email";
     private static final int RC_SIGN_IN = 1;
-
+    private SharedPreferences sharedPreferences;
+    private SignupPresenter presenter;
     private static final String TAG = "Logindashboard";
 
 
@@ -60,11 +64,14 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         pwdbtn = findViewById(R.id.passwordsignin);
         signuptxt = findViewById(R.id.Signuptxt);
 
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+
         pwdbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Logindashboard.this, MainLogin.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -73,17 +80,19 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             public void onClick(View view) {
                 Intent intent = new Intent(Logindashboard.this,Signup.class);
                 startActivity(intent);
+                finish();
             }
         });
 
-
+         presenter = new SignupPresenter( this , sharedPreferences);
         fbbtn = (LoginButton) findViewById(R.id.facebooksignin);
-
+        fbbutton = findViewById(R.id.fb);
 
 
         googlebtn = findViewById(R.id.googlesignin);
 
         googlebtn.setOnClickListener(this);
+        fbbtn.setOnClickListener(this);
 
 
         //Facebook login
@@ -102,6 +111,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         fbbtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                checkAccessToken();
             }
 
             @Override
@@ -116,18 +126,65 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+
+
+    }
+    //Checking Facebook Login Status
+    private void checkAccessToken(){
+        accessToken = AccessToken.getCurrentAccessToken();
+
+        if(accessToken == null){
+
+        }else{
+            facebookLoadUserProfile(accessToken);
+        }
+
         AccessTokenTracker tokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
                 if(currentAccessToken == null){
 
                 }else{
-                    loadUserProfile(currentAccessToken);
+                    facebookLoadUserProfile(currentAccessToken);
                 }
             }
         };
     }
 
+    private void facebookLoadUserProfile(AccessToken newAccessToken){
+
+        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    String first_name = object.getString("first_name");
+                    String last_name = object.getString("last_name");
+                    String email = object.getString("email");
+                    String id = object.getString("id");
+                    String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                    String location = "";
+                    try {
+                        JSONObject jsonobject_location = object.getJSONObject("location");
+                        location = jsonobject_location.getString("name");
+
+                    } catch (Exception e) {
+                        location = "";
+                        e.printStackTrace();
+                    }
+                    register(first_name, last_name, location, "Facebook", email);
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "first_name, last_name, email, id, location{location}");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
     private void googleLogin(){
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -135,12 +192,23 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//        updateUI(account);
+    private void googleLoadUserProfile(GoogleSignInAccount account){
+
+
+
+        String personName = account.getDisplayName();
+        String personGivenName = account.getGivenName();
+        String personFamilyName = account.getFamilyName();
+        String personEmail = account.getEmail();
+        String personId = account.getId();
+        Uri profile_imgURL = account.getPhotoUrl();
+
+        register(personGivenName, personFamilyName, "", "Google", personEmail);
+
+
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -160,30 +228,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
 
 
 
-    private void loadUserProfile(AccessToken newAccessToken){
 
-        GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    String first_name = object.getString("first_name");
-                    String last_name = object.getString("last_name");
-                    String email = object.getString("email");
-                    String id = object.getString("id");
-                    String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
-
-                    Toast.makeText(Logindashboard.this, first_name, Toast.LENGTH_SHORT).show();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "first_name, last_name, email, id");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }
 
     @Override
     public void onClick(View view) {
@@ -191,7 +236,9 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             case R.id.googlesignin:
                 signInWithGoogle();
                 break;
-
+            case R.id.fb:
+                fbbtn.performClick();
+                break;
         }
     }
 
@@ -205,24 +252,29 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            updateUI(account);
+            googleLoadUserProfile(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.d(TAG, "handleSignInResult: " + e.toString());
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
+
         }
     }
 
-    private void updateUI(GoogleSignInAccount account){
-        if(account != null){
-            String personName = account.getDisplayName();
-            String personGivenName = account.getGivenName();
-            String personFamilyName = account.getFamilyName();
-            String personEmail = account.getEmail();
-            String personId = account.getId();
-            Uri personPhoto = account.getPhotoUrl();
-            Toast.makeText(this, personName, Toast.LENGTH_SHORT).show();
-        }
+
+    @Override
+    public void onSuccess() {
+    finish();
+    }
+
+    @Override
+    public void onFailed(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void register(String fname, String lname, String address, String type, String email){
+        presenter.register(new User(fname, lname, address, "", email, type, "password"));
     }
 }
