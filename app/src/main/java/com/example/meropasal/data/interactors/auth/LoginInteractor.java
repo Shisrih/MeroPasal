@@ -2,20 +2,16 @@ package com.example.meropasal.data.interactors.auth;
 
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.meropasal.models.User;
+import com.example.meropasal.models.user.User;
 import com.example.meropasal.network.API.AuthApi;
 import com.example.meropasal.network.RetrofitIniti;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.views.AuthContract;
-import com.facebook.share.Share;
-import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 /*

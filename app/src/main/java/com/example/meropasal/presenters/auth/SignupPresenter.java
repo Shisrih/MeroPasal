@@ -3,7 +3,7 @@ package com.example.meropasal.presenters.auth;
 import android.content.SharedPreferences;
 
 import com.example.meropasal.data.interactors.auth.SignupInteractor;
-import com.example.meropasal.models.User;
+import com.example.meropasal.models.user.User;
 import com.example.meropasal.views.AuthContract;
 
 public class SignupPresenter implements AuthContract.Presenter {

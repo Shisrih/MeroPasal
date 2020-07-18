@@ -1,7 +1,7 @@
-package com.example.meropasal.presenters;
+package com.example.meropasal.presenters.user;
 
-import com.example.meropasal.data.interactors.ProfileInteractor;
-import com.example.meropasal.models.User;
+import com.example.meropasal.data.interactors.user.ProfileInteractor;
+import com.example.meropasal.models.user.User;
 import com.example.meropasal.views.ProfileContract;
 
 public class ProfilePresenter implements ProfileContract.Presenter {

@@ -1,4 +1,4 @@
-package com.example.meropasal.models;
+package com.example.meropasal.models.user;
 
 import com.google.gson.annotations.SerializedName;
 

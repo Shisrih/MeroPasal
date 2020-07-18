@@ -1,6 +1,6 @@
 package com.example.meropasal;
 
-import com.example.meropasal.models.User;
+import com.example.meropasal.models.user.User;
 import com.example.meropasal.network.API.AuthApi;
 import com.example.meropasal.network.RetrofitIniti;
 

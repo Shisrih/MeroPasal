@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
-import com.example.meropasal.models.User;
+import com.example.meropasal.models.user.User;
 import com.example.meropasal.presenters.auth.LoginPresenter;
 import com.example.meropasal.utiils.Validator;
 import com.example.meropasal.views.AuthContract;

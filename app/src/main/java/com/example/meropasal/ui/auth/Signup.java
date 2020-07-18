@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meropasal.R;
-import com.example.meropasal.models.User;
+import com.example.meropasal.models.user.User;
 import com.example.meropasal.presenters.auth.CheckEmailPresenter;
 import com.example.meropasal.presenters.auth.SignupPresenter;
 import com.example.meropasal.presenters.auth.VerificationPresenter;
@@ -30,7 +30,6 @@ import com.example.meropasal.views.AuthContract;
 import com.example.meropasal.views.CheckEmailContract;
 import com.example.meropasal.views.VerificationContract;
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -46,12 +45,9 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.shobhitpuri.custombuttons.GoogleSignInButton;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Arrays;
 
 public class Signup extends AppCompatActivity implements AuthContract.View, View.OnClickListener, CheckEmailContract.View, VerificationContract.View
 {

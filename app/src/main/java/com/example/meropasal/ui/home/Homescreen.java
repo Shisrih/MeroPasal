@@ -10,12 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.example.meropasal.R;
 import com.example.meropasal.adapters.ExclusiveProductAdapter;
 import com.example.meropasal.adapters.ImageSliderAdapter;
-import com.example.meropasal.models.ExclusiveProductScrollModel;
+import com.example.meropasal.models.products.ExclusiveProductScrollModel;
+import com.example.meropasal.models.products.Product;
+import com.example.meropasal.presenters.products.ProductPresenter;
+import com.example.meropasal.views.ProductContract;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -24,10 +28,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Homescreen extends Fragment {
+public class Homescreen extends Fragment implements ProductContract.View {
     private SliderView sliderview;
-    private List<ExclusiveProductScrollModel> exclusiveProductScrollModelList = new ArrayList<>();
+//    private List<Product> exclusiveProductList = new ArrayList<>();
     private RecyclerView exclusiveproductsrecycler;
+
+    private ProductPresenter productPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,10 +56,9 @@ public class Homescreen extends Fragment {
         sliderview.setScrollTimeInSec(3); //set scroll delay in seconds :
         sliderview.startAutoCycle();
 
-        //Exclusive products horizontal scroll view (Instanciating Adapter)//
-        ExclusiveProductAdapter exadpter = new ExclusiveProductAdapter(root.getContext(),exclusiveProductScrollModelList);
-        exclusiveProductScrollModelList.add(new ExclusiveProductScrollModel(R.drawable.mobilephones,"Iphone 8 Plus(8GB RAM 256GB )","Rs.2000","Rs.3000"));
-        exclusiveproductsrecycler.setAdapter(exadpter);
+        productPresenter = new ProductPresenter(this);
+
+        productPresenter.getExclusiveProducts();
 
 
 
@@ -63,5 +68,20 @@ public class Homescreen extends Fragment {
 
 
         return root;
+    }
+
+    @Override
+    public void getExclusiveProducts(List<Product> products) {
+        //Exclusive products horizontal scroll view (Instanciating Adapter)//
+        ExclusiveProductAdapter exadpter = new ExclusiveProductAdapter(getContext(),products);
+
+        exclusiveproductsrecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        exclusiveproductsrecycler.setAdapter(exadpter);
+    }
+
+    @Override
+    public void onFailed(String message) {
+        Toast.makeText(getContext(),   message, Toast.LENGTH_SHORT).show();
     }
 }

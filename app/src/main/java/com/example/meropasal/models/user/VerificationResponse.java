@@ -1,4 +1,4 @@
-package com.example.meropasal.models;
+package com.example.meropasal.models.user;
 
 public class VerificationResponse {
 

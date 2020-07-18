@@ -1,17 +1,21 @@
 package com.example.meropasal.views;
 
+import com.example.meropasal.models.products.Product;
 import com.example.meropasal.models.user.User;
 
-public interface ProfileContract {
+import java.util.List;
+
+public interface ProductContract {
+
     interface View{
-        void getUser(User user);
+        void getExclusiveProducts(List<Product> products);
         void onFailed(String message);
     }
 
 
     //User Authentication Presenter
     interface Presenter{
-        void getUser(User user);
+        void getExclusiveProducts(List<Product> products);
         void onFailed(String message);
     }
 }

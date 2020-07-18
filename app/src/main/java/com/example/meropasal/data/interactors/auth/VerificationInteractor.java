@@ -2,7 +2,7 @@ package com.example.meropasal.data.interactors.auth;
 
 import android.util.Log;
 
-import com.example.meropasal.models.VerificationResponse;
+import com.example.meropasal.models.user.VerificationResponse;
 import com.example.meropasal.network.API.AuthApi;
 import com.example.meropasal.network.RetrofitIniti;
 import com.example.meropasal.presenters.auth.VerificationPresenter;

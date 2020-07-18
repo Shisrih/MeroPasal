@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
 
     android:layout_width="match_parent"
@@ -44,8 +45,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:scrollbars="none"
-        android:layout_below="@id/search"
+        android:layout_below="@+id/search"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,7 +66,7 @@
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:sliderIndicatorEnabled="false"
+
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
@@ -91,6 +93,7 @@
             android:layout_marginTop="5dp">
 
             //Category 1st row
+
 
             <LinearLayout
                 android:id="@+id/categoryrow1"
@@ -279,9 +282,9 @@
 
 
         //Exclusive Items Horizantalscroll view//
-        <HorizontalScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="wrap_content"
             android:background="@color/blueAccent">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -291,7 +294,7 @@
 
 
 
-        </HorizontalScrollView>
+        </LinearLayout>
 
 
 

@@ -1,8 +1,8 @@
-package com.example.meropasal.data.interactors;
+package com.example.meropasal.data.interactors.user;
 
 import android.util.Log;
 
-import com.example.meropasal.models.User;
+import com.example.meropasal.models.user.User;
 import com.example.meropasal.network.API.UserApi;
 import com.example.meropasal.network.RetrofitIniti;
 import com.example.meropasal.views.ProfileContract;

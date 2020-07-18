@@ -15,11 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.meropasal.R;
-import com.example.meropasal.models.User;
-import com.example.meropasal.presenters.ProfilePresenter;
+import com.example.meropasal.models.user.User;
+import com.example.meropasal.presenters.user.ProfilePresenter;
 import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.views.ProfileContract;
