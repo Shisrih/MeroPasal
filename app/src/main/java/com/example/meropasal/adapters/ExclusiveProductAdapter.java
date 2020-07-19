@@ -1,7 +1,6 @@
 package com.example.meropasal.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meropasal.R;
-import com.example.meropasal.models.products.ExclusiveProductScrollModel;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.utiils.Constants;
 import com.squareup.picasso.Picasso;
@@ -22,8 +20,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProductAdapter.MyHolder> {
-    Context context;
-    List<Product> exclusiveProductScrollModelList;
+   private Context context;
+    private List<Product> exclusiveProductScrollModelList;
 
     public ExclusiveProductAdapter(Context context, List<Product> exclusiveProductScrollModelList) {
         this.context = context;

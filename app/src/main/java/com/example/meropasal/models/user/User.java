@@ -22,7 +22,7 @@ public class User {
     @SerializedName("token")
     private String token;
 
-
+    //For Profile Response
     public User(boolean success, String message, String firstname, String lastname, String location, String phone, String email, String type){
       this.success = success;
       this.message = message;
@@ -32,19 +32,18 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.type = type;
-
     }
-    public User( String firstname, String lastname, String location, String phone, String email, String type){
 
+    public User( String firstname, String lastname, String location, String phone, String email, String type){
         this.firstname = firstname;
         this.lastname = lastname;
         this.location = location;
         this.phone = phone;
         this.email = email;
         this.type = type;
-
-
     }
+
+    //For Registration Request
     public User( String firstname, String lastname, String location, String phone, String email, String type, String password){
 
         this.firstname = firstname;
@@ -57,12 +56,14 @@ public class User {
 
     }
 
+    //For Auth Response
     public User(boolean success, String message, String token){
         this.success = success;
         this.message = message;
         this.token = token;
     }
 
+    //For Login Request
     public User (String email, String password){
         this.email = email;
         this.password = password;

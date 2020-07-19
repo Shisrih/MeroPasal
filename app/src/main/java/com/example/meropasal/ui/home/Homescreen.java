@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,26 +15,26 @@ import android.widget.Toast;
 
 
 import com.example.meropasal.R;
+import com.example.meropasal.adapters.CategoriesAdapter;
 import com.example.meropasal.adapters.ExclusiveProductAdapter;
 import com.example.meropasal.adapters.ImageSliderAdapter;
-import com.example.meropasal.models.products.ExclusiveProductScrollModel;
+import com.example.meropasal.models.products.Category;
 import com.example.meropasal.models.products.Product;
-import com.example.meropasal.presenters.products.ProductPresenter;
-import com.example.meropasal.views.ProductContract;
+import com.example.meropasal.presenters.home.HomePresenter;
+import com.example.meropasal.views.HomeContract;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class Homescreen extends Fragment implements ProductContract.View {
+public class Homescreen extends Fragment implements HomeContract.View {
     private SliderView sliderview;
-//    private List<Product> exclusiveProductList = new ArrayList<>();
-    private RecyclerView exclusiveproductsrecycler;
 
-    private ProductPresenter productPresenter;
+    private RecyclerView exclusiveproductsrecycler, categoriesview;
+
+    private HomePresenter homePresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +43,7 @@ public class Homescreen extends Fragment implements ProductContract.View {
         View root = inflater.inflate(R.layout.fragment_homescreen,container,false);
         sliderview = root.findViewById(R.id.imageSlider);
         exclusiveproductsrecycler = root.findViewById(R.id.exclusiveitems_stack);
-
+        categoriesview = root.findViewById(R.id.categoryrow);
 
 
         //Instanciating the image-slider adapter in the buymeds fragment//
@@ -56,9 +57,10 @@ public class Homescreen extends Fragment implements ProductContract.View {
         sliderview.setScrollTimeInSec(3); //set scroll delay in seconds :
         sliderview.startAutoCycle();
 
-        productPresenter = new ProductPresenter(this);
+        homePresenter = new HomePresenter(this);
 
-        productPresenter.getExclusiveProducts();
+        homePresenter.getCategories("6");
+        homePresenter.getExclusiveProducts();
 
 
 
@@ -68,6 +70,13 @@ public class Homescreen extends Fragment implements ProductContract.View {
 
 
         return root;
+    }
+
+    @Override
+    public void getCategories(List<Category> categories) {
+        CategoriesAdapter adapter = new CategoriesAdapter(getContext(), categories);
+        categoriesview.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        categoriesview.setAdapter(adapter);
     }
 
     @Override
