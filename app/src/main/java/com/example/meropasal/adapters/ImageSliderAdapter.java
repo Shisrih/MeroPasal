@@ -42,7 +42,7 @@ public class ImageSliderAdapter extends SliderViewAdapter<SliderViewHolder> {
             case 2:
                 Glide.with(viewHolder.itemView)
                         .load(R.drawable.ad3)
-
+                        .fitCenter()
                         .into(viewHolder.sliderImageView);
                 break;
             case 3:
