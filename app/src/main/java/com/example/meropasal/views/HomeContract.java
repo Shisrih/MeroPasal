@@ -9,6 +9,7 @@ import java.util.List;
 public interface HomeContract {
 
     interface View{
+        void getLatestProducts(List<Product> products);
         void getCategories(List<Category> categories);
         void getExclusiveProducts(List<Product> products);
         void onFailed(String message);
@@ -17,6 +18,7 @@ public interface HomeContract {
 
     //User Authentication Presenter
     interface Presenter{
+        void getLatestProducts(List<Product> products);
         void getCategories(List<Category> categories);
         void getExclusiveProducts(List<Product> products);
         void onFailed(String message);

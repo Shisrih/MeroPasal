@@ -17,9 +17,13 @@ public class Product {
     private String detail;
     private String brand;
     private String[] image;
+    private String createdAt;
+    private String updatedAt;
+
 
     @SerializedName("category_id")
     private Category category;
+
 
 
     public Product( boolean success, String message, List<Product> products) {
@@ -40,11 +44,13 @@ public class Product {
         return products;
     }
 
-    public Product(String _id, String name, String price, String detail, String brand, String[] image, Category category) {
+    public Product(String _id, String name, String price, String detail, String brand, String[] image, Category category, String createdAt, String updatedAt) {
         this._id = _id;
         this.name = name;
         this.price = price;
         this.detail = detail;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.brand = brand;
         this.image = image;
         this.category = category;
@@ -73,6 +79,8 @@ public class Product {
     public String[] getImage() {
         return image;
     }
+
+
 
     public Category getCategory() {
         return category;

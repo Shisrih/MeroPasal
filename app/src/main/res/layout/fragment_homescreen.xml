@@ -39,13 +39,20 @@
 
     </LinearLayout>
 
-    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/search"
+        android:id="@+id/pullToRefresh"
+        android:background="@drawable/background"
+        android:layout_height="wrap_content"
+        >
+    <androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+
     android:scrollbars="none"
-        android:layout_below="@+id/search"
+
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -163,6 +170,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
             android:background="@color/blueAccent">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -175,10 +183,46 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cultured"
+            android:padding="15dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Latest Entries"
+                android:textColor="@color/alwaysblack"
+                android:textStyle="italic"
+                android:drawableLeft="@drawable/ic_shopping_bag"
+                android:drawablePadding="5dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cultured">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeproductsview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+
+
 
 
     </LinearLayout>
 
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

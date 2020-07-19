@@ -26,6 +26,7 @@ import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -70,6 +71,8 @@ public class Account extends Fragment implements ProfileContract.View {
 
         return root;
     }
+
+
     //initializing view Components
     private void viewInit(View root){
         profileimg = root.findViewById(R.id.userimg);
@@ -98,14 +101,13 @@ public class Account extends Fragment implements ProfileContract.View {
         accountlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences.Editor editor  = sharedPreferences.edit();
-                editor.remove(Constants.TOKEN);
-                editor.remove(Constants.ACCOUNT);
-
-                editor.commit();
-                unLoadUserProfile();
+                logout();
             }
         });
+
+
+
+
 
         profilePresenter = new ProfilePresenter(this);
 
@@ -120,6 +122,14 @@ public class Account extends Fragment implements ProfileContract.View {
     }
 
 
+    private void logout(){
+        SharedPreferences.Editor editor  = sharedPreferences.edit();
+        editor.remove(Constants.TOKEN);
+        editor.remove(Constants.ACCOUNT);
+
+        editor.commit();
+        unLoadUserProfile();
+    }
     //Checking Facebook Login Status
     private void checkAccessToken(){
         accessToken = AccessToken.getCurrentAccessToken();
@@ -134,7 +144,7 @@ public class Account extends Fragment implements ProfileContract.View {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
                 if(currentAccessToken == null){
-                    unLoadUserProfile();
+                    logout();
                 }else{
                     facebookLoadUserProfile(currentAccessToken);
                 }
@@ -200,7 +210,7 @@ public class Account extends Fragment implements ProfileContract.View {
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        unLoadUserProfile();
+                        logout();
                     }
                 });
     }
@@ -242,6 +252,7 @@ public class Account extends Fragment implements ProfileContract.View {
     private void checkAccountLogin(){
         String token = sharedPreferences.getString(Constants.TOKEN, null);
         String account = sharedPreferences.getString(Constants.ACCOUNT, null);
+
         Log.d(TAG, "checkAccountLogin: " + account);
         if(token != null  && account != null ){
                 profilePresenter.getProfile(token);

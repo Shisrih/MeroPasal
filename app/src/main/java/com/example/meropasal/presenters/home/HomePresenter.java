@@ -22,8 +22,17 @@ public class HomePresenter implements HomeContract.Presenter {
         interactor.getExclusiveProducts();
     }
 
+    public void getLatestProducts(){
+        interactor.getLatestProducts();
+    }
+
     public void getCategories(String limit){
         interactor.getCategories(limit);
+    }
+
+    @Override
+    public void getLatestProducts(List<Product> products) {
+        view.getLatestProducts(products);
     }
 
     @Override

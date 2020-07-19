@@ -14,6 +14,11 @@ public interface ProductApi {
     @GET("product")
     Call<Product> getExclusiveProducts();
 
+    @GET("product/order/desc")
+    Call<Product> getLatestProducts();
+
     @GET("category/{limit}")
     Call<Category> getCategoriesWithLimit(@Path("limit") String limit);
+
+
 }

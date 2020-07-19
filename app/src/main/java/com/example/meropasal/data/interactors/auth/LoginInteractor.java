@@ -44,10 +44,13 @@ public class LoginInteractor {
 
                 if(response.isSuccessful()){
 
-                    editor.putString(Constants.TOKEN, response.body().getToken());
                     editor.putString(Constants.ACCOUNT, "ACCOUNT");
+                    editor.putString(Constants.TOKEN, response.body().getToken());
+                    editor.putString(Constants.USER_ID, response.body().get_id());
+                    Log.d(TAG, "onResponse: " + response.body().get_id());
                     editor.commit();
                     authentication(true);
+
                 }else{
 
                     authentication(false);

@@ -36,6 +36,8 @@ public class SignupInteractor {
                 if(response.isSuccessful()){
 
                     editor.putString(Constants.TOKEN, response.body().getToken());
+                    editor.putString(Constants.USER_ID, response.body().get_id());
+
                     if(!response.body().getMessage().equals("Account Already Exists")){
                         editor.putString(Constants.ACCOUNT, "ACCOUNT");
                     }else{

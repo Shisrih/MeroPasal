@@ -57,10 +57,11 @@ public class User {
     }
 
     //For Auth Response
-    public User(boolean success, String message, String token){
+    public User(boolean success, String message, String token, String _id){
         this.success = success;
         this.message = message;
         this.token = token;
+        this._id = _id;
     }
 
     //For Login Request

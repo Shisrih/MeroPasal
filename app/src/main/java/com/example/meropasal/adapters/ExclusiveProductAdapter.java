@@ -1,19 +1,25 @@
 package com.example.meropasal.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meropasal.R;
+import com.example.meropasal.data.database.DbHelper;
+import com.example.meropasal.models.products.CartModel;
 import com.example.meropasal.models.products.Product;
+import com.example.meropasal.ui.auth.MainLogin;
+import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
 import com.squareup.picasso.Picasso;
 
@@ -41,21 +47,30 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         final Product expsm = exclusiveProductScrollModelList.get(position);
 
-        String product_img = expsm.getImage()[0];
+       final String product_img = expsm.getImage()[0];
         String imgurl = Constants.IMAGE_URL + "products/" + expsm.get_id() + "/" + product_img;
 
-//        Log.d("TAG", "onBindViewHolder: " + imgurl);
+
 
         Picasso.get().load(imgurl).into(holder.productimg);
 
         holder.productname.setText(expsm.getName());
         holder.oldprice.setText("Rs " + expsm.getPrice());
         holder.newprice.setText("Rs " + expsm.getPrice());
+        final DbHelper helper = new DbHelper(context);
+
+        final SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+
+        final String userid  = sharedPreferences.getString(Constants.USER_ID, null);
 
         holder.cartbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Product Added to Cart", Toast.LENGTH_SHORT).show();
+              if(Authenticator.checkLoginStatus(sharedPreferences)){
+                  helper.addToCart(new CartModel(0, userid, expsm.get_id(), expsm.getName(), product_img ));
+              }else{
+                  context.startActivity(new Intent(context.getApplicationContext(), MainLogin.class));
+              }
             }
         });
 

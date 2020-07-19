@@ -10,6 +10,7 @@ public class Constants {
 
     //Tokens received from the API
     public static final  String TOKEN = "token";
+    public static final String USER_ID = "user";
     public static final String  ACCOUNT = "account";
     public static final String IMAGE_URL = "http://192.168.1.16:3200/public/images/";
     public static final String FB_TOKEN = "fbtoken";

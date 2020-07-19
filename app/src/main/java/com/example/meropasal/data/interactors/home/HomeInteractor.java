@@ -75,4 +75,32 @@ public class HomeInteractor {
         });
     }
 
+    public void getLatestProducts(){
+        ProductApi api = RetrofitIniti.initialize().create(ProductApi.class);
+        Call<Product> responseCall = api.getLatestProducts();
+
+        responseCall.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.isSuccessful()){
+                    if(response.body().isSuccess()){
+                        homePresenter.getLatestProducts(response.body().getProducts());
+                    }else{
+                        homePresenter.onFailed("Failed To Get Products");
+                    }
+
+                }else{
+                    homePresenter.onFailed("Something Went Wrong");
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.toString());
+                homePresenter.onFailed("Connection Error!");
+            }
+        });
+    }
+
 }
