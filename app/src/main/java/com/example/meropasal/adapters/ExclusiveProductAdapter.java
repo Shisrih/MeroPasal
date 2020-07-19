@@ -18,6 +18,7 @@ import com.example.meropasal.R;
 import com.example.meropasal.data.database.DbHelper;
 import com.example.meropasal.models.products.CartModel;
 import com.example.meropasal.models.products.Product;
+import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.ui.auth.MainLogin;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
@@ -69,7 +70,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
               if(Authenticator.checkLoginStatus(sharedPreferences)){
                   helper.addToCart(new CartModel(0, userid, expsm.get_id(), expsm.getName(), product_img ));
               }else{
-                  context.startActivity(new Intent(context.getApplicationContext(), MainLogin.class));
+                  context.startActivity(new Intent(context.getApplicationContext(), Logindashboard.class));
               }
             }
         });

@@ -20,6 +20,7 @@ import com.example.meropasal.R;
 import com.example.meropasal.adapters.CartAdapter;
 import com.example.meropasal.data.database.DbHelper;
 import com.example.meropasal.models.products.CartModel;
+import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.ui.auth.MainLogin;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
@@ -32,6 +33,7 @@ public class Cart extends Fragment {
     private RecyclerView cartview;
     public static LinearLayout emptycart, cartlayout, notsignin;
     private  List<CartModel> cart;
+    private DbHelper helper;
     private Button signinbtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,33 +53,20 @@ public class Cart extends Fragment {
         notsignin = root.findViewById(R.id.notsignin);
         signinbtn  = root.findViewById(R.id.signinbtn);
 
-        DbHelper helper = new DbHelper(getContext());
+        helper = new DbHelper(getContext());
 
 
 
 
 
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
-        String userid = sharedPreferences.getString(Constants.USER_ID, null);
-        cart =  helper.getFromCart(userid);
 
-
-        if(Authenticator.checkLoginStatus(sharedPreferences)){
-            if(!cart.isEmpty()){
-                showCart();
-            }else{
-                setEmptycart();
-            }
-        }else{
-            showNotSignedIn();
-        }
 
         signinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getContext(), MainLogin.class));
+                startActivity(new Intent(getContext(), Logindashboard.class));
             }
         });
 
@@ -110,11 +99,22 @@ public class Cart extends Fragment {
         notsignin.setVisibility(View.GONE);
     }
 
-
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        String userid = sharedPreferences.getString(Constants.USER_ID, null);
+        cart =  helper.getFromCart(userid);
 
+
+        if(Authenticator.checkLoginStatus(sharedPreferences)){
+            if(!cart.isEmpty()){
+                showCart();
+            }else{
+                setEmptycart();
+            }
+        }else{
+            showNotSignedIn();
+        }
     }
-
 }
