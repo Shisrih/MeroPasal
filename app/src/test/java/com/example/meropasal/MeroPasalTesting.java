@@ -1,7 +1,9 @@
 package com.example.meropasal;
 
+
 import com.example.meropasal.models.user.User;
 import com.example.meropasal.network.API.AuthApi;
+import com.example.meropasal.network.API.UserApi;
 import com.example.meropasal.network.RetrofitIniti;
 
 import org.junit.Test;
@@ -13,6 +15,8 @@ import static org.junit.Assert.assertTrue;
 
 public class MeroPasalTesting {
     AuthApi authInterface = RetrofitIniti.initialize().create(AuthApi.class);
+    UserApi userInterface = RetrofitIniti.initialize().create(UserApi.class);
+
     @Test
     public void login_test(){
         Call<User> userCall = authInterface.login(new User("hemantchand32@gmail.com","hemant"));
@@ -36,7 +40,17 @@ public class MeroPasalTesting {
         }
     }
 
-
+    @Test
+    public void profile_test(){
+        Call<User> userCall = userInterface.getUser("");
+        try{
+            Response<User> profileResponse = userCall.execute();
+            assertTrue(profileResponse.isSuccessful());
+        }catch (Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
 
 
 }
