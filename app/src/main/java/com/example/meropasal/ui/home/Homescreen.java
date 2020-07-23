@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
@@ -104,7 +105,7 @@ public class Homescreen extends Fragment implements HomeContract.View {
     @Override
     public void getLatestProducts(List<Product> products) {
         HomeProductsAdapter adapter = new HomeProductsAdapter(getContext(), products);
-        homeproductsview.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        homeproductsview.setLayoutManager(new StaggeredGridLayoutManager(2  , LinearLayoutManager.VERTICAL));
 
         homeproductsview.setAdapter(adapter);
         ViewCompat.setNestedScrollingEnabled(homeproductsview, false);

@@ -1,77 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:elevation="10dp">
 
-    android:id="@+id/productlayout"
-    android:background="?android:attr/selectableItemBackground"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:layout_margin="10dp"
-    >
 
     <LinearLayout
+        android:id="@+id/productlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:elevation="8dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/alwayswhite"
-        >
+        android:layout_margin="5dp"
+        android:elevation="1dp">
 
         <ImageView
             android:id="@+id/productimg"
             android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:layout_height="wrap_content"
-            android:maxHeight="150dp"
+
+
             app:srcCompat="@drawable/mobilephones" />
 
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:padding="10dp"
-            >
-
-            <TextView
-                android:id="@+id/productname"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Iphone 8 Plus (8GB RAM, 256GB storage)"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content">
+                >
 
                 <TextView
-                    android:id="@+id/productprice"
+                    android:id="@+id/productname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="Rs.350"
-                    android:textColor="#F28500"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
+                    android:text="Vicks Nasal Moisturizing Spray"
+                    android:textSize="14dp"/>
 
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/productprice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs.350"
+                        android:textColor="#F28500"
+                        android:textSize="21sp"
+                        android:layout_weight="1"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold" />
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="2"
+                      android:layout_marginRight="10dp"
+                      android:text="Rs.470"
+                      android:textSize="18sp"
+                      android:gravity="center"
+                      android:background="@drawable/horizontaldash"/>
+
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+
+                    //Layout for Product rating display//
+                    //Star rating should be in the left side of the product card//
+                    //this is only an image at the moment//
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:src="@drawable/rate"/>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                
             </LinearLayout>
-        </LinearLayout>
+
+
+
+
 
 
     </LinearLayout>
-
-
 
 </LinearLayout>
