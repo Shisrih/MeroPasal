@@ -38,7 +38,7 @@ public class Homescreen extends Fragment implements HomeContract.View {
     private View root = null;
 
     private RecyclerView exclusiveproductsrecycler, categoriesview, homeproductsview;
-
+    private  SwipeRefreshLayout pullToRefresh;
     private HomePresenter homePresenter;
 
     @Override
@@ -84,12 +84,14 @@ public class Homescreen extends Fragment implements HomeContract.View {
 
 
 
-        final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
+        pullToRefresh  = root.findViewById(R.id.pullToRefresh);
+        pullToRefresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 apiCalls();
                 pullToRefresh.setRefreshing(false);
+
             }
         });
 
