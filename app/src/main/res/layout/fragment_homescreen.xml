@@ -2,6 +2,8 @@
 
 <RelativeLayout
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -48,14 +50,13 @@
         >
 
      //nested scroll view for scrolling//
-    <androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:scrollbars="none"
 
-    xmlns:android="http://schemas.android.com/apk/res/android">
+        >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,7 +99,7 @@
             android:layout_height="wrap_content"
             android:background="@color/alwayswhite"
             android:paddingTop="30dp"
-            android:paddingBottom="30dp"
+            android:paddingBottom="15dp"
             android:layout_marginTop="5dp">
 
             //Category 1st row
@@ -148,17 +149,36 @@
             android:background="@color/cultured"
             android:padding="15dp"
             android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hot deals"
+                android:textAllCaps="true"
+                android:textColor="@color/homescreenPrimarytxt"
+                android:textSize="26sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Hot deals"
+                android:text="Hurry up now. "
                 android:textAllCaps="true"
-                android:textSize="30sp"
-                android:textColor="@color/homescreentxt"
-                android:gravity="center"
-                />
+                android:textColor="@color/homescreenSecondarytxt"
+                android:textSize="15sp" />
+            </LinearLayout>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="See More"
+                android:textColor="@color/alwayswhite"
+                android:layout_weight="3"
+                android:background="@drawable/homescreenbtns"/>
 
         </LinearLayout>
 
@@ -180,6 +200,173 @@
 
         </LinearLayout>
 
+        //Static Brand Layout//
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/alwayswhite"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/adidas"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/bata"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/bajaj"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:src="@drawable/baltra"/>
+
+        </LinearLayout>
+
+        //MeroPasal Exclusive section//
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/alwayswhite"
+            android:orientation="horizontal">
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:src="@drawable/exclusivecoffee"
+                        android:scaleType="fitXY"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:background="@color/exclusiveoverlay"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Brand Coffee"
+                            android:textColor="@color/alwayswhite"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="A coffee with great aroma."
+                            android:textColor="@color/alwayswhite"
+                            android:textStyle="italic"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:src="@drawable/havellsad"
+                        android:scaleType="fitXY"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:background="@color/exclusiveoverlay"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Havell's Appliances"
+                            android:textColor="@color/alwayswhite"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="The best home appliances in South Asia."
+                            android:textColor="@color/alwayswhite"
+                            android:textStyle="italic"
+                            />
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+
 //Product Grid View Starts here//
         <LinearLayout
             android:layout_width="match_parent"
@@ -193,7 +380,7 @@
                 android:layout_weight="1"
                 android:text="Just for you"
                 android:textAllCaps="true"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:padding="20dp"
                 android:textColor="@color/alwaysblack"
                 android:gravity="center"
@@ -204,19 +391,13 @@
 //Products Grid View//
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-         >
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/homeproductsview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-
-
         </LinearLayout>
-
-
 
 
 

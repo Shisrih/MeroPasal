@@ -12,6 +12,8 @@
     <color name="facebook">#3b5998</color>
     <color name="userloginbtn">#F6D4D5</color>
     <color name="cultured">#FAFAFA</color>
-    <color name="homescreentxt">#292727</color>
+    <color name="homescreenPrimarytxt">#DF5022</color>
+    <color name="homescreenSecondarytxt">#F4A68E</color>
+    <color name="exclusiveoverlay">#48000000</color>
 
 </resources>
