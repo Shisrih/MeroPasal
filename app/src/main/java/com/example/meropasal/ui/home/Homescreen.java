@@ -24,6 +24,7 @@ import com.example.meropasal.adapters.HomeProductsAdapter;
 import com.example.meropasal.adapters.ImageSliderAdapter;
 import com.example.meropasal.models.products.Category;
 import com.example.meropasal.models.products.Product;
+import com.example.meropasal.models.products.res.ProductRes;
 import com.example.meropasal.presenters.home.HomePresenter;
 import com.example.meropasal.views.HomeContract;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -105,7 +106,7 @@ public class Homescreen extends Fragment implements HomeContract.View {
     }
 
     @Override
-    public void getLatestProducts(List<Product> products) {
+    public void getLatestProducts(List<ProductRes> products) {
         HomeProductsAdapter adapter = new HomeProductsAdapter(getContext(), products);
         homeproductsview.setLayoutManager(new StaggeredGridLayoutManager(2  , LinearLayoutManager.VERTICAL));
 

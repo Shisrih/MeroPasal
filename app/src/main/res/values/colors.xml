@@ -15,5 +15,7 @@
     <color name="homescreenPrimarytxt">#DF5022</color>
     <color name="homescreenSecondarytxt">#F4A68E</color>
     <color name="exclusiveoverlay">#48000000</color>
-
+    <color name="duskYellow">#ffc922</color>
+    <color name="lightGrey">#d3d3d3 </color>
+    <color name="brightYellow">#FFAD0A </color>
 </resources>

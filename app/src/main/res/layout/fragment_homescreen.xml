@@ -382,7 +382,7 @@
                 android:textAllCaps="true"
                 android:textSize="25sp"
                 android:padding="20dp"
-                android:textColor="@color/alwaysblack"
+                android:textColor="@color/homescreenPrimarytxt"
                 android:gravity="center"
                 />
 

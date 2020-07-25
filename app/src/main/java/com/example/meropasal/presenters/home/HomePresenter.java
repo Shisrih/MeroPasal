@@ -3,6 +3,7 @@ package com.example.meropasal.presenters.home;
 import com.example.meropasal.data.interactors.home.HomeInteractor;
 import com.example.meropasal.models.products.Category;
 import com.example.meropasal.models.products.Product;
+import com.example.meropasal.models.products.res.ProductRes;
 import com.example.meropasal.views.HomeContract;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
-    public void getLatestProducts(List<Product> products) {
+    public void getLatestProducts(List<ProductRes> products) {
         view.getLatestProducts(products);
     }
 

@@ -16,4 +16,9 @@
         <item name="android:windowEnterAnimation">@anim/bounce</item>
         <item name="android:windowExitAnimation">@anim/bounceexit</item>
     </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/lightGrey</item>
+        <item name="colorControlActivated">@color/brightYellow</item>
+    </style>
 </resources>

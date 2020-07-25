@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.meropasal.models.products.Category;
 import com.example.meropasal.models.products.Product;
+import com.example.meropasal.models.products.res.ProductRes;
 import com.example.meropasal.network.API.ProductApi;
 import com.example.meropasal.network.RetrofitIniti;
 import com.example.meropasal.presenters.home.HomePresenter;
@@ -77,11 +78,11 @@ public class HomeInteractor {
 
     public void getLatestProducts(){
         ProductApi api = RetrofitIniti.initialize().create(ProductApi.class);
-        Call<Product> responseCall = api.getLatestProducts();
+        Call<ProductRes> responseCall = api.getLatestProducts();
 
-        responseCall.enqueue(new Callback<Product>() {
+        responseCall.enqueue(new Callback<ProductRes>() {
             @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
+            public void onResponse(Call<ProductRes> call, Response<ProductRes> response) {
                 if(response.isSuccessful()){
                     if(response.body().isSuccess()){
                         homePresenter.getLatestProducts(response.body().getProducts());
@@ -96,7 +97,7 @@ public class HomeInteractor {
             }
 
             @Override
-            public void onFailure(Call<Product> call, Throwable t) {
+            public void onFailure(Call<ProductRes> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.toString());
                 homePresenter.onFailed("Connection Error!");
             }

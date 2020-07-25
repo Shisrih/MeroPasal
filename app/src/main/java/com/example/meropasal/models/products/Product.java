@@ -19,10 +19,16 @@ public class Product {
     private String[] image;
     private String createdAt;
     private String updatedAt;
+    private String discount;
+    private List<Discount> discountvalue;
+
 
 
     @SerializedName("category_id")
-    private Category category;
+    private String category;
+
+
+
 
 
 
@@ -44,7 +50,7 @@ public class Product {
         return products;
     }
 
-    public Product(String _id, String name, String price, String detail, String brand, String[] image, Category category, String createdAt, String updatedAt) {
+    public Product(String _id, String name, String price, String detail, String brand, String[] image, String category, String createdAt, String updatedAt, String discount) {
         this._id = _id;
         this.name = name;
         this.price = price;
@@ -53,8 +59,26 @@ public class Product {
         this.updatedAt = updatedAt;
         this.brand = brand;
         this.image = image;
+        this.discount = discount;
         this.category = category;
     }
+
+    public Product(String _id, String name, String price, String detail, String brand, String[] image, String category, String createdAt, String updatedAt, List<Discount> discountvalue) {
+        this._id = _id;
+        this.name = name;
+        this.price = price;
+        this.detail = detail;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.brand = brand;
+        this.image = image;
+        this.discountvalue = discountvalue;
+        this.category = category;
+    }
+
+
+
+
 
     public String get_id() {
         return _id;
@@ -81,8 +105,24 @@ public class Product {
     }
 
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-    public Category getCategory() {
+    public String getDiscount() {
+        return discount;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+
+    public List<Discount> getDiscountvalue() {
+        return discountvalue;
+    }
+
+    public String getCategory() {
         return category;
     }
 }

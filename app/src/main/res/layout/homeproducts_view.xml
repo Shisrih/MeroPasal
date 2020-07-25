@@ -20,10 +20,10 @@
         <ImageView
             android:id="@+id/productimg"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:scaleType="fitXY"
-
-
+                android:maxHeight="150dp"
+            android:adjustViewBounds="true"
             app:srcCompat="@drawable/mobilephones" />
 
 
@@ -61,15 +61,7 @@
                         android:layout_weight="1"
                         android:layout_marginTop="5dp"
                         android:textStyle="bold" />
-                  <TextView
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="2"
-                      android:layout_marginRight="10dp"
-                      android:text="Rs.470"
-                      android:textSize="18sp"
-                      android:gravity="center"
-                      android:background="@drawable/horizontaldash"/>
+
 
                 </LinearLayout>
                 
@@ -88,10 +80,17 @@
                         android:orientation="horizontal"
                         android:layout_weight="1">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:src="@drawable/rate"/>
+                       <RatingBar
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:numStars="5"
+                           android:id="@+id/ratings"
+                           style="@style/Widget.AppCompat.RatingBar.Small"
+                           android:clickable="false"
+                           android:stepSize="1"
+                            android:theme="@style/RatingBar"
+                            android:isIndicator="true"
+                           />
 
 
                     </LinearLayout>

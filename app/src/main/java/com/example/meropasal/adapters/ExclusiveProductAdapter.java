@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.meropasal.R;
 import com.example.meropasal.data.database.DbHelper;
 import com.example.meropasal.models.products.CartModel;
+import com.example.meropasal.models.products.Discount;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.ui.auth.MainLogin;
@@ -24,6 +25,7 @@ import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProductAdapter.MyHolder> {
@@ -47,6 +49,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         final Product expsm = exclusiveProductScrollModelList.get(position);
+        final Discount discount = expsm.getDiscountvalue().get(0);
 
        final String product_img = expsm.getImage()[0];
         String imgurl = Constants.IMAGE_URL + "products/" + expsm.get_id() + "/" + product_img;
@@ -56,11 +59,22 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
         Picasso.get().load(imgurl).into(holder.productimg);
 
         holder.productname.setText(expsm.getName());
+        holder.discountvalue.setText("-" + discount.getDiscountValue() + "%");
         holder.oldprice.setText("Rs " + expsm.getPrice());
-        holder.newprice.setText("Rs " + expsm.getPrice());
+
+        float price = Float.parseFloat(expsm.getPrice());
+        float discountVAl = Float.parseFloat(discount.getDiscountValue());
+
+        float newprice = Math.round(price - (price * (discountVAl / 100)));
+        DecimalFormat df = new DecimalFormat("0.##");
+
+        holder.newprice.setText("Rs " +  df.format(newprice));
+
+
         final DbHelper helper = new DbHelper(context);
 
         final SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+
 
         final String userid  = sharedPreferences.getString(Constants.USER_ID, null);
 
@@ -85,7 +99,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
     public class MyHolder extends RecyclerView.ViewHolder {
 
        private ImageView productimg;
-       private TextView productname,newprice,oldprice;
+       private TextView productname,newprice,oldprice, discountvalue;
        private Button cartbtn;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +108,8 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
             newprice= itemView.findViewById(R.id.latestprice);
             oldprice =itemView.findViewById(R.id.originalprice);
             cartbtn = itemView.findViewById(R.id.addcartbtn);
+            discountvalue = itemView.findViewById(R.id.discountvalue);
+
         }
     }
 }
