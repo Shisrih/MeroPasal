@@ -1,6 +1,7 @@
 package com.example.meropasal;
 
 
+import com.example.meropasal.models.products.Category;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.models.user.User;
 import com.example.meropasal.network.API.AuthApi;
@@ -19,6 +20,9 @@ public class MeroPasalTesting {
     AuthApi authInterface = RetrofitIniti.initialize().create(AuthApi.class);
     UserApi userInterface = RetrofitIniti.initialize().create(UserApi.class);
     ProductApi productInterface = RetrofitIniti.initialize().create(ProductApi.class);
+
+
+
 
     @Test
     public void login_test(){
@@ -61,6 +65,17 @@ public class MeroPasalTesting {
         try{
             Response<Product> productResponse = productCall.execute();
             assertTrue(productResponse.isSuccessful());
+        }catch (Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void category_test(){
+        Call<Category> categoryCall = productInterface.getCategoriesWithLimit("6");
+        try{
+            Response<Category> categoryResponse = categoryCall.execute();
+            assertTrue(categoryResponse.isSuccessful());
         }catch (Exception e){
             System.out.println(e.toString());
             e.printStackTrace();
