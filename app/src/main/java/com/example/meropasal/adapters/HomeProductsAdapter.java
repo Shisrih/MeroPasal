@@ -1,6 +1,7 @@
 package com.example.meropasal.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.meropasal.R;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.models.products.res.ProductRes;
+
+import com.example.meropasal.ui.product.ProductView;
 import com.example.meropasal.utiils.Constants;
+import com.example.meropasal.utiils.Utility;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,7 +47,7 @@ public class HomeProductsAdapter extends RecyclerView.Adapter<HomeProductsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull HomeProductsAdapter.MyHolder holder, int position) {
-      ProductRes productRes = productList.get(position);
+      final ProductRes productRes = productList.get(position);
 
         String product_img = productRes.getProduct().getImage()[0];
         String imgurl = Constants.IMAGE_URL + "products/" + productRes.getProduct().get_id() + "/" + product_img;
@@ -53,13 +57,23 @@ public class HomeProductsAdapter extends RecyclerView.Adapter<HomeProductsAdapte
         Picasso.get().load(imgurl).into(holder.productimage);
 
         holder.productname.setText(productRes.getProduct().getName());
-        holder.productprice.setText("Rs " + productRes.getProduct().getPrice());
+        holder.productprice.setText("Rs " + Utility.getFormatedNumber(productRes.getProduct().getPrice()) );
         holder.ratings.setRating(productRes.getAvgRatings());
 
         holder.productlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, ProductView.class);
+                intent.putExtra("name", productRes.getProduct().getName());
+                intent.putExtra("price", productRes.getProduct().getPrice());
+                intent.putExtra("ratings", productRes.getAvgRatings());
+                intent.putExtra("images", productRes.getProduct().getImage());
+                intent.putExtra("brand", productRes.getProduct().getBrand());
+                intent.putExtra("id", productRes.getProduct().get_id());
+                intent.putExtra("details", productRes.getProduct().getDetail());
 
+
+                        context.startActivity(intent);
             }
         });
     }

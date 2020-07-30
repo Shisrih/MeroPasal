@@ -45,6 +45,7 @@ public class HomeInteractor {
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.toString());
+                t.printStackTrace();
                 homePresenter.onFailed("Connection Error!");
             }
         });
@@ -65,13 +66,14 @@ public class HomeInteractor {
                     }
                 }else{
                     Log.d(TAG, "onResponse: " + response.message());
+
                     homePresenter.onFailed("Something Went Wrong");
                 }
             }
 
             @Override
             public void onFailure(Call<Category> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
     }
@@ -99,6 +101,7 @@ public class HomeInteractor {
             @Override
             public void onFailure(Call<ProductRes> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.toString());
+                t.printStackTrace();
                 homePresenter.onFailed("Connection Error!");
             }
         });

@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.auth.Signup"></activity>
+        <activity android:name=".ui.product.ProductView"></activity>
+        <activity android:name=".ui.auth.Signup" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -40,15 +41,14 @@
         </activity>
         <activity
             android:name=".ui.auth.MainLogin"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.auth.Logindashboard"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.splashscreen.Splashscreen"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,6 +4,12 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
+
+    repositories {
+        flatDir {dirs 'libs'}
+    }
+
+
     defaultConfig {
         applicationId "com.example.meropasal"
         minSdkVersion 16
@@ -23,6 +29,8 @@ android {
 }
 
 dependencies {
+    implementation(name: "eSewaSdk", ext: "aar")
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.1.0'
 

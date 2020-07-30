@@ -12,6 +12,7 @@ import retrofit2.http.Query;
 
 public interface ProductApi {
 
+
     @GET("product/exclusive/discount")
     Call<Product> getExclusiveProducts();
 

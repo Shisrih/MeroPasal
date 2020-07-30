@@ -23,6 +23,7 @@ import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.ui.auth.MainLogin;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
+import com.example.meropasal.utiils.Utility;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -60,7 +61,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
 
         holder.productname.setText(expsm.getName());
         holder.discountvalue.setText("-" + discount.getDiscountValue() + "%");
-        holder.oldprice.setText("Rs " + expsm.getPrice());
+        holder.oldprice.setText("Rs " + Utility.getFormatedNumber(expsm.getPrice()));
 
         float price = Float.parseFloat(expsm.getPrice());
         float discountVAl = Float.parseFloat(discount.getDiscountValue());
@@ -68,7 +69,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
         float newprice = Math.round(price - (price * (discountVAl / 100)));
         DecimalFormat df = new DecimalFormat("0.##");
 
-        holder.newprice.setText("Rs " +  df.format(newprice));
+        holder.newprice.setText("Rs " +  Utility.getFormatedNumber(newprice + ""));
 
 
         final DbHelper helper = new DbHelper(context);
