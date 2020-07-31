@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meropasal.R;
+import com.example.meropasal.models.products.Discount;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.models.products.res.ProductRes;
 
@@ -49,6 +50,26 @@ public class HomeProductsAdapter extends RecyclerView.Adapter<HomeProductsAdapte
     public void onBindViewHolder(@NonNull HomeProductsAdapter.MyHolder holder, int position) {
       final ProductRes productRes = productList.get(position);
 
+
+
+        if( productRes.getProduct().getDiscount().size() != 0){
+
+            Discount discount = productRes.getProduct().getDiscount().get(0);
+            float price = Float.parseFloat(productRes.getProduct().getPrice());
+            float discountVAl = Float.parseFloat(discount.getDiscountValue());
+
+            float newprice = Math.round(price - (price * (discountVAl / 100)));
+
+            holder.oldprice.setVisibility(View.VISIBLE);
+
+            holder.oldprice.setText("Rs " + Utility.getFormatedNumber(productRes.getProduct().getPrice()) );
+            holder.productprice.setText("Rs " + Utility.getFormatedNumber(newprice+""));
+
+        }else{
+            holder.oldprice.setVisibility(View.GONE);
+            holder.productprice.setText("Rs " + Utility.getFormatedNumber(productRes.getProduct().getPrice()) );
+        }
+
         String product_img = productRes.getProduct().getImage()[0];
         String imgurl = Constants.IMAGE_URL + "products/" + productRes.getProduct().get_id() + "/" + product_img;
 
@@ -57,21 +78,20 @@ public class HomeProductsAdapter extends RecyclerView.Adapter<HomeProductsAdapte
         Picasso.get().load(imgurl).into(holder.productimage);
 
         holder.productname.setText(productRes.getProduct().getName());
-        holder.productprice.setText("Rs " + Utility.getFormatedNumber(productRes.getProduct().getPrice()) );
+
         holder.ratings.setRating(productRes.getAvgRatings());
 
         holder.productlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ProductView.class);
-                intent.putExtra("name", productRes.getProduct().getName());
-                intent.putExtra("price", productRes.getProduct().getPrice());
-                intent.putExtra("ratings", productRes.getAvgRatings());
-                intent.putExtra("images", productRes.getProduct().getImage());
-                intent.putExtra("brand", productRes.getProduct().getBrand());
+//                intent.putExtra("name", productRes.getProduct().getName());
+//                intent.putExtra("price", productRes.getProduct().getPrice());
+//                intent.putExtra("ratings", productRes.getAvgRatings());
+//                intent.putExtra("images", productRes.getProduct().getImage());
+//                intent.putExtra("brand", productRes.getProduct().getBrand());
+//                intent.putExtra("details", productRes.getProduct().getDetail());
                 intent.putExtra("id", productRes.getProduct().get_id());
-                intent.putExtra("details", productRes.getProduct().getDetail());
-
 
                         context.startActivity(intent);
             }
@@ -87,7 +107,7 @@ public class HomeProductsAdapter extends RecyclerView.Adapter<HomeProductsAdapte
     public class MyHolder extends RecyclerView.ViewHolder {
 
         public ImageView productimage;
-        public TextView productname, productprice;
+        public TextView productname, productprice, oldprice;
         public LinearLayout productlayout;
         public RatingBar ratings;
 
@@ -97,6 +117,8 @@ public class HomeProductsAdapter extends RecyclerView.Adapter<HomeProductsAdapte
             productimage = itemView.findViewById(R.id.productimg);
             productname = itemView.findViewById(R.id.productname);
             productprice = itemView.findViewById(R.id.productprice);
+            oldprice = itemView.findViewById(R.id.oldprice);
+
             productlayout = itemView.findViewById(R.id.productlayout);
             ratings = itemView.findViewById(R.id.ratings);
         }

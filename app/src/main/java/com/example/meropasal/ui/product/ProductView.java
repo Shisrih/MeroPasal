@@ -23,10 +23,13 @@ import com.example.meropasal.adapters.ImageSliderAdapter;
 import com.example.meropasal.adapters.ProductSliderAdapter;
 import com.example.meropasal.data.database.DbHelper;
 import com.example.meropasal.models.products.CartModel;
+import com.example.meropasal.models.products.Product;
+import com.example.meropasal.presenters.product.ProductPresenter;
 import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.utiils.Utility;
+import com.example.meropasal.views.ProductContract;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -36,7 +39,7 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductView extends AppCompatActivity {
+public class ProductView extends AppCompatActivity implements ProductContract.View {
 
     private static final String CONFIG_ENVIRONMENT = ESewaConfiguration.ENVIRONMENT_TEST;
     private SliderView sliderview;
@@ -50,6 +53,7 @@ public class ProductView extends AppCompatActivity {
     private String originalprice = null;
     private int ratings;
     private ImageView backbtn;
+    private ProductPresenter presenter;
 
     public static final int REQUEST_CODE_PAYMENT = 1;
 
@@ -91,48 +95,16 @@ public class ProductView extends AppCompatActivity {
         final String images[] = intent.getStringArrayExtra("images");
 
 
+
+
+
+        presenter = new ProductPresenter(this);
+
         id = intent.getStringExtra("id");
 
-        name = intent.getStringExtra("name");
-        prodname.setText(name);
-
-        brand = intent.getStringExtra("brand");
-        prodbrand.setText(brand);
+        presenter.getProductById(id);
 
 
-        price = intent.getStringExtra("price");
-        prodprice.setText("Rs " + Utility.getFormatedNumber(price));
-
-
-        detail = intent.getStringExtra("details");
-        proddetail.setText(detail);
-
-
-        originalprice = intent.getStringExtra("originalprice");
-
-
-        ratings = intent.getIntExtra("ratings", 0);
-
-
-        prodratings.setRating(ratings);
-
-        for (String image:
-             images) {
-            imgList.add(image);
-        }
-
-
-        String product_id = intent.getStringExtra("id");
-
-        ProductSliderAdapter adapter = new ProductSliderAdapter(this, imgList,product_id , slidercount);
-        sliderview.setSliderAdapter(adapter);
-        sliderview.setIndicatorAnimation(IndicatorAnimationType.DROP); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderview.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderview.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-        sliderview.setIndicatorSelectedColor(Color.WHITE);
-        sliderview.setIndicatorUnselectedColor(Color.WHITE);
-        sliderview.setScrollTimeInSec(3); //set scroll delay in seconds :
-        sliderview.startAutoCycle();
 
 
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -193,4 +165,40 @@ public class ProductView extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onSuccess(Product product, int rating) {
+        prodname.setText(product.getName());
+
+
+        prodbrand.setText(product.getBrand());
+
+        prodratings.setRating(rating);
+        prodprice.setText("Rs " + Utility.getFormatedNumber(product.getPrice()));
+
+
+
+        proddetail.setText(product.getDetail());
+
+        for (String image:
+                product.getImage()) {
+            imgList.add(image);
+        }
+
+        ProductSliderAdapter adapter = new ProductSliderAdapter(this, imgList, product.get_id() , slidercount);
+        sliderview.setSliderAdapter(adapter);
+        sliderview.setIndicatorAnimation(IndicatorAnimationType.DROP); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderview.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderview.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderview.setIndicatorSelectedColor(Color.WHITE);
+        sliderview.setIndicatorUnselectedColor(Color.WHITE);
+        sliderview.setScrollTimeInSec(3); //set scroll delay in seconds :
+        sliderview.startAutoCycle();
+
+
+    }
+
+    @Override
+    public void onFailed(String message) {
+
+    }
 }

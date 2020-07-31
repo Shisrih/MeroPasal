@@ -19,8 +19,8 @@ public class Product {
     private String[] image;
     private String createdAt;
     private String updatedAt;
-    private String discount;
-    private List<Discount> discountvalue;
+
+    private List<Discount> discount;
 
 
 
@@ -50,7 +50,20 @@ public class Product {
         return products;
     }
 
-    public Product(String _id, String name, String price, String detail, String brand, String[] image, String category, String createdAt, String updatedAt, String discount) {
+    public Product(String _id, String name, String price, String detail, String brand, String[] image, String category, String createdAt, String updatedAt) {
+        this._id = _id;
+        this.name = name;
+        this.price = price;
+        this.detail = detail;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.brand = brand;
+        this.image = image;
+
+        this.category = category;
+    }
+
+    public Product(String _id, String name, String price, String detail, String brand, String[] image, String category, String createdAt, String updatedAt, List<Discount> discount) {
         this._id = _id;
         this.name = name;
         this.price = price;
@@ -60,19 +73,6 @@ public class Product {
         this.brand = brand;
         this.image = image;
         this.discount = discount;
-        this.category = category;
-    }
-
-    public Product(String _id, String name, String price, String detail, String brand, String[] image, String category, String createdAt, String updatedAt, List<Discount> discountvalue) {
-        this._id = _id;
-        this.name = name;
-        this.price = price;
-        this.detail = detail;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.brand = brand;
-        this.image = image;
-        this.discountvalue = discountvalue;
         this.category = category;
     }
 
@@ -109,17 +109,15 @@ public class Product {
         return createdAt;
     }
 
-    public String getDiscount() {
-        return discount;
-    }
+
 
     public String getUpdatedAt() {
         return updatedAt;
     }
 
 
-    public List<Discount> getDiscountvalue() {
-        return discountvalue;
+    public List<Discount> getDiscount() {
+        return discount;
     }
 
     public String getCategory() {

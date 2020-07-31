@@ -22,5 +22,8 @@ public interface ProductApi {
     @GET("category/{limit}")
     Call<Category> getCategoriesWithLimit(@Path("limit") String limit);
 
+    @GET("product/{id}")
+    Call<ProductRes> getProductById(@Path("id") String id);
+
 
 }

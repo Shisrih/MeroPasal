@@ -12,9 +12,10 @@ public class ProductRes {
     private List<ProductRes> products;
 
 
-    @SerializedName("_id")
+
     private Product product;
 
+    @SerializedName("avgratings")
     private int avgRatings;
 
 
@@ -30,6 +31,12 @@ public class ProductRes {
         this.avgRatings = avgRatings;
     }
 
+    public ProductRes(boolean success, String message, Product product, int avgRatings) {
+        this.success = success;
+        this.message = message;
+        this.product = product;
+        this.avgRatings = avgRatings;
+    }
 
 
 

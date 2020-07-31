@@ -50,7 +50,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         final Product expsm = exclusiveProductScrollModelList.get(position);
-        final Discount discount = expsm.getDiscountvalue().get(0);
+        final Discount discount = expsm.getDiscount().get(0);
 
        final String product_img = expsm.getImage()[0];
         String imgurl = Constants.IMAGE_URL + "products/" + expsm.get_id() + "/" + product_img;
