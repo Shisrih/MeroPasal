@@ -1,5 +1,6 @@
 package com.example.meropasal.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import com.example.meropasal.models.products.Discount;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.ui.auth.MainLogin;
+import com.example.meropasal.ui.product.ProductView;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.utiils.Utility;
@@ -90,6 +93,20 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
             }
         });
 
+        holder.productlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               
+                Intent intent = new Intent(context, ProductView.class);
+
+                intent.putExtra("brand", expsm.getBrand());
+
+                intent.putExtra("id", expsm.get_id());
+
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -102,6 +119,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
        private ImageView productimg;
        private TextView productname,newprice,oldprice, discountvalue;
        private Button cartbtn;
+        private LinearLayout productlayout;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             productimg = itemView.findViewById(R.id.exclusiveproductimg);
@@ -110,7 +128,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
             oldprice =itemView.findViewById(R.id.originalprice);
             cartbtn = itemView.findViewById(R.id.addcartbtn);
             discountvalue = itemView.findViewById(R.id.discountvalue);
-
+            productlayout = itemView.findViewById(R.id.productlayout);
         }
     }
 }

@@ -4,6 +4,8 @@ import com.example.meropasal.data.interactors.product.ProductInteractor;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.views.ProductContract;
 
+import java.util.List;
+
 public class ProductPresenter implements ProductContract.Presenter {
 
     private ProductContract.View view;
@@ -17,6 +19,15 @@ public class ProductPresenter implements ProductContract.Presenter {
 
     public void getProductById(String id){
         interactor.getProductById(id);
+    }
+
+    public void getProductsByBrand(String brand, String id){
+        interactor.getSimilarProducts(brand, id);
+    }
+
+    @Override
+    public void getSimilarProducts(List<Product> product) {
+        view.getSimilarProducts(product);
     }
 
     @Override

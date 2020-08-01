@@ -89,7 +89,7 @@ public class HomeProductsAdapter extends RecyclerView.Adapter<HomeProductsAdapte
 //                intent.putExtra("price", productRes.getProduct().getPrice());
 //                intent.putExtra("ratings", productRes.getAvgRatings());
 //                intent.putExtra("images", productRes.getProduct().getImage());
-//                intent.putExtra("brand", productRes.getProduct().getBrand());
+                intent.putExtra("brand", productRes.getProduct().getBrand());
 //                intent.putExtra("details", productRes.getProduct().getDetail());
                 intent.putExtra("id", productRes.getProduct().get_id());
 

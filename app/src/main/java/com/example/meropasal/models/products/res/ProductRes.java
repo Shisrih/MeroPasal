@@ -11,6 +11,8 @@ public class ProductRes {
     private String message;
     private List<ProductRes> products;
 
+    private List<Product> similarProducts;
+
 
 
     private Product product;
@@ -25,6 +27,15 @@ public class ProductRes {
         this.products = products;
     }
 
+    public ProductRes(boolean success, List<Product> similarProducts) {
+        this.success = success;
+        this.message = message;
+        this.similarProducts = similarProducts;
+    }
+
+    public List<Product> getSimilarProducts() {
+        return similarProducts;
+    }
 
     public ProductRes(Product product, int avgRatings) {
         this.product = product;

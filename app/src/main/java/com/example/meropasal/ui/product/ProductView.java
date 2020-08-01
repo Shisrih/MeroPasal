@@ -2,6 +2,8 @@ package com.example.meropasal.ui.product;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,8 +23,10 @@ import com.esewa.android.sdk.payment.ESewaPaymentActivity;
 import com.example.meropasal.R;
 import com.example.meropasal.adapters.ImageSliderAdapter;
 import com.example.meropasal.adapters.ProductSliderAdapter;
+import com.example.meropasal.adapters.SimilarProductAdapter;
 import com.example.meropasal.data.database.DbHelper;
 import com.example.meropasal.models.products.CartModel;
+import com.example.meropasal.models.products.Discount;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.presenters.product.ProductPresenter;
 import com.example.meropasal.ui.auth.Logindashboard;
@@ -48,6 +52,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     private List<String> imgList = new ArrayList<>();
     private RatingBar prodratings;
     private  TextView slidercount, prodname, prodbrand, prodprice, proddetail, oldprice;
+    private RecyclerView similarProductsView;
     private String name,brand, price, detail, id;
     private FloatingActionButton buybtn, esewabtn, cartbtn;
     private String originalprice = null;
@@ -80,7 +85,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         backbtn = findViewById(R.id.backbtn);
         esewabtn = findViewById(R.id.esewabtn);
         cartbtn = findViewById(R.id.cartbtn);
-
+        similarProductsView = findViewById(R.id.similarproductview);
 
          eSewaConfiguration = new ESewaConfiguration()
                 .clientId(MERCHANT_ID)
@@ -101,8 +106,11 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         presenter = new ProductPresenter(this);
 
         id = intent.getStringExtra("id");
+        brand = intent.getStringExtra("brand");
+
 
         presenter.getProductById(id);
+        presenter.getProductsByBrand(brand, id);
 
 
 
@@ -166,6 +174,13 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     }
 
     @Override
+    public void getSimilarProducts(List<Product> product) {
+        SimilarProductAdapter adapter = new SimilarProductAdapter(this, product);
+        similarProductsView.setAdapter(adapter);
+        similarProductsView.setLayoutManager(new GridLayoutManager(this, 3));
+    }
+
+    @Override
     public void onSuccess(Product product, int rating) {
         prodname.setText(product.getName());
 
@@ -173,9 +188,22 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         prodbrand.setText(product.getBrand());
 
         prodratings.setRating(rating);
-        prodprice.setText("Rs " + Utility.getFormatedNumber(product.getPrice()));
 
 
+        if( product.getDiscount().size() != 0) {
+            oldprice.setVisibility(View.VISIBLE);
+
+            Discount discount = product.getDiscount().get(0);
+            float price = Float.parseFloat(product.getPrice());
+            float discountVAl = Float.parseFloat(discount.getDiscountValue());
+
+            float newprice = Math.round(price - (price * (discountVAl / 100)));
+
+            prodprice.setText("Rs " +  Utility.getFormatedNumber(newprice + ""));
+            oldprice.setText("Rs " + Utility.getFormatedNumber(product.getPrice()));
+        }else{
+            prodprice.setText("Rs " + Utility.getFormatedNumber(product.getPrice()));
+        }
 
         proddetail.setText(product.getDetail());
 
@@ -199,6 +227,6 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
 
     @Override
     public void onFailed(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

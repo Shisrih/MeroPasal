@@ -25,5 +25,9 @@ public interface ProductApi {
     @GET("product/{id}")
     Call<ProductRes> getProductById(@Path("id") String id);
 
+    @GET("product/brand/{brand}/{id}")
+    Call<ProductRes> getProductsByBrand(@Path("brand") String brand,
+                                        @Path("id") String id);
+
 
 }

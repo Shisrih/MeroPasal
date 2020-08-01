@@ -27,12 +27,15 @@ public class Product {
     @SerializedName("category_id")
     private String category;
 
+    //For Similar products
+    public Product(String _id, String name, String brand, String[] image) {
+        this._id = _id;
+        this.name = name;
+        this.brand = brand;
+        this.image = image;
+    }
 
-
-
-
-
-    public Product( boolean success, String message, List<Product> products) {
+    public Product(boolean success, String message, List<Product> products) {
         this.success = success;
         this.message = message;
         this.products = products;
