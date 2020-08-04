@@ -77,12 +77,12 @@
             android:id="@+id/addcartbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/redsecondaryAccent"
+            android:background="@color/alwayswhite"
             android:drawableRight="@drawable/ic_addtocart"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="Add to Cart"
-            android:textColor="#FFF"
+            android:textColor="@color/alwaysblack"
             android:textSize="10dp"
 
             />

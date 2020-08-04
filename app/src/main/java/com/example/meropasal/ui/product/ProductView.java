@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -52,9 +53,13 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     private List<String> imgList = new ArrayList<>();
     private RatingBar prodratings;
     private  TextView slidercount, prodname, prodbrand, prodprice, proddetail, oldprice;
+    private Button buynowbtn,cartbtn;
     private RecyclerView similarProductsView;
     private String name,brand, price, detail, id;
-    private FloatingActionButton buybtn, esewabtn, cartbtn;
+
+
+    //no Floating Action Button needed in Product view, instead a separate activity for payment option is created opened through buy  now button//
+    private FloatingActionButton buybtn, esewabtn;
     private String originalprice = null;
     private int ratings;
     private ImageView backbtn;
@@ -82,6 +87,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         prodprice = findViewById(R.id.prodprice);
         proddetail = findViewById(R.id.proddetail);
         oldprice = findViewById(R.id.oldprice);
+        buynowbtn =findViewById(R.id.buynowbtn);
         backbtn = findViewById(R.id.backbtn);
         esewabtn = findViewById(R.id.esewabtn);
         cartbtn = findViewById(R.id.cartbtn);
@@ -122,6 +128,16 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
             }
         });
 
+        buynowbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductView.this,PaymentOptions.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //eSEWA Payment optio in seperate activity//
         esewabtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

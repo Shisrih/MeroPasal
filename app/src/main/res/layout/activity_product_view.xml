@@ -173,13 +173,22 @@
                         android:textStyle="italic"
 
                         />
+                    <TextView
+                        android:id="@+id/prodprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/prodbrand"
+                        android:text="Rs 4000"
+                        android:textColor="#F28500"
+                        android:textSize="33sp"
+                        android:textStyle="bold" />
 
                     <RatingBar
                         android:id="@+id/prodratings"
                         style="@style/Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/prodbrand"
+                        android:layout_below="@+id/prodprice"
                         android:clickable="false"
                         android:isIndicator="true"
                         android:numStars="5"
@@ -187,15 +196,55 @@
                         android:stepSize="1"
                         android:theme="@style/RatingBar" />
 
-                    <TextView
-                        android:id="@+id/prodprice"
-                        android:layout_width="wrap_content"
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/delivery"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/prodratings"
-                        android:text="Rs 4000"
-                        android:textColor="#F28500"
-                        android:textSize="21sp"
-                        android:textStyle="bold" />
+                        android:layout_below="@id/line">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal||center_vertical"
+                                android:text="Delivery"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="3dp"
+                                android:orientation="vertical">
+
+                                //Fill user location in this textview//
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="User Location Here "/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Home Delivery within 2-4 days"/>
+
+                            </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
 
@@ -211,11 +260,18 @@
                         android:textStyle="bold"
                         android:visibility="gone" />
 
+
+               <LinearLayout
+                android:id="@+id/proddetaillayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                android:layout_below="@id/prodprice">
                     <TextView
                         android:id="@+id/proddetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/prodprice"
+
                         android:layout_marginTop="20dp"
                         android:justificationMode="inter_word"
                         android:text="Product Details"
@@ -224,22 +280,30 @@
 
                         />
 
+</LinearLayout>
+
+
+                    //
+
                     <View
                         android:id="@+id/line"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@+id/proddetail"
+                        android:layout_below="@+id/proddetaillayout"
                         android:layout_centerVertical="true"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginBottom="40dp"
                         android:background="#A5A5A5" />
+
+
+
 
                     <TextView
                         android:id="@+id/ratetxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/line"
+                        android:layout_below="@id/delivery"
                         android:gravity="center_horizontal"
                         android:text="Rate This Product"
 
@@ -253,13 +317,10 @@
                         android:id="@+id/rateprod"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_below="@+id/ratetxt"
-
                         android:layout_centerHorizontal="true"
                         android:numStars="5"
                         android:stepSize="1"
-
                         android:theme="@style/RatingBar"
 
                         />
@@ -297,60 +358,79 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_alignParentBottom="true"
         android:background="@color/alwayswhite"
-        android:orientation="horizontal"
         >
 
-
-<!--        //Button for buy products-->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|bottom"
 
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_pay"
-
-            app:borderWidth="0dp"
-
-            android:id="@+id/buybtn"
-
-            />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:orientation="horizontal">
 
 
 
 
-<!--        button for esewa-->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|bottom"
 
-            android:layout_margin="10dp"
-            android:backgroundTint="#1B998B"
-            app:borderWidth="0dp"
-            android:layout_toRightOf="@+id/buybtn"
+//Buy now button, proceed to payment//
+         <Button
+                android:id="@+id/buynowbtn"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+             android:layout_marginRight="3dp"
+                android:background="@drawable/productviewbtns1"
+                android:text="Buy Now"
+             android:textColor="@color/white"/>
 
-            android:id="@+id/esewabtn"
-            android:src="@drawable/esewa"
-            />
+            //Add to cart Button//
+
+            <Button
+                android:id="@+id/cartbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add to cart"
+                android:textColor="@color/white"
+                android:background="@drawable/productviewbtns2"
+                android:drawableRight="@drawable/ic_addtocart2"
+                android:paddingRight="20dp"
+                android:paddingLeft="25dp"/>
 
 
-<!--        button to add to cart-->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="10dp"
+            //Contact us page intent here//
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_phone"
+                    android:paddingRight="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Call Us"
+                    android:gravity="center"
+                    android:textSize="15sp"/>
+            </LinearLayout>
 
 
-            android:id="@+id/cartbtn"
-            app:borderWidth="0dp"
-            android:layout_alignParentEnd="true"
 
-            android:src="@drawable/ic_cart3"
-            android:layout_alignParentRight="true" />
+            //E-sewa payment option on another page through Buy Now//
+
+
+
+
+        </LinearLayout>
     </RelativeLayout>
     </RelativeLayout>
 
