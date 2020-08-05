@@ -19,4 +19,6 @@
     <color name="duskYellow">#ffc922</color>
     <color name="lightGrey">#d3d3d3 </color>
     <color name="brightYellow">#FFAD0A </color>
+    <color name="color_non_collapsed">#33000000 </color>
+
 </resources>

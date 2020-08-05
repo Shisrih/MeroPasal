@@ -2,6 +2,7 @@ package com.example.meropasal.ui.product;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,10 +32,12 @@ import com.example.meropasal.models.products.Discount;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.presenters.product.ProductPresenter;
 import com.example.meropasal.ui.auth.Logindashboard;
+import com.example.meropasal.utiils.AppBarStateChangeListener;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.utiils.Utility;
 import com.example.meropasal.views.ProductContract;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -46,7 +49,6 @@ import java.util.List;
 
 public class ProductView extends AppCompatActivity implements ProductContract.View {
 
-    private static final String CONFIG_ENVIRONMENT = ESewaConfiguration.ENVIRONMENT_TEST;
     private SliderView sliderview;
     private Toolbar pdttoolbar;
     private CollapsingToolbarLayout ct;
@@ -56,21 +58,14 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     private Button buynowbtn,cartbtn;
     private RecyclerView similarProductsView;
     private String name,brand, price, detail, id;
-
+    private AppBarLayout mAppBarLayout;
 
     //no Floating Action Button needed in Product view, instead a separate activity for payment option is created opened through buy  now button//
-    private FloatingActionButton buybtn, esewabtn;
+    private FloatingActionButton buybtn;
     private String originalprice = null;
     private int ratings;
     private ImageView backbtn;
     private ProductPresenter presenter;
-
-    public static final int REQUEST_CODE_PAYMENT = 1;
-
-    private ESewaConfiguration eSewaConfiguration;
-
-    private static final String MERCHANT_ID = "JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R";
-    private static final String MERCHANT_SECRET_KEY = "BhwIWQQADhIYSxILExMcAgFXFhcOBwAKBgAXEQ==";
 
 
     @Override
@@ -89,24 +84,26 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         oldprice = findViewById(R.id.oldprice);
         buynowbtn =findViewById(R.id.buynowbtn);
         backbtn = findViewById(R.id.backbtn);
-        esewabtn = findViewById(R.id.esewabtn);
+        mAppBarLayout = findViewById(R.id.appBar);
         cartbtn = findViewById(R.id.cartbtn);
         similarProductsView = findViewById(R.id.similarproductview);
 
-         eSewaConfiguration = new ESewaConfiguration()
-                .clientId(MERCHANT_ID)
-                .secretKey(MERCHANT_SECRET_KEY)
-                .environment(CONFIG_ENVIRONMENT);
-
-
 
         //Instanciating the image-slider adapter in the buymeds fragment//
-
         Intent intent = getIntent();
         final String images[] = intent.getStringArrayExtra("images");
 
 
 
+        //Change toolbar color when collapse
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+
+                int toolbarBackground = (state == AppBarStateChangeListener.State.COLLAPSED) ? R.color.transparent : R.color.color_non_collapsed;
+                pdttoolbar.setBackgroundColor(ContextCompat.getColor(ProductView.this, toolbarBackground));
+            }
+        });
 
 
         presenter = new ProductPresenter(this);
@@ -118,15 +115,13 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         presenter.getProductById(id);
         presenter.getProductsByBrand(brand, id);
 
-
-
-
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ProductView.super.onBackPressed();
             }
         });
+
 
         buynowbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,20 +132,6 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         });
 
 
-        //eSEWA Payment optio in seperate activity//
-        esewabtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ESewaPayment eSewaPayment = new ESewaPayment(price,
-        name, id,"<call_back_url>");
-
-                Intent intent = new Intent(ProductView.this, ESewaPaymentActivity.class);
-                intent.putExtra(ESewaConfiguration.ESEWA_CONFIGURATION, eSewaConfiguration);
-
-                intent.putExtra(ESewaPayment.ESEWA_PAYMENT, eSewaPayment);
-                startActivityForResult(intent, REQUEST_CODE_PAYMENT);
-            }
-        });
 
         final DbHelper helper = new DbHelper(this);
 
@@ -172,22 +153,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_PAYMENT) {
-            if (resultCode == RESULT_OK) {
-                String s = data.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE);
-                Log.i("Proof of Payment", s);
-                Toast.makeText(this, "SUCCESSFUL PAYMENT", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Canceled By User", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == ESewaPayment.RESULT_EXTRAS_INVALID) {
-                String s = data.getStringExtra(ESewaPayment.EXTRA_RESULT_MESSAGE);
-                Log.i("Proof of Payment", s);
-            }
-        }
-    }
+
 
     @Override
     public void getSimilarProducts(List<Product> product) {

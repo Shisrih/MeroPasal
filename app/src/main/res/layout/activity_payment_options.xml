@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="230dp"
     android:layout_marginTop="50dp"
-    android:src="@drawable/payment"/>
+    />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +35,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
+
                 android:src="@drawable/esewa"
                 android:layout_weight="3"/>
 
@@ -43,6 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/esewabtn"
             android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -63,7 +66,6 @@
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/ic_next"
                 android:paddingRight="15dp"
-                android:gravity="center_vertical||center_horizontal"
                 android:layout_weight="3"/>
         </LinearLayout>
 
@@ -86,7 +88,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:src="@drawable/cashondelivery"
+                android:src="@drawable/ic_pay"
                 android:layout_weight="3"/>
 
 
@@ -94,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
@@ -114,7 +117,6 @@
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/ic_next"
                 android:paddingRight="15dp"
-                android:gravity="center_vertical||center_horizontal"
                 android:layout_weight="3"/>
         </LinearLayout>
 

@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                android:background="#33000000" >
+                android:background="@color/transparent" >
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -91,7 +91,7 @@
 
             </RelativeLayout>
                 <RelativeLayout
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_margin="10dp"
 
                     android:layout_alignParentEnd="true"
@@ -99,16 +99,25 @@
                     android:layout_alignParentRight="true"
                     android:layout_height="match_parent">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <ImageView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_fav"
                         android:padding="5dp"
-                        android:layout_centerInParent="true"
+
 
                         android:id="@+id/favbtn"
                          />
 
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone"
+                        android:padding="5dp"
+                  
+                        android:layout_toRightOf="@+id/favbtn"
+                        android:id="@+id/callus"
+                        />
 
 
 
@@ -182,7 +191,20 @@
                         android:textColor="#F28500"
                         android:textSize="33sp"
                         android:textStyle="bold" />
+                    <TextView
 
+                        android:id="@+id/oldprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/prodbrand"
+                        android:layout_marginLeft="30dp"
+                        android:padding="5dp"
+                        android:layout_toRightOf="@+id/prodprice"
+                        android:background="@drawable/horizontaldash"
+                        android:text="Rs.410"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
                     <RatingBar
                         android:id="@+id/prodratings"
                         style="@style/Widget.AppCompat.RatingBar.Small"
@@ -203,18 +225,22 @@
                         android:id="@+id/delivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                           app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true"
+                        android:layout_marginBottom="20dp"
                         android:layout_below="@id/line">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:padding="10dp"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+
                                 android:layout_weight="1"
-                                android:gravity="center_horizontal||center_vertical"
                                 android:text="Delivery"/>
 
                             <LinearLayout
@@ -246,19 +272,7 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <TextView
 
-                        android:id="@+id/oldprice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/prodratings"
-                        android:layout_marginLeft="30dp"
-                        android:layout_toRightOf="@+id/prodprice"
-                        android:background="@drawable/horizontaldash"
-                        android:text="Rs.410"
-                        android:textSize="21sp"
-                        android:textStyle="bold"
-                        android:visibility="gone" />
 
 
                <LinearLayout
@@ -292,8 +306,8 @@
                         android:layout_below="@+id/proddetaillayout"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="30dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="40dp"
+
+                        android:layout_marginBottom="20dp"
                         android:background="#A5A5A5" />
 
 
@@ -404,24 +418,26 @@
 
 
             //Contact us page intent here//
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/ic_phone"
-                    android:paddingRight="20dp"/>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1.5"-->
+<!--                android:padding="5dp"-->
+<!--                android:orientation="vertical">-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:drawableRight="@drawable/ic_phone"-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Call Us"
-                    android:gravity="center"
-                    android:textSize="15sp"/>
-            </LinearLayout>
+<!--                    android:paddingRight="10dp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Call Us"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textSize="15sp"/>-->
+<!--            </LinearLayout>-->
 
 
 
