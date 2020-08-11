@@ -6,6 +6,7 @@
     <color name="alwaysblack">#000</color>
     <color name="redprimaryAccent">#ff5b60</color>
     <color name="redsecondaryAccent">#EF5B5F</color>
+    <color name="lightredtxtfields">#FDF2F3</color>
     <color name="blueAccent">#1f8ed7</color>
     <color name="alwayswhite">#FFFFFF</color>
     <color name="textoverlay">#F8F0F0</color>

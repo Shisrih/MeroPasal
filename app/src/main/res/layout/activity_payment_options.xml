@@ -7,6 +7,7 @@
 <ImageView
     android:layout_width="match_parent"
     android:layout_height="230dp"
+    android:src="@drawable/payment"
     android:layout_marginTop="50dp"
     />
 
@@ -131,7 +132,7 @@
             android:background="#A5A5A5" />
 
 
-        <Li
+
 
 
 

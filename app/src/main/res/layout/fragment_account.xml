@@ -13,9 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#FFFFFF"
-
         android:elevation="2dp">
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,7 +118,195 @@
             android:gravity="center"
             android:text="LogOut"
             />
+        </androidx.cardview.widget.CardView>
 
+
+
+        //user information in numbers in 2nd Card View//
+       <androidx.cardview.widget.CardView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+          >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:background="@color/redprimaryAccent"
+           android:padding="15dp">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_weight="1">
+
+
+
+               //If  thelayout is empty simply insert the text view with "-"//
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="10"
+                   android:textSize="22sp"
+                   android:gravity="center"
+                   android:textColor="@color/alwayswhite"/>
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="My Orders"
+                   android:gravity="center"
+                   android:textColor="@color/alwayswhite"/>
+
+           </LinearLayout>
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_weight="1">
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="10"
+                   android:textSize="22sp"
+                   android:gravity="center"
+                   android:textColor="@color/alwayswhite"/>
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="My Orders"
+                   android:gravity="center"
+                   android:textColor="@color/alwayswhite"/>
+
+           </LinearLayout>
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_weight="1">
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="10"
+                   android:textSize="22sp"
+                   android:gravity="center"
+                   android:textColor="@color/alwayswhite"/>
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="My Orders"
+                   android:gravity="center"
+                   android:textColor="@color/alwayswhite"/>
+
+           </LinearLayout>
+
+
+
+
+
+       </LinearLayout>
+       </androidx.cardview.widget.CardView>
+
+
+        //3rd cart view//
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:drawableLeft="@drawable/ic_editprofile"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Manage Orders"
+                    android:drawableLeft="@drawable/ic_orders"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Returned Products"
+                    android:drawableLeft="@drawable/ic_return"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"/>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        //4th Card View//
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+               android:text="Contact Us"
+                    android:drawableLeft="@drawable/ic_contact_us"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Help"
+                    android:drawableLeft="@drawable/ic_info"
+                    android:drawablePadding="10dp"
+                    android:padding="10dp"/>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 
