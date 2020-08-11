@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:id="@+id/productlayout"
     android:background="?android:attr/selectableItemBackground"
     android:foreground="?android:attr/selectableItemBackground"
-    android:layout_margin="10dp"
+    android:layout_margin="15dp"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:elevation="8dp"
         android:background="@color/alwayswhite"
         >
@@ -21,6 +20,7 @@
         <ImageView
             android:id="@+id/productimg"
             android:layout_width="match_parent"
+            android:layout_weight="2"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:layout_height="wrap_content"
@@ -30,43 +30,24 @@
 
 
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/productname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:padding="10dp"
-            >
-
-            <TextView
-                android:id="@+id/productname"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Iphone 8 Plus (8GB RAM, 256GB storage)"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-
-
-            </LinearLayout>
-        </LinearLayout>
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:text="Iphone 8 Plus (8GB RAM, 256GB storage)"
+            android:textSize="12dp"
+            android:textColor="@color/alwaysblack" />
+    </LinearLayout>
         <Button
             android:id="@+id/removebtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Remove From Cart"
-            android:background="@color/redsecondaryAccent"
-            android:textColor="#FFF"
+            android:textColor="@color/alwaysblack"
             android:drawableRight="@drawable/ic_close"
-            android:padding="10dp"
+            android:padding="5dp"
             android:textSize="10dp"
 
             />
@@ -75,4 +56,3 @@
 
 
 
-</LinearLayout>

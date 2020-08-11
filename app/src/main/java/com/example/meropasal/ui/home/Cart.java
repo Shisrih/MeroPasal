@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meropasal.R;
@@ -87,7 +88,7 @@ public class Cart extends Fragment {
         CartAdapter adapter = new CartAdapter(getContext(), cart);
 
 
-        cartview.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        cartview.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
 
         cartview.setAdapter(adapter);
 

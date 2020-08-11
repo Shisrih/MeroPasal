@@ -146,4 +146,7 @@
     android:layout_height="wrap_content"
     />
     </LinearLayout>
+
+
+  //Add a Recycler Layout like the "Just for you" segment in Homescreen fragment//
 </FrameLayout>
