@@ -1,17 +1,22 @@
 package com.example.meropasal.data.database;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.meropasal.R;
 import com.example.meropasal.models.products.CartModel;
 import com.example.meropasal.utiils.Constants;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +28,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     Context context;
 
-    String tbl_create = "CREATE TABLE cart (id INTEGER PRIMARY KEY AUTOINCREMENT, userid TEXT, productid TEXT, name TEXT , imgurl TEXT )";
+    String tbl_create = "CREATE TABLE cart (id INTEGER PRIMARY KEY AUTOINCREMENT, userid TEXT, productid TEXT, name TEXT , imgurl TEXT, price FLOAT ,quantity INTEGER, totalprice FLOAT )";
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -52,9 +57,30 @@ public class DbHelper extends SQLiteOpenHelper {
     public boolean addToCart(CartModel cartModel){
         try{
             SQLiteDatabase db = getWritableDatabase();
-            String imgurl = Constants.IMAGE_URL + "products/" + cartModel.getProductId() + "/" + cartModel.getSingleImg();
-            db.execSQL("INSERT INTO cart (userid, productid, name, imgurl) values ('" + cartModel.getUserid()+ "','"+ cartModel.getProductId()+"', '"+ cartModel.getName()+"', '"+imgurl+"')");
-            Toast.makeText(context, "Product Added To Cart", Toast.LENGTH_SHORT).show();
+            SQLiteDatabase readdb = this.getReadableDatabase();
+            int quantity = 1;
+
+            Cursor cursor = readdb.rawQuery("SELECT * from cart WHERE productid = ? AND userid = ?", new String[]{String.valueOf(cartModel.getProductId()), String.valueOf(cartModel.getUserid())});
+
+            if(cursor.moveToFirst()){
+
+                quantity = cursor.getInt(6) + quantity;
+                float newprice = cartModel.getPrice() * quantity;
+
+            ContentValues cv = new ContentValues();
+            cv.put("quantity", quantity);
+            cv.put("totalprice", newprice);
+
+            db.update("cart", cv, "productid=?", new String[]{String.valueOf(cursor.getString(2))});
+
+
+            } else {
+
+
+                String imgurl = Constants.IMAGE_URL + "products/" + cartModel.getProductId() + "/" + cartModel.getSingleImg();
+                db.execSQL("INSERT INTO cart (userid, productid, name, imgurl, price, quantity, totalprice) values ('" + cartModel.getUserid()+ "','"+ cartModel.getProductId()+"', '"+ cartModel.getName()+"', '"+imgurl+"', '"+ cartModel.getPrice() +"' , '"+quantity+"','" + cartModel.getTotalPrice() + "')");
+            }
+
 
             return  true;
         }catch (Exception e){
@@ -70,13 +96,14 @@ public class DbHelper extends SQLiteOpenHelper {
             Cursor cursor =db.rawQuery("SELECT * from cart WHERE userid = ?", new String[]{String.valueOf(id)});
             if(cursor !=null){
                 while(cursor.moveToNext()){
-                    cartModelList.add(new CartModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
+                    cartModelList.add(new CartModel(cursor.getInt(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getFloat(5), cursor.getInt(6), cursor.getFloat(7)));
                 }
 
             }
             return cartModelList;
 
         }catch(Exception e){
+            Log.d(TAG, "getCart: " + e.toString());
 
         }
         return null;
@@ -90,21 +117,48 @@ public class DbHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.d("delete_error", e.toString());
         }
+
     }
-//    public boolean updateStudentDetails(int id, String name, String email, String phone) {
-//        try {
-//            SQLiteDatabase db = getWritableDatabase();
-//            ContentValues cv = new ContentValues();
-//            cv.put("name", name);
-//            cv.put("email", email);
-//            cv.put("phone", phone);
-//
-//            db.update("students", cv, "id=?", new String[]{String.valueOf(id)});
-//            return true;
-//        } catch (Exception e) {
-//            Log.d("update_error", e.toString());
-//            return false;
-//        }
-//
-//    }
+
+    public void deleteAllCart(){
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            db.delete("cart",null , null);
+        } catch (Exception e) {
+            Log.d("delete_error", e.toString());
+        }
+
+    }
+
+
+    public boolean updateCart(int id, float price, int quantity){
+        try{
+            SQLiteDatabase db = getWritableDatabase();
+            SQLiteDatabase readdb = this.getReadableDatabase();
+
+
+            Cursor cursor = readdb.rawQuery("SELECT * from cart WHERE id = ?", new String[]{String.valueOf(id)});
+
+
+            if(cursor.moveToFirst()) {
+                ContentValues cv = new ContentValues();
+
+
+                cv.put("quantity", quantity);
+                cv.put("totalprice", price);
+
+                db.update("cart", cv, "id=?", new String[]{String.valueOf(id)});
+
+                return true;
+
+            }else{
+                Log.d("update_error", "Not Found");
+            }
+            }catch (Exception e){
+            Log.d("update_error", e.toString());
+            return false;
+        }
+        return false;
+    }
+
 }

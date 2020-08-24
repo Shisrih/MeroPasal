@@ -1,6 +1,7 @@
 package com.example.meropasal.ui.product;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class PaymentOptions extends AppCompatActivity {
 
     private ESewaConfiguration eSewaConfiguration;
     private static final String CONFIG_ENVIRONMENT = ESewaConfiguration.ENVIRONMENT_TEST;
-    private LinearLayout esewabtn;
+    private LinearLayout esewabtn, paydeliver;
     public static final int REQUEST_CODE_PAYMENT = 1;
 
 
@@ -32,7 +33,9 @@ public class PaymentOptions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_options);
 
-        esewabtn = findViewById(R.id.esewabtn);
+        esewabtn = findViewById(R.id.esewalay);
+        paydeliver = findViewById(R.id.paylay);
+
 
 
         eSewaConfiguration = new ESewaConfiguration()
@@ -53,6 +56,16 @@ public class PaymentOptions extends AppCompatActivity {
 
                 intent.putExtra(ESewaPayment.ESEWA_PAYMENT, eSewaPayment);
                 startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+
+
+
+            }
+        });
+
+        paydeliver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

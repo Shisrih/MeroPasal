@@ -2,6 +2,8 @@ package com.example.meropasal.models.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
 
 
@@ -14,6 +16,7 @@ public class User {
     private String email;
     private String type;
     private String password;
+    private List<ShippingAddress> shippingAddress;
 
     //Response
     private boolean success;
@@ -34,7 +37,19 @@ public class User {
         this.type = type;
     }
 
-    public User( String firstname, String lastname, String location, String phone, String email, String type){
+    //For getting shipping Address
+    public User(boolean success, String message, List<ShippingAddress> shippingAddress){
+        this.success = success;
+        this.message = message;
+        this.shippingAddress = shippingAddress;
+    }
+
+    public User(boolean success, String message) {
+        this.success = success;
+        this.message = message;
+    }
+
+    public User(String firstname, String lastname, String location, String phone, String email, String type){
         this.firstname = firstname;
         this.lastname = lastname;
         this.location = location;
@@ -114,6 +129,8 @@ public class User {
         return password;
     }
 
-
+    public List<ShippingAddress> getShippingAddress() {
+        return shippingAddress;
+    }
 }
 

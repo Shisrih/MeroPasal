@@ -16,9 +16,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.elyeproj.loaderviewlibrary.LoaderTextView;
 import com.example.meropasal.R;
 import com.example.meropasal.models.user.User;
 import com.example.meropasal.presenters.user.ProfilePresenter;
+import com.example.meropasal.ui.acount.Contactus;
+import com.example.meropasal.ui.acount.EditProfileDash;
+import com.example.meropasal.ui.acount.EditUserInfo;
 import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.views.ProfileContract;
@@ -46,7 +50,7 @@ public class Account extends Fragment implements ProfileContract.View {
         private Button registerbtn, googlelogout, accountlogout;
         private AccessToken accessToken;
         private CircleImageView profileimg;
-        private TextView fullname,acclink;
+        private TextView fullname, acclink, editlink, managelink, helplink, returnedlink, contactlink;
         private LoginButton fblgn;
         private GoogleSignInClient mGoogleSignInClient;
         private ProfilePresenter profilePresenter;
@@ -54,7 +58,9 @@ public class Account extends Fragment implements ProfileContract.View {
         private final int FACEBOOK = 1;
         private final int GOOGLE = 2;
         private final int ACCOUNT = 3;
-    private static final String TAG = "Account";
+        private static final String TAG = "Account";
+        private String fname, lname, location, phone;
+        private  String profile_imgURL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +88,12 @@ public class Account extends Fragment implements ProfileContract.View {
         accountlogout = root.findViewById(R.id.accountlogout);
         googlelogout = root.findViewById(R.id.googlelogout);
         acclink = root.findViewById(R.id.acclink);
+        editlink = root.findViewById(R.id.editlink);
+        managelink = root.findViewById(R.id.managelink);
+        returnedlink = root.findViewById(R.id.returnedlink);
+        contactlink = root.findViewById(R.id.contactlink);
+        helplink = root.findViewById(R.id.helplink);
+
 
         sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
 
@@ -105,8 +117,36 @@ public class Account extends Fragment implements ProfileContract.View {
             }
         });
 
+        editlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(getContext(), EditUserInfo.class);
+                intent.putExtra("fname" , fname);
+                intent.putExtra("lname", lname);
+                intent.putExtra("location", location);
+                intent.putExtra("phone", phone);
+                startActivity(intent);
+            }
+        });
+
+        contactlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), Contactus.class));
+            }
+        });
 
 
+        acclink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EditProfileDash.class);
+                intent.putExtra("image", profile_imgURL);
+                intent.putExtra("fname", fname);
+                intent.putExtra("lname", lname);
+                startActivity(intent);
+            }
+        });
 
 
         profilePresenter = new ProfilePresenter(this);
@@ -170,11 +210,18 @@ public class Account extends Fragment implements ProfileContract.View {
             String personFamilyName = account.getFamilyName();
             String personEmail = account.getEmail();
             String personId = account.getId();
-            Uri profile_imgURL = account.getPhotoUrl();
+            Uri url = account.getPhotoUrl();
 
 
             fullname.setText(personName);
-            Picasso.get().load(profile_imgURL).into(profileimg);
+
+              fname = account.getGivenName();
+              lname = account.getFamilyName();
+              location = "";
+              phone = "";
+              profile_imgURL = account.getPhotoUrl().toString();
+
+            Picasso.get().load(url).into(profileimg);
 
 
     }
@@ -229,8 +276,13 @@ public class Account extends Fragment implements ProfileContract.View {
                     String last_name = object.getString("last_name");
                     String email = object.getString("email");
                     String id = object.getString("id");
-                    String profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                     profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
 
+
+                    fname = object.getString("first_name");
+                    lname = object.getString("last_name");
+                    location = "";
+                    phone = "";
 
                     Picasso.get().load(profile_imgURL).into(profileimg);
 
@@ -286,7 +338,10 @@ public class Account extends Fragment implements ProfileContract.View {
     public void getUser(User user) {
 
         updateUI(ACCOUNT);
-
+        fname = user.getFirstname();
+        lname = user.getLastname();
+        location = user.getLocation();
+        phone = user.getPhone();
         fullname.setText(user.getFirstname() + " " + user.getLastname());
 
     }

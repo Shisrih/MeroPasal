@@ -101,22 +101,23 @@
                 android:drawablePadding="10dp"
                 android:padding="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content">
+
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number"
                 android:id="@+id/phonesign"
-                android:drawableRight="@drawable/ic_phone"
+                android:drawableRight="@drawable/ic_phone2"
                 android:inputType="number"
-                android:drawablePadding="10dp"
+
                 android:padding="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
 

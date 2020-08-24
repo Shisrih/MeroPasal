@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    android:background="#9000">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="0dp"
+        android:minHeight="650dp"
+        android:id="@+id/infocard"
+
+        app:cardCornerRadius="10dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cultured"
+            >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rel1"
+            android:background="@color/alwayswhite"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/top"
+            android:orientation="horizontal"
+          android:layout_marginLeft="130dp"
+            android:padding="10dp"
+          >
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:orientation="horizontal"
+             >
+             <TextView
+                 android:id="@+id/prodprice"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+
+                 android:layout_weight="3"
+                 android:text="Rs.350,000"
+                 android:textColor="#F28500"
+
+                 android:textStyle="bold" />
+         </LinearLayout>
+            <ImageView
+                android:id="@+id/closedialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:src="@drawable/ic_close"
+                />
+
+
+
+        </LinearLayout>
+            <TextView
+                android:id="@+id/discounttxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/top"
+                android:text="After discount : Rs.350"
+                android:background="@color/colorPrimary"
+                android:layout_marginLeft="140dp"
+                android:padding="5dp"
+                android:layout_marginRight="25dp"
+                android:textColor="@color/alwayswhite"
+                android:textSize="15sp"
+                android:textStyle="italic"
+              />
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/discounttxt"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp"
+    android:layout_marginTop="20dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Quantity"
+        android:padding="5dp"
+         android:textColor="@color/alwaysblack"
+        android:textStyle="bold"
+
+         />
+
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/productprice"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="-"
+            android:layout_weight="3"
+            android:textColor="@color/alwayswhite"
+            android:background="@drawable/round_back2"
+            android:id="@+id/buttonminus"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:textAlignment="center"
+            android:id="@+id/quantityview"
+            android:gravity="center_horizontal" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="+"
+            android:textColor="@color/alwayswhite"
+            android:background="@drawable/round_back2"
+            android:id="@+id/buttonadd"
+            android:layout_weight="3"
+            />
+    </LinearLayout>
+</LinearLayout>
+
+
+        </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel1"
+                android:id="@+id/rel2"
+                android:layout_marginTop="13dp"
+                android:background="@color/alwayswhite"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/shippingtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Shipping Details"
+                    android:textColor="@color/alwaysblack"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/shipcharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shippingtitle"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Shipping Charge:"
+                        android:textAlignment="center"
+                        android:textColor="@color/alwaysblack" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Rs 50"
+                        android:textAlignment="center"
+                        android:textColor="@color/alwaysblack" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/shipfrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shipcharge"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Ships From:"
+                        android:textAlignment="center"
+                        android:textColor="@color/alwaysblack" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Kathmandu"
+                        android:textAlignment="center"
+                        android:textColor="@color/alwaysblack" />
+
+                </LinearLayout>
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/shipfrom"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/gray_10" />
+
+                <TextView
+                    android:id="@+id/shipaddresstitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line"
+                    android:text="Select Shipping Address"
+                    android:textColor="@color/alwaysblack"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shipaddresstitle"
+                    android:id="@+id/shipaddresslist"
+                    android:visibility="gone"
+                    />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shipaddresslist"
+                    android:text="Add Address"
+                    android:textColor="@color/alwayswhite"
+                    android:background="@drawable/gradient_back"
+                    android:id="@+id/addshipaddressbtn"
+                   />
+
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:layout_alignParentBottom="true"
+
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/placeorder"
+            android:text="Continue"
+            android:textColor="@color/alwayswhite"
+            android:background="@color/colorPrimary"
+            />
+
+    </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignTop="@+id/infocard"
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="-40dp"
+        android:layout_marginLeft="20dp"
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/prodimg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ad2"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.acount.EditLogincredentials"></activity>
+        <activity android:name=".ui.shipping.ShippingAddressForm"></activity>
+        <activity android:name=".ui.product.OrderConfirm" />
+        <activity android:name=".ui.acount.EditLogincredentials" />
         <activity android:name=".ui.acount.ViewProfile" />
         <activity android:name=".ui.acount.EditUserInfo" />
         <activity android:name=".ui.acount.EditProfileDash" />

@@ -28,9 +28,12 @@
 
         //Payment Option 1//
         <LinearLayout
+            android:id="@+id/esewalay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@color/alwayswhite"
+
             android:layout_margin="20dp">
 
             <ImageView
@@ -83,7 +86,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/alwayswhite"
             android:orientation="horizontal"
+
+            android:id="@+id/paylay"
+
             android:layout_margin="20dp">
 
             <ImageView
@@ -97,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:layout_marginLeft="5dp"
                 android:orientation="vertical">
                 <TextView

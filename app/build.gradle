@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    buildToolsVersion '30.0.2'
 
 
     repositories {
@@ -25,6 +25,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -59,7 +63,7 @@ dependencies {
 
     //facebook
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
-
+    implementation 'com.facebook.android:facebook-login:[5,6)'
     //google
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
     //Custom google btn
@@ -77,5 +81,8 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
    implementation 'com.etsy.android.grid:library:1.0.5'
+
+    //LoaderView
+    implementation 'com.elyeproj.libraries:loaderviewlibrary:2.0.0'
 
 }

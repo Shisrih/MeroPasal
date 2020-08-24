@@ -15,28 +15,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+
         android:orientation="vertical">
 
-<ImageView
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:scaleType="centerCrop"
-    android:layout_marginTop="20dp"
-    android:src="@drawable/editinfo"/>
+    android:layout_height="300dp"
+    android:background="@drawable/gradient_back2">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/profileimg"
+        android:layout_centerInParent="true"
+        android:src="@drawable/fox"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileimg"
+        android:text="Shishir Bhndari"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="@color/alwaysblack"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>
 
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
+            android:background="@color/alwayswhite"
             android:orientation="vertical">
 
             <TextView
@@ -60,7 +74,7 @@
                     android:padding="15dp"
                     android:text="Shishir"
                     android:textColor="@color/alwaysblack"
-                    android:background="@drawable/editinfotxtfields"
+
                     android:drawableRight="@drawable/ic_account"/>
 
 
@@ -90,7 +104,7 @@
                     android:text="Bhandari"
                     android:padding="15dp"
                     android:textColor="@color/alwaysblack"
-                    android:background="@drawable/editinfotxtfields"
+
                     android:drawableRight="@drawable/ic_account"/>
 
 
@@ -121,7 +135,7 @@
                     android:text="Shitak-Marg, Khumaltar, Lalitpur-15"
                     android:padding="15dp"
                     android:textColor="@color/alwaysblack"
-                    android:background="@drawable/editinfotxtfields"
+
                     android:drawableRight="@drawable/ic_address"/>
 
 
@@ -167,8 +181,8 @@
                     android:text="9813123222"
                     android:padding="15dp"
                     android:textColor="@color/alwaysblack"
-                    android:background="@drawable/editinfotxtfields"
-                    android:drawableRight="@drawable/ic_phone"/>
+
+                    android:drawableRight="@drawable/ic_phone2"/>
 
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -187,7 +201,6 @@
                 android:textColor="@color/alwayswhite"/>
         </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
 
 
 

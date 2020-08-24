@@ -23,6 +23,7 @@
             android:layout_weight="1"
             android:hint="Search for products"
             android:drawablePadding="10dp"
+            android:maxLines="1"
             android:drawableLeft="@drawable/ic_search"
             android:background="@drawable/textfields"/>
 

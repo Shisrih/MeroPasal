@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.product.OrderConfirm">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/pdttoolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        android:background="@color/colorPrimary" >
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+
+                    android:layout_centerInParent="true"
+
+                    android:id="@+id/backbtn"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/backbtn"
+                android:text="Confirm Order"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/alwayswhite"
+                android:textSize="20dp"
+                />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:layout_below="@+id/appBar"
+    >
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".ui.product.OrderConfirm">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderlist"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderlist"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:id="@+id/ordersummary"
+        android:background="@color/alwayswhite"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Order Summary"
+            android:textColor="@color/alwaysblack"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/shipfrom"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_10" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quantity"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Shipping Address"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Chhetrapati"
+                android:textAlignment="center"
+                android:id="@+id/shipaddress"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quantity"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Shipping Charge"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rs 50"
+                android:textAlignment="center"
+                android:id="@+id/shipcharge"
+
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quantity"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rs 2000"
+                android:textAlignment="center"
+                android:id="@+id/finalprice"
+                android:textColor="#F28500"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    android:layout_below="@+id/ordersummary"
+    android:padding="10dp"
+    android:layout_marginBottom="50dp"
+    >
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I agree with the Terms And Conditions"
+        android:textColor="@color/blueAccent"
+        android:id="@+id/agreeBox"
+        />
+</LinearLayout>
+
+</RelativeLayout>
+</androidx.core.widget.NestedScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Confirm Order"
+        android:background="@color/colorPrimary"
+        android:id="@+id/confirmorder"
+        android:textColor="@color/alwayswhite"
+        />
+
+</RelativeLayout>

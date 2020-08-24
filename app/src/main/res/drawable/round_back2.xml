@@ -3,10 +3,10 @@
      <!-- include your icon here -->
     <item>
         <shape android:shape="oval"> <!-- or rectangle -->
-
+            <solid android:color="#F28500"/>
             <stroke
                 android:width="2dp"
-                android:color="@android:color/white" />
+                android:color="#F28500" />
         </shape>
     </item>
 </layer-list>

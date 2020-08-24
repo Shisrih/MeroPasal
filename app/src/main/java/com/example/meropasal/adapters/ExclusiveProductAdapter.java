@@ -27,6 +27,7 @@ import com.example.meropasal.ui.product.ProductView;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
 import com.example.meropasal.utiils.Utility;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -53,59 +54,72 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         final Product expsm = exclusiveProductScrollModelList.get(position);
-        final Discount discount = expsm.getDiscount().get(0);
 
-       final String product_img = expsm.getImage()[0];
-        String imgurl = Constants.IMAGE_URL + "products/" + expsm.get_id() + "/" + product_img;
+        if(expsm.getDiscount().size() != 0) {
+            final Discount discount = expsm.getDiscount().get(0);
 
-
-
-        Picasso.get().load(imgurl).into(holder.productimg);
-
-        holder.productname.setText(expsm.getName());
-        holder.discountvalue.setText("-" + discount.getDiscountValue() + "%");
-        holder.oldprice.setText("Rs " + Utility.getFormatedNumber(expsm.getPrice()));
-
-        float price = Float.parseFloat(expsm.getPrice());
-        float discountVAl = Float.parseFloat(discount.getDiscountValue());
-
-        float newprice = Math.round(price - (price * (discountVAl / 100)));
-        DecimalFormat df = new DecimalFormat("0.##");
-
-        holder.newprice.setText("Rs " +  Utility.getFormatedNumber(newprice + ""));
+            final String product_img = expsm.getImage()[0];
+            String imgurl = Constants.IMAGE_URL + "products/" + expsm.get_id() + "/" + product_img;
 
 
-        final DbHelper helper = new DbHelper(context);
 
-        final SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+            Picasso.get().load(imgurl).into(holder.productimg);
+
+            holder.productname.setText(expsm.getName());
+            holder.discountvalue.setText("-" + discount.getDiscountValue() + "%");
+            holder.oldprice.setText("Rs " + Utility.getFormatedNumber(expsm.getPrice()));
+
+            float price = Float.parseFloat(expsm.getPrice());
+            float discountVAl = Float.parseFloat(discount.getDiscountValue());
+
+            float newprice = Math.round(price - (price * (discountVAl / 100)));
+            DecimalFormat df = new DecimalFormat("0.##");
+
+            holder.newprice.setText("Rs " +  Utility.getFormatedNumber(newprice + ""));
 
 
-        final String userid  = sharedPreferences.getString(Constants.USER_ID, null);
+            final DbHelper helper = new DbHelper(context);
 
-        holder.cartbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              if(Authenticator.checkLoginStatus(sharedPreferences)){
-                  helper.addToCart(new CartModel(0, userid, expsm.get_id(), expsm.getName(), product_img ));
-              }else{
-                  context.startActivity(new Intent(context.getApplicationContext(), Logindashboard.class));
-              }
-            }
-        });
+            final SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 
-        holder.productlayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               
-                Intent intent = new Intent(context, ProductView.class);
 
-                intent.putExtra("brand", expsm.getBrand());
+            final String userid  = sharedPreferences.getString(Constants.USER_ID, null);
 
-                intent.putExtra("id", expsm.get_id());
+            holder.cartbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(Authenticator.checkLoginStatus(sharedPreferences)){
 
-                context.startActivity(intent);
-            }
-        });
+
+                        if(  helper.addToCart(new CartModel(0, userid, expsm.get_id(), expsm.getName(), product_img , newprice, 1, newprice))){
+                            Snackbar.make(view, "Product Added To Cart", Snackbar.LENGTH_LONG).show();
+
+                        }else{
+                            Snackbar.make(view, "Something went wrong", Snackbar.LENGTH_LONG).show();
+                        }
+
+                    }else{
+                        context.startActivity(new Intent(context.getApplicationContext(), Logindashboard.class));
+                    }
+                }
+            });
+
+            holder.productlayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(context, ProductView.class);
+
+                    intent.putExtra("brand", expsm.getBrand());
+
+                    intent.putExtra("id", expsm.get_id());
+
+                    context.startActivity(intent);
+                }
+            });
+
+
+        }
 
     }
 

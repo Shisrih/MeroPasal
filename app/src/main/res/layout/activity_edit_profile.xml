@@ -17,6 +17,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="337dp"
             android:layout_height="125dp"
+            android:id="@+id/profile"
             android:src="@drawable/blank_avatar" />
 
 //Set username in this textview//
@@ -27,6 +28,7 @@
             android:textColor="@color/alwayswhite"
             android:gravity="center"
             android:layout_marginTop="10dp"
+            android:id="@+id/fullname"
             android:textSize="18sp"/>
 
     </LinearLayout>
@@ -46,7 +48,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/edituserinfo"
+                android:id="@+id/viewuserinfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"

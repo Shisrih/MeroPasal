@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/productlayout"
+    android:background="?android:attr/selectableItemBackground"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_margin="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:elevation="2dp"
+        android:padding="10dp"
+        android:background="@color/alwayswhite"
+        >
+
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_width="100dp"
+                android:layout_weight="2"
+
+                android:layout_height="100dp"
+                android:id="@+id/productimgcard"
+                >
+
+                <ImageView
+                    android:id="@+id/productimg"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+
+                    app:srcCompat="@drawable/ad2" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/productname"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/productimgcard"
+                android:layout_height="wrap_content"
+                android:text="Iphone 8 Plus (8GB RAM, 256GB storage)"
+                android:textSize="15dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/alwaysblack"
+                tools:ignore="NotSibling" />
+            <TextView
+                android:id="@+id/productprice"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_toRightOf="@+id/productimgcard"
+                android:padding="5dp"
+                android:layout_height="wrap_content"
+                android:text="Rs 100"
+                android:textSize="12dp"
+                android:maxLines="2"
+                android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:layout_below="@+id/productname"
+                android:textColor="@color/alwaysblack" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/productprice"
+                android:orientation="horizontal"
+
+                android:layout_toRightOf="@+id/productimgcard"
+                android:id="@+id/quantity"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Quantity"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2"
+                    android:textAlignment="center"
+                    android:id="@+id/quantityview"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/productimgcard"
+                android:orientation="horizontal"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:id="@+id/subtotalview"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sub Total"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rs 2000"
+                    android:textAlignment="center"
+                    android:id="@+id/subtotal"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subtotalview"
+                android:orientation="horizontal"
+               android:id="@+id/shipchargeview"
+                android:layout_margin="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Shipping Charge"
+                    android:textStyle="bold"
+                     />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rs 50"
+                    android:textAlignment="center"
+                    android:id="@+id/shipcharge"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shipchargeview"
+                android:orientation="horizontal"
+                android:id="@+id/totalview"
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rs 50"
+                    android:textAlignment="center"
+                    android:id="@+id/total"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+
+

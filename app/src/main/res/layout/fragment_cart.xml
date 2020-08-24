@@ -122,30 +122,55 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
         android:id="@+id/cartlayout"
          >
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:padding="20dp"
+        android:id="@+id/carttitle"
         android:text="Shopping Cart"
         android:textColor="@color/alwaysblack"
         android:textStyle="bold"
         android:textSize="20dp"
         />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/carttitle"
+            android:text="Total : Rs 10,000"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:id="@+id/carttotal"
+            android:textColor="@color/colorPrimary"
+            android:padding="20dp"
+            />
 
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/cartview"
+    android:layout_below="@+id/carttitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="50dp"
     />
-    </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/cartcont"
+            android:layout_alignParentBottom="true"
+            android:text="Proceed To Checkout"
+            android:textColor="@color/alwayswhite"
+            android:background="@color/colorPrimary"
+            />
+
+    </RelativeLayout>
 
 
   //Add a Recycler Layout like the "Just for you" segment in Homescreen fragment//

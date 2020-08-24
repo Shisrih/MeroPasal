@@ -18,11 +18,19 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            
             android:padding="15dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -118,6 +126,7 @@
             android:gravity="center"
             android:text="LogOut"
             />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
@@ -131,7 +140,9 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal"
+           android:id="@+id/accstats"
            android:background="@color/redprimaryAccent"
+
            android:padding="15dp">
            <LinearLayout
                android:layout_width="match_parent"
@@ -177,7 +188,7 @@
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="My Orders"
+                   android:text="Wishlist"
                    android:gravity="center"
                    android:textColor="@color/alwayswhite"/>
 
@@ -201,7 +212,7 @@
                <TextView
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="My Orders"
+                   android:text="Vouchers"
                    android:gravity="center"
                    android:textColor="@color/alwayswhite"/>
 
@@ -229,6 +240,7 @@
                 android:padding="15dp">
 
                 <TextView
+                    android:id="@+id/editlink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Edit Profile"
@@ -240,6 +252,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Manage Orders"
+                    android:id="@+id/managelink"
                     android:drawableLeft="@drawable/ic_orders"
                     android:drawablePadding="10dp"
                     android:padding="10dp"/>
@@ -251,6 +264,7 @@
                     android:text="Returned Products"
                     android:drawableLeft="@drawable/ic_return"
                     android:drawablePadding="10dp"
+                    android:id="@+id/returnedlink"
                     android:padding="10dp"/>
 
 
@@ -284,6 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                android:text="Contact Us"
+                    android:id="@+id/contactlink"
                     android:drawableLeft="@drawable/ic_contact_us"
                     android:drawablePadding="10dp"
                     android:padding="10dp"/>
@@ -294,6 +309,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Help"
+                    android:id="@+id/helplink"
                     android:drawableLeft="@drawable/ic_info"
                     android:drawablePadding="10dp"
                     android:padding="10dp"/>

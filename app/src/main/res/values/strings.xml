@@ -10,8 +10,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="facebook_app_id">2697478583909638</string>
-    <string name="fb_login_protocol_scheme">fb2697478583909638</string>
+    <string name="facebook_app_id">585919855433427</string>
+    <string name="fb_login_protocol_scheme">fb585919855433427</string>
 
     <string name="server_client_id">558453872618-smjndq39gsau3o4u8fqiusgll7dvv4nr.apps.googleusercontent.com</string>
 </resources>
+
+
+
+

@@ -6,12 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.meropasal.R;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileDash extends AppCompatActivity {
 
     private LinearLayout editprofile,editlogincred;
+    private CircleImageView imageview;
+    private TextView fullnametxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +26,17 @@ public class EditProfileDash extends AppCompatActivity {
 
         editprofile = findViewById(R.id.edituserinfo);
         editlogincred = findViewById(R.id.editlogincredentials);
+        imageview = findViewById(R.id.profile);
+        fullnametxt = findViewById(R.id.fullname);
 
+        String profileimg = getIntent().getStringExtra("image");
+        String fname = getIntent().getStringExtra("fname");
+        String lname = getIntent().getStringExtra("lname");
+
+        Picasso.get().load(profileimg).into(imageview);
+        String fullname = fname + " " + lname;
+
+        fullnametxt.setText(fullname);
 
         editprofile.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -41,7 +41,7 @@
                 app:sliderIndicatorUnselectedColor="#FFF"
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
-            <TextView
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:padding="30dp">
 
-                    <TextView
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
                         android:id="@+id/prodname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
 
                         />
 
-                    <TextView
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
                         android:id="@+id/prodbrand"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                         android:textStyle="italic"
 
                         />
-                    <TextView
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
                         android:id="@+id/prodprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                         android:textColor="#F28500"
                         android:textSize="33sp"
                         android:textStyle="bold" />
-                    <TextView
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
 
                         android:id="@+id/oldprice"
                         android:layout_width="wrap_content"
@@ -235,13 +235,20 @@
                             android:layout_height="wrap_content"
                             android:padding="10dp"
                             android:orientation="horizontal">
-
-                            <TextView
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-
                                 android:layout_weight="1"
-                                android:text="Delivery"/>
+                                >
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:textAlignment="center"
+                                    android:text="Delivery"
+                                    android:gravity="center_horizontal" />
+
+                            </RelativeLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -251,10 +258,6 @@
                                 android:orientation="vertical">
 
                                 //Fill user location in this textview//
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="User Location Here "/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -281,7 +284,7 @@
                 android:layout_height="wrap_content"
                    android:orientation="vertical"
                 android:layout_below="@id/prodprice">
-                    <TextView
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
                         android:id="@+id/proddetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +40,8 @@ import com.shobhitpuri.custombuttons.GoogleSignInButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class Logindashboard extends AppCompatActivity implements View.OnClickListener, AuthContract.View {
@@ -84,6 +90,7 @@ public class Logindashboard extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+       
          presenter = new SignupPresenter( this , sharedPreferences);
         fbbtn = (LoginButton) findViewById(R.id.facebooksignin);
         fbbutton = findViewById(R.id.fb);
