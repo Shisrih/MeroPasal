@@ -99,15 +99,19 @@
                     android:layout_alignParentRight="true"
                     android:layout_height="match_parent">
 
-                    <ImageView
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/favbtn"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_fav"
-                        android:padding="5dp"
-
-
-                        android:id="@+id/favbtn"
-                         />
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:scaleType="centerCrop"
+                        app:lottie_autoPlay="false"
+                        app:lottie_fileName="fav_anim_icon.json"
+                        app:lottie_loop="false"
+                        app:lottie_speed="1.25"/>
 
                     <ImageView
                         android:layout_width="50dp"
@@ -158,7 +162,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="30dp">
+                    android:padding="20dp">
 
                     <com.elyeproj.loaderviewlibrary.LoaderTextView
                         android:id="@+id/prodname"
@@ -205,21 +209,31 @@
                         android:textSize="21sp"
                         android:textStyle="bold"
                         android:visibility="visible" />
-                    <RatingBar
-                        android:id="@+id/prodratings"
-                        style="@style/Widget.AppCompat.RatingBar.Small"
-                        android:layout_width="wrap_content"
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/proddetaillayout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/prodprice"
-                        android:clickable="false"
-                        android:isIndicator="true"
-                        android:numStars="5"
+                        android:orientation="vertical"
+                        android:layout_below="@id/prodprice">
 
-                        android:stepSize="1"
-                        android:theme="@style/RatingBar" />
+                        <com.elyeproj.loaderviewlibrary.LoaderTextView
+                            android:id="@+id/proddetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
+                            android:layout_marginTop="20dp"
+                            android:justificationMode="inter_word"
+                            android:text="Product Details"
+                            android:textColor="#808080"
+                            android:textSize="13dp"
 
+                            />
 
+                    </LinearLayout>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/delivery"
@@ -278,27 +292,6 @@
 
 
 
-               <LinearLayout
-                android:id="@+id/proddetaillayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                   android:orientation="vertical"
-                android:layout_below="@id/prodprice">
-                    <com.elyeproj.loaderviewlibrary.LoaderTextView
-                        android:id="@+id/proddetail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:layout_marginTop="20dp"
-                        android:justificationMode="inter_word"
-                        android:text="Product Details"
-                        android:textColor="#808080"
-                        android:textSize="13dp"
-
-                        />
-
-</LinearLayout>
-
 
                     //
 
@@ -321,34 +314,70 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/delivery"
-                        android:gravity="center_horizontal"
-                        android:text="Rate This Product"
+
+                        android:text="Customer Reviews"
 
 
-                        android:textAlignment="center"
+
                         android:textColor="@color/black"
 
                         android:textSize="16dp" />
 
-                    <RatingBar
-                        android:id="@+id/rateprod"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/review"
+                        android:layout_below="@+id/ratetxt"
+                        >
+                        <RatingBar
+                            android:id="@+id/prodratings"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:clickable="false"
+                            android:isIndicator="true"
+                            android:numStars="5"
+
+                            android:stepSize="1"
+                            android:theme="@style/RatingBar" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/prodratings"
+                            android:text="4.5/5"
+                            android:id="@+id/ratingstxt"
+                            android:layout_marginLeft="20dp"
+                            />
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/review"
+                        android:id="@+id/reviewsview"
+                        android:layout_marginTop="10dp"
+                        />
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/ratetxt"
-                        android:layout_centerHorizontal="true"
-                        android:numStars="5"
-                        android:stepSize="1"
-                        android:theme="@style/RatingBar"
-
+                         android:padding="10dp"
+                        android:text="View All Reviews"
+                        android:layout_below="@id/reviewsview"
+                        android:textColor="@color/blueAccent"
+                        android:id="@+id/reviewlink"
                         />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/rateprod"
+                        android:layout_below="@+id/reviewlink"
                         android:text="Similar Products"
                         android:id="@+id/similartxt"
                         android:layout_marginTop="20dp"
+                        android:textSize="16dp"
                         android:layout_marginBottom="20dp"
                         android:textColor="@color/black"
 
@@ -358,6 +387,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/similarproductview"
                         android:layout_below="@+id/similartxt"
+                        android:layout_marginBottom="70dp"
                         />
 
                 </RelativeLayout>

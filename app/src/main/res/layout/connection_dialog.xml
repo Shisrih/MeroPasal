@@ -25,24 +25,22 @@
             android:padding="20dp"
 
             >
-            <ImageView
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lav_actionBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
+                android:layout_marginStart="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="0dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:src="@drawable/ic_wifi"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Connection Error!!!"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:id="@+id/editlbl"
-                />
+                android:layout_marginEnd="0dp"
+                android:scaleType="centerCrop"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="no_connection_anim.json"
+                app:lottie_loop="true" />
+
 
 
 

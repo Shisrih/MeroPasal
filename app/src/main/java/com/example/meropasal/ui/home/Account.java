@@ -166,6 +166,9 @@ public class Account extends Fragment implements ProfileContract.View {
         SharedPreferences.Editor editor  = sharedPreferences.edit();
         editor.remove(Constants.TOKEN);
         editor.remove(Constants.ACCOUNT);
+        profile_imgURL = "";
+        fname = "";
+        lname = "";
 
         editor.commit();
         unLoadUserProfile();
@@ -343,6 +346,8 @@ public class Account extends Fragment implements ProfileContract.View {
         location = user.getLocation();
         phone = user.getPhone();
         fullname.setText(user.getFirstname() + " " + user.getLastname());
+
+        profile_imgURL = "";
 
     }
 

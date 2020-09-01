@@ -15,6 +15,7 @@ public class Dashboard extends AppCompatActivity {
 BottomNavigationView bottomNavigationItemView;
 Homescreen home = new Homescreen();
 Cart cart = new Cart();
+Favourites fav = new Favourites();
 Account account = new Account();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,13 @@ Account account = new Account();
                     case R.id.navigation_cart:
                         setFragment(cart);
                         break;
+                    case R.id.navigation_favourites:
+                        setFragment(fav);
+                        break;
                     case R.id.navigation_account:
                         setFragment(account);
                         break;
+
                 }
 
 

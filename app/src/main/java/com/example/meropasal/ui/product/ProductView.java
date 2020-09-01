@@ -21,9 +21,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.elyeproj.loaderviewlibrary.LoaderTextView;
 import com.example.meropasal.R;
 import com.example.meropasal.adapters.ProductSliderAdapter;
+import com.example.meropasal.adapters.ReviewsAdapter;
 import com.example.meropasal.adapters.ShippingAddressAdapter;
 import com.example.meropasal.adapters.SimilarProductAdapter;
 import com.example.meropasal.data.database.DbHelper;
@@ -31,10 +33,12 @@ import com.example.meropasal.models.orders.OrderConfirmation;
 import com.example.meropasal.models.products.CartModel;
 import com.example.meropasal.models.products.Discount;
 import com.example.meropasal.models.products.Product;
+import com.example.meropasal.models.review.Rating;
 import com.example.meropasal.models.user.ShippingAddress;
 import com.example.meropasal.presenters.product.ProductPresenter;
 import com.example.meropasal.presenters.user.ShippingAddressPresenter;
 import com.example.meropasal.ui.auth.Logindashboard;
+import com.example.meropasal.ui.review.CustomerReviews;
 import com.example.meropasal.ui.shipping.ShippingAddressForm;
 import com.example.meropasal.utiils.AppBarStateChangeListener;
 import com.example.meropasal.utiils.Authenticator;
@@ -54,7 +58,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductView extends AppCompatActivity implements ProductContract.View, ShippingAddressContract.View, SelectShippingAddress {
+public class ProductView extends AppCompatActivity implements ProductContract.View, ShippingAddressContract.View, SelectShippingAddress{
 
     private SliderView sliderview;
     private Toolbar pdttoolbar;
@@ -75,6 +79,10 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     private ProductPresenter presenter;
     private String productid;
     private static final String TAG = "ProductView";
+    private TextView ratingstxt, reviewlink;
+    private RecyclerView reviewsview;
+    private LottieAnimationView favbtn;
+
 
     private List<ShippingAddress> shippingAddressList = new ArrayList<>();
     private ShippingAddressPresenter shippingAddressPresenter;
@@ -91,6 +99,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     private boolean isAddressSelected = false;
 
 
+    private int favFlag = 0;
 
     private float finalPrice, price;
 
@@ -113,8 +122,16 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         mAppBarLayout = findViewById(R.id.appBar);
         cartbtn = findViewById(R.id.cartbtn);
         similarProductsView = findViewById(R.id.similarproductview);
+        ratingstxt = findViewById(R.id.ratingstxt);
+        reviewsview = findViewById(R.id.reviewsview);
+        reviewlink = findViewById(R.id.reviewlink);
+        favbtn = findViewById(R.id.favbtn);
 
         shipAddress = new ShippingAddress();
+
+
+
+
 
 
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
@@ -126,6 +143,21 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
 
             shippingAddressPresenter.getShippingAddress(token);
         }
+
+
+        favbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(favFlag == 0){
+                    favbtn.playAnimation();
+                    favFlag = 1;
+                }else{
+                    favbtn.setProgress(0);
+                    favFlag = 0;
+                }
+
+            }
+        });
 
 
         //Instanciating the image-slider adapter in the buymeds fragment//
@@ -155,6 +187,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         presenter.getProductById(id);
         presenter.getProductsByBrand(brand, id);
 
+
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,6 +206,9 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
              }
             }
         });
+
+
+
 
           DbHelper helper = new DbHelper(this);
 
@@ -326,15 +362,17 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     }
 
     @Override
-    public void onSuccess(Product product, int rating) {
+    public void onSuccess(Product product, float rating) {
         prodname.setText(product.getName());
         name = product.getName();
         productid = product.get_id();
 
-
+        presenter.getReviews(product.get_id());
         prodbrand.setText(product.getBrand());
 
         prodratings.setRating(rating);
+        ratingstxt.setText(rating + "/5");
+
 
 
         for (String image:
@@ -376,7 +414,15 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         sliderview.setScrollTimeInSec(3); //set scroll delay in seconds :
         sliderview.startAutoCycle();
 
-
+        reviewlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent  intent  = new Intent(ProductView.this, CustomerReviews.class);
+                intent.putExtra("avgrating", rating);
+                intent.putExtra("productid", productid);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -388,6 +434,14 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     public void getShippingAddress(List<ShippingAddress> shippingAddress) {
            this.shippingAddressList = shippingAddress;
 
+    }
+
+    @Override
+    public void getProductReviews(List<Rating> ratingList) {
+
+        ReviewsAdapter adapter = new ReviewsAdapter(this, ratingList);
+        reviewsview.setLayoutManager(new LinearLayoutManager(this));
+        reviewsview.setAdapter(adapter);
     }
 
     @Override

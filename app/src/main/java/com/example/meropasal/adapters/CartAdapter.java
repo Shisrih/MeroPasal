@@ -79,6 +79,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyHolder>  {
 
                         helper.deleteFromCart(cartModel.getId());
                         cartModelList.remove(cartModel);
+                        cartModelList = helper.getFromCart(cartModel.getUserid());
+                        cartUpdateInterface.updateCart(cartModelList);
+
+                        totalprice = 0;
+
+                        for (CartModel cart:
+                                cartModelList) {
+                            totalprice = cart.getTotalPrice() + totalprice;
+                        }
+
+                        carttotal.setText("Total : Rs " + Utility.getFormatedNumber(totalprice + ""));
+
+
                         notifyDataSetChanged();
 
                         if(cartModelList.isEmpty()){

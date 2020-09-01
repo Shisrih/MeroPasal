@@ -18,7 +18,7 @@ public class ProductRes {
     private Product product;
 
     @SerializedName("avgratings")
-    private int avgRatings;
+    private float avgRatings;
 
 
     public ProductRes(boolean success, String message, List<ProductRes> products) {
@@ -42,7 +42,7 @@ public class ProductRes {
         this.avgRatings = avgRatings;
     }
 
-    public ProductRes(boolean success, String message, Product product, int avgRatings) {
+    public ProductRes(boolean success, String message, Product product, float avgRatings) {
         this.success = success;
         this.message = message;
         this.product = product;
@@ -67,7 +67,7 @@ public class ProductRes {
         return product;
     }
 
-    public int getAvgRatings() {
+    public float getAvgRatings() {
         return avgRatings;
     }
 }

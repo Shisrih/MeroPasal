@@ -1,9 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/notsignin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="@color/alwayswhite"
+        android:orientation="vertical"
+        >
+        <com.airbnb.lottie.LottieAnimationView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+
+            android:layout_marginTop="0dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="0dp"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="wishlist.json"
+            app:lottie_loop="false" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textAlignment="center"
+            android:text="You are not signed in"
+            android:textColor="@color/alwaysblack"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_horizontal" />
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    //Do the same  as cart fragment on this one //
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="Signin to view your wishlist!"
+
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+        <Button
+            android:id="@+id/signinbtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:textColor="@color/alwayswhite"
+            android:text="Sign In"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/emptycart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="@color/alwayswhite"
+        android:visibility="gone"
+        android:orientation="vertical"
+        >
+        <com.airbnb.lottie.LottieAnimationView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+
+            android:layout_marginTop="0dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="0dp"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="wishlist.json"
+            app:lottie_loop="false" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textAlignment="center"
+            android:text="Your cart is empty"
+            android:textColor="@color/alwaysblack"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="You have no items in your shopping cart"
+
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Let's go buy something!"
+
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+        <Button
+            android:id="@+id/shopnowbtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:textColor="@color/alwayswhite"
+            android:text="Shop Now"
+            />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/cartlayout"
+        >
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:id="@+id/carttitle"
+            android:text="Shopping Cart"
+            android:textColor="@color/alwaysblack"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/carttitle"
+            android:text="Total : Rs 10,000"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:id="@+id/carttotal"
+            android:textColor="@color/colorPrimary"
+            android:padding="20dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartview"
+            android:layout_below="@+id/carttitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/cartcont"
+            android:layout_alignParentBottom="true"
+            android:text="Proceed To Checkout"
+            android:textColor="@color/alwayswhite"
+            android:background="@color/colorPrimary"
+            />
+
+    </RelativeLayout>
+
+
+    //Add a Recycler Layout like the "Just for you" segment in Homescreen fragment//
+</FrameLayout>

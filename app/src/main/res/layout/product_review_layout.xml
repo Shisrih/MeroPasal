@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:layout_height="wrap_content">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/username"
+    android:textStyle="bold"
+    android:text="Amanda Raj Shrestha"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reviewdate"
+        android:layout_alignParentRight="true"
+        android:text="2020/5/5"/>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:id="@+id/rating"
+        android:layout_below="@+id/username"
+        android:stepSize="1"
+        android:layout_marginTop="5dp"
+        android:theme="@style/RatingBar"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/comment"
+        android:layout_below="@+id/rating"
+        android:layout_marginTop="10dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="This is a review"
+        />
+
+</RelativeLayout>

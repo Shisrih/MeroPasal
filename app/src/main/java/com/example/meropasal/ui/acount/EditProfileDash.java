@@ -33,7 +33,13 @@ public class EditProfileDash extends AppCompatActivity {
         String fname = getIntent().getStringExtra("fname");
         String lname = getIntent().getStringExtra("lname");
 
-        Picasso.get().load(profileimg).into(imageview);
+
+
+        if(profileimg == ""){
+            imageview.setImageResource(R.drawable.fox);
+        }else{
+            Picasso.get().load(profileimg).into(imageview);
+        }
         String fullname = fname + " " + lname;
 
         fullnametxt.setText(fullname);

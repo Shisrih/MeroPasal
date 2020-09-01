@@ -59,20 +59,31 @@ public class ShippingAddressAdapter extends RecyclerView.Adapter<ShippingAddress
         holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            if(b){
-                selectShippingAddress.selectedShippingAddress(shippingAddressList.get(position));
-                selectShippingAddress.isShippingAddressSelected(true);
-                    ship.setSelected(true);
-                    if(selectedPosition >= 0){
-                        shippingAddressList.get(selectedPosition).setSelected(false);
-                        notifyDataSetChanged();
+
+                if(shippingAddressList.size() == 1){
+                    if(b){
+                        selectShippingAddress.selectedShippingAddress(shippingAddressList.get(position));
+                        selectShippingAddress.isShippingAddressSelected(true);
+                    }else{
+                        selectShippingAddress.isShippingAddressSelected(false);
                     }
-                    selectedPosition = position;
+                }else{
+                    if(b){
+                        selectShippingAddress.selectedShippingAddress(shippingAddressList.get(position));
+                        selectShippingAddress.isShippingAddressSelected(true);
+                        ship.setSelected(true);
+                        if(selectedPosition >= 0){
+                            shippingAddressList.get(selectedPosition).setSelected(false);
+                            notifyDataSetChanged();
+                        }
+                        selectedPosition = position;
+                    }
+                    else{
+                        ship.setSelected(false);
+                        selectShippingAddress.isShippingAddressSelected(false);
+                    }
                 }
-            else{
-                ship.setSelected(false);
-                selectShippingAddress.isShippingAddressSelected(true);
-            }
+
             }
         });
     }
