@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.review.CustomerReviews"></activity>
+        <activity android:name=".ui.acount.ManageShippingAddress"></activity>
+        <activity android:name=".ui.order.OrdersView" />
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.review.CustomerReviews" />
         <activity android:name=".ui.shipping.ShippingAddressForm" />
         <activity android:name=".ui.product.OrderConfirm" />
         <activity android:name=".ui.acount.EditLogincredentials" />

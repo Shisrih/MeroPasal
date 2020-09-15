@@ -1,5 +1,6 @@
 package com.example.meropasal.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,9 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,6 +31,7 @@ import com.example.meropasal.models.products.Category;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.models.products.res.ProductRes;
 import com.example.meropasal.presenters.home.HomePresenter;
+import com.example.meropasal.ui.search.SearchActivity;
 import com.example.meropasal.views.HomeContract;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -37,7 +43,7 @@ import java.util.List;
 public class Homescreen extends Fragment implements HomeContract.View {
     private SliderView sliderview;
     private View root = null;
-
+        private EditText searchbar;
     private RecyclerView exclusiveproductsrecycler, categoriesview, homeproductsview;
     private  SwipeRefreshLayout pullToRefresh;
     private HomePresenter homePresenter;
@@ -82,7 +88,7 @@ public class Homescreen extends Fragment implements HomeContract.View {
 
 
         homePresenter = new HomePresenter(this);
-
+        searchbar = root.findViewById(R.id.searchbar);
 
 
         pullToRefresh  = root.findViewById(R.id.pullToRefresh);
@@ -96,7 +102,25 @@ public class Homescreen extends Fragment implements HomeContract.View {
             }
         });
 
+        searchbar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
 
+                    performSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    }
+
+    private void performSearch(){
+        String search = searchbar.getText().toString();
+        Intent intent = new Intent(getContext(), SearchActivity.class);
+        intent.putExtra("search", search);
+        startActivity(intent);
     }
 
     private void apiCalls(){

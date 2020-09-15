@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -32,6 +31,7 @@ import com.example.meropasal.data.database.DbHelper;
 import com.example.meropasal.models.orders.OrderConfirmation;
 import com.example.meropasal.models.products.CartModel;
 import com.example.meropasal.models.products.Discount;
+import com.example.meropasal.models.products.FavModel;
 import com.example.meropasal.models.products.Product;
 import com.example.meropasal.models.review.Rating;
 import com.example.meropasal.models.user.ShippingAddress;
@@ -99,6 +99,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
     private boolean isAddressSelected = false;
 
 
+
     private int favFlag = 0;
 
     private float finalPrice, price;
@@ -134,6 +135,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
 
 
 
+
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         token = sharedPreferences.getString(Constants.TOKEN, null);
 
@@ -145,19 +147,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         }
 
 
-        favbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(favFlag == 0){
-                    favbtn.playAnimation();
-                    favFlag = 1;
-                }else{
-                    favbtn.setProgress(0);
-                    favFlag = 0;
-                }
 
-            }
-        });
 
 
         //Instanciating the image-slider adapter in the buymeds fragment//
@@ -212,8 +202,6 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
 
           DbHelper helper = new DbHelper(this);
 
-        final SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-
 
         final String userid  = sharedPreferences.getString(Constants.USER_ID, null);
 
@@ -233,6 +221,28 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
             }
         });
 
+
+        if(helper.checkFav(new FavModel(userid, id))){
+            favbtn.playAnimation();
+            favFlag = 1;
+        }
+
+        favbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(favFlag == 0){
+                    favbtn.playAnimation();
+                    helper.addToFav(new FavModel(0, userid, id, name, imgList.get(0) , price));
+                    Snackbar.make(view, "Product Added To Favourites", Snackbar.LENGTH_LONG).show();
+                    favFlag = 1;
+                }else{
+                    favbtn.setProgress(0);
+                    helper.unFavourite(new FavModel(userid, id));
+                    favFlag = 0;
+                }
+
+            }
+        });
     }
 
 
@@ -259,15 +269,16 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         proddiscount = dialog.findViewById(R.id.discounttxt);
         prodimg = dialog.findViewById(R.id.prodimg);
 
-        if(shippingAddressList.size() > 0){
+        if(shippingAddressList.size() == 0){
+            shippingAddressView.setVisibility(View.GONE);
+            addAddressBtn.setVisibility(View.VISIBLE);
+        }else{
+
             ShippingAddressAdapter addressAdapter = new ShippingAddressAdapter(this, this, shippingAddressList);
             shippingAddressView.setLayoutManager(new LinearLayoutManager(this));
             shippingAddressView.setAdapter(addressAdapter);
             shippingAddressView.setVisibility(View.VISIBLE);
             addAddressBtn.setVisibility(View.GONE);
-        }else{
-            shippingAddressView.setVisibility(View.GONE);
-            addAddressBtn.setVisibility(View.VISIBLE);
         }
 
 

@@ -14,17 +14,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elyeproj.loaderviewlibrary.LoaderTextView;
 import com.example.meropasal.R;
+import com.example.meropasal.models.orders.OrderRes;
 import com.example.meropasal.models.user.User;
+import com.example.meropasal.presenters.order.OrdersPresenter;
 import com.example.meropasal.presenters.user.ProfilePresenter;
 import com.example.meropasal.ui.acount.Contactus;
 import com.example.meropasal.ui.acount.EditProfileDash;
 import com.example.meropasal.ui.acount.EditUserInfo;
 import com.example.meropasal.ui.auth.Logindashboard;
+import com.example.meropasal.ui.order.OrdersView;
 import com.example.meropasal.utiils.Constants;
+import com.example.meropasal.views.OrdersContract;
 import com.example.meropasal.views.ProfileContract;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -43,10 +49,12 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class Account extends Fragment implements ProfileContract.View {
+public class Account extends Fragment implements ProfileContract.View, OrdersContract.View {
         private Button registerbtn, googlelogout, accountlogout;
         private AccessToken accessToken;
         private CircleImageView profileimg;
@@ -61,6 +69,11 @@ public class Account extends Fragment implements ProfileContract.View {
         private static final String TAG = "Account";
         private String fname, lname, location, phone;
         private  String profile_imgURL;
+        private LinearLayout orderslink;
+        private OrdersPresenter ordersPresenter;
+        private String token;
+        private TextView orderscount;
+        private  SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,9 +106,13 @@ public class Account extends Fragment implements ProfileContract.View {
         returnedlink = root.findViewById(R.id.returnedlink);
         contactlink = root.findViewById(R.id.contactlink);
         helplink = root.findViewById(R.id.helplink);
+        orderslink = root.findViewById(R.id.orderslink);
+        orderscount = root.findViewById(R.id.orderscount);
+
 
 
         sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -159,11 +176,22 @@ public class Account extends Fragment implements ProfileContract.View {
              signOut();
             }
         });
+
+        orderslink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), OrdersView.class));
+            }
+        });
+
+
+
     }
 
 
     private void logout(){
-        SharedPreferences.Editor editor  = sharedPreferences.edit();
+
+        editor.remove(Constants.PROFILE_PIC);
         editor.remove(Constants.TOKEN);
         editor.remove(Constants.ACCOUNT);
         profile_imgURL = "";
@@ -226,7 +254,8 @@ public class Account extends Fragment implements ProfileContract.View {
 
             Picasso.get().load(url).into(profileimg);
 
-
+        editor.putString(Constants.PROFILE_PIC, profile_imgURL);
+        editor.commit();
     }
 
     //updating UI according to logged in account
@@ -282,10 +311,15 @@ public class Account extends Fragment implements ProfileContract.View {
                      profile_imgURL = "https://graph.facebook.com/" + id + "/picture?type=normal";
 
 
+
+
                     fname = object.getString("first_name");
                     lname = object.getString("last_name");
                     location = "";
                     phone = "";
+
+                    editor.putString(Constants.PROFILE_PIC, profile_imgURL);
+                    editor.commit();
 
                     Picasso.get().load(profile_imgURL).into(profileimg);
 
@@ -308,10 +342,12 @@ public class Account extends Fragment implements ProfileContract.View {
         String token = sharedPreferences.getString(Constants.TOKEN, null);
         String account = sharedPreferences.getString(Constants.ACCOUNT, null);
 
+
         Log.d(TAG, "checkAccountLogin: " + account);
         if(token != null  && account != null ){
                 profilePresenter.getProfile(token);
-
+            ordersPresenter = new OrdersPresenter(this);
+            ordersPresenter.getOrdersByUser(token);
         }else{
 
         }
@@ -348,6 +384,17 @@ public class Account extends Fragment implements ProfileContract.View {
         fullname.setText(user.getFirstname() + " " + user.getLastname());
 
         profile_imgURL = "";
+
+    }
+
+    @Override
+    public void ordersByUsers(List<OrderRes> orders) {
+        orderscount.setText(orders.size() + "");
+
+    }
+
+    @Override
+    public void cancelOrders(String message) {
 
     }
 

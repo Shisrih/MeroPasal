@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.product.OrderConfirm">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/pdttoolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            android:background="@color/colorPrimary" >
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+
+                    android:layout_centerInParent="true"
+
+                    android:id="@+id/backbtn"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/backbtn"
+                    android:text="Your Orders"
+                    android:padding="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/alwayswhite"
+                    android:textSize="20dp"
+                    />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_below="@+id/appBar"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            tools:context=".ui.product.OrderConfirm">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/orderlist"
+
+                />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Cancel Order"
+        android:background="@color/colorPrimary"
+        android:id="@+id/cancelorder"
+        android:textColor="@color/alwayswhite"
+        />
+</RelativeLayout>

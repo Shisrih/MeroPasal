@@ -63,14 +63,19 @@ public class CustomerReviews extends AppCompatActivity implements ProductReviews
         Intent intent = getIntent();
         avgRating = intent.getFloatExtra("avgrating", 0);
         productid = intent.getStringExtra("productid");
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        token = sharedPreferences.getString(Constants.TOKEN, null);
 
         viewInit();
-        dialogInit();
-
+        if(token != null) {
+            dialogInit();
+        }
         reviewdialogbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.show();
+                if(token != null){
+                    dialog.show();
+                }
             }
         });
     }
@@ -83,12 +88,8 @@ public class CustomerReviews extends AppCompatActivity implements ProductReviews
         reviewtxt = dialog.findViewById(R.id.reviewtxt);
         submitbtn = dialog.findViewById(R.id.submitbtn);
 
+            productReviewsPresenter.getRatingByUser(token, productid);
 
-
-        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
-        token = sharedPreferences.getString(Constants.TOKEN, null);
-
-        productReviewsPresenter.getRatingByUser(token, productid);
 
         dialogRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override

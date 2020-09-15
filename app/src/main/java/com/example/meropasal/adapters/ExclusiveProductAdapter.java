@@ -80,10 +80,10 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
 
             final DbHelper helper = new DbHelper(context);
 
-            final SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+             SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
 
 
-            final String userid  = sharedPreferences.getString(Constants.USER_ID, null);
+             String userid  = sharedPreferences.getString(Constants.USER_ID, null);
 
             holder.cartbtn.setOnClickListener(new View.OnClickListener() {
                 @Override

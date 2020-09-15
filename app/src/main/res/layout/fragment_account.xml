@@ -148,6 +148,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="vertical"
+               android:id="@+id/orderslink"
                android:layout_weight="1">
 
 
@@ -159,6 +160,7 @@
                    android:text="10"
                    android:textSize="22sp"
                    android:gravity="center"
+                   android:id="@+id/orderscount"
                    android:textColor="@color/alwayswhite"/>
 
                <TextView
@@ -251,7 +253,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Manage Orders"
+                    android:text="Manage Shipping Address"
                     android:id="@+id/managelink"
                     android:drawableLeft="@drawable/ic_orders"
                     android:drawablePadding="10dp"

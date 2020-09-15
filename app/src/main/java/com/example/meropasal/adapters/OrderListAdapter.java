@@ -48,8 +48,6 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyHo
             holder.quantity.setText(oc.getQuantity() + "");
             holder.subtotal.setText("Rs " +  Utility.getFormatedNumber(oc.getTotalPrice() + ""));
 
-//
-//
 //            float total = oc.getTotalPrice() + oc.getShippingCharge();
 //            holder.total.setText("Rs " +  Utility.getFormatedNumber(total + ""));
     }

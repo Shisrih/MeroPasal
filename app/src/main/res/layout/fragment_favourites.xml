@@ -66,7 +66,7 @@
 
 
     <LinearLayout
-        android:id="@+id/emptycart"
+        android:id="@+id/emptyfav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:textAlignment="center"
-            android:text="Your cart is empty"
+            android:text="Your favourites is empty"
             android:textColor="@color/alwaysblack"
             android:textStyle="bold"
             android:textSize="25dp"
@@ -102,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="You have no items in your shopping cart"
+            android:text="You have no items in your favourites"
 
             android:textAlignment="center"
             android:layout_gravity="center_horizontal"
@@ -138,34 +138,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        android:id="@+id/cartlayout"
+        android:id="@+id/favlayout"
         >
 
         <TextView
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:id="@+id/carttitle"
-            android:text="Shopping Cart"
+            android:id="@+id/favtitle"
+            android:text="Your Favourites"
             android:textColor="@color/alwaysblack"
             android:textStyle="bold"
             android:textSize="20dp"
             />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/carttitle"
-            android:text="Total : Rs 10,000"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:id="@+id/carttotal"
-            android:textColor="@color/colorPrimary"
-            android:padding="20dp"
-            />
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cartview"
-            android:layout_below="@+id/carttitle"
+            android:id="@+id/favview"
+            android:layout_below="@+id/favtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="50dp"
@@ -174,9 +164,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/cartcont"
+            android:id="@+id/clearbtn"
             android:layout_alignParentBottom="true"
-            android:text="Proceed To Checkout"
+            android:text="Clear Favourites"
             android:textColor="@color/alwayswhite"
             android:background="@color/colorPrimary"
             />
