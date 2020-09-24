@@ -25,6 +25,9 @@ public class User {
     @SerializedName("token")
     private String token;
 
+    private User user;
+
+
     //For Profile Response
     public User(boolean success, String message, String firstname, String lastname, String location, String phone, String email, String type){
       this.success = success;
@@ -37,11 +40,20 @@ public class User {
         this.type = type;
     }
 
+
+
     //For getting shipping Address
     public User(boolean success, String message, List<ShippingAddress> shippingAddress){
         this.success = success;
         this.message = message;
         this.shippingAddress = shippingAddress;
+    }
+
+
+    public User(boolean success, String message, User user) {
+        this.success = success;
+        this.message = message;
+        this.user = user;
     }
 
     public User(boolean success, String message) {
@@ -70,6 +82,16 @@ public class User {
         this.password = password;
 
     }
+
+
+    //For Updating User Info
+    public User(String firstname, String lastname, String location, String phone){
+        this.firstname= firstname;
+        this.lastname = lastname;
+        this.location = location;
+        this.phone = phone;
+    }
+
 
     //For Auth Response
     public User(boolean success, String message, String token, String _id){
@@ -131,6 +153,10 @@ public class User {
 
     public List<ShippingAddress> getShippingAddress() {
         return shippingAddress;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
 

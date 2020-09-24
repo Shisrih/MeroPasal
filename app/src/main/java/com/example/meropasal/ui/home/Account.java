@@ -27,6 +27,7 @@ import com.example.meropasal.presenters.user.ProfilePresenter;
 import com.example.meropasal.ui.acount.Contactus;
 import com.example.meropasal.ui.acount.EditProfileDash;
 import com.example.meropasal.ui.acount.EditUserInfo;
+import com.example.meropasal.ui.acount.ManageShippingAddress;
 import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.ui.order.OrdersView;
 import com.example.meropasal.utiils.Constants;
@@ -184,6 +185,13 @@ public class Account extends Fragment implements ProfileContract.View, OrdersCon
             }
         });
 
+        managelink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ManageShippingAddress.class));
+            }
+        });
+
 
 
     }
@@ -317,6 +325,8 @@ public class Account extends Fragment implements ProfileContract.View, OrdersCon
                     lname = object.getString("last_name");
                     location = "";
                     phone = "";
+
+                    Log.d(TAG, "onCompleted: " + profile_imgURL);
 
                     editor.putString(Constants.PROFILE_PIC, profile_imgURL);
                     editor.commit();

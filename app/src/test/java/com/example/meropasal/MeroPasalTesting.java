@@ -35,6 +35,8 @@ public class MeroPasalTesting {
             e.printStackTrace();
         }
     }
+
+
     @Test
     public void signup_test(){
         Call<User> userCall = authInterface.register(new User("Hemant","Chand","Dillibazar","9841577822","hemantchand72@gmail.com","Account", "password"));
@@ -82,6 +84,16 @@ public class MeroPasalTesting {
         }
     }
 
-
+    @Test
+    public void shipping_address_test(){
+        Call<User> categoryCall = userInterface.getShippingAddress("6");
+        try{
+            Response<User> categoryResponse = categoryCall.execute();
+            assertTrue(categoryResponse.isSuccessful());
+        }catch (Exception e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
 
 }

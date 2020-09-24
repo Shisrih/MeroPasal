@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,6 +85,7 @@ public class ExclusiveProductAdapter extends RecyclerView.Adapter<ExclusiveProdu
 
 
              String userid  = sharedPreferences.getString(Constants.USER_ID, null);
+
 
             holder.cartbtn.setOnClickListener(new View.OnClickListener() {
                 @Override

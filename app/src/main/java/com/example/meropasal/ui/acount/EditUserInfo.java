@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,11 +14,14 @@ import android.widget.Toast;
 import com.example.meropasal.R;
 import com.example.meropasal.models.user.User;
 import com.example.meropasal.presenters.user.ProfilePresenter;
+import com.example.meropasal.presenters.user.UpdatePresenter;
 import com.example.meropasal.ui.auth.Logindashboard;
 import com.example.meropasal.utiils.Authenticator;
 import com.example.meropasal.utiils.Constants;
+import com.example.meropasal.utiils.Validator;
 import com.example.meropasal.views.ProfileContract;
 import com.example.meropasal.views.UpdateContract;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -31,6 +35,8 @@ public class EditUserInfo extends AppCompatActivity implements ProfileContract.V
     private CircleImageView profileimg;
     private String profile_img, token;
         private ProfilePresenter profilePresenter;
+        private UpdatePresenter presenter;
+
 
 
 
@@ -61,13 +67,65 @@ public class EditUserInfo extends AppCompatActivity implements ProfileContract.V
         phonetxt = findViewById(R.id.phone);
 
         profileimg = findViewById(R.id.profileimg);
+        editbtn = findViewById(R.id.editbtn);
+
+
+
+        editbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateForm();
+            }
+        });
 
 
         profilePresenter = new ProfilePresenter(this);
 
+        presenter = new UpdatePresenter(this);
+
         profilePresenter.getProfile(token);
 
 
+    }
+
+
+    private void validateForm(){
+    String fname = fnametxt.getText().toString();
+    String lname = lnametxt.getText().toString();
+    String address = addresstxt.getText().toString();
+    String phone = phonetxt.getText().toString();
+
+
+
+    int err = 0;
+
+    if(!Validator.validateFields(fname)){
+        err++;
+    }
+
+    if(!Validator.validateFields(lname)){
+        err++;
+    }
+        if(!Validator.validateFields(address)){
+            err++;
+        }
+
+        if(!Validator.validateFields(phone)){
+            err++;
+        }
+
+
+        if(err==0){
+            editUser(fname,lname,address,phone);
+        }
+
+
+    }
+
+
+
+    private void editUser(String fname, String lname, String address, String phone){
+        presenter.updateUser(token, new User(fname, lname, address, phone));
     }
 
     private void checkAuth(){
@@ -98,7 +156,17 @@ public class EditUserInfo extends AppCompatActivity implements ProfileContract.V
 
     @Override
     public void onUpdateUser(User user) {
+        View parentLayout = findViewById(android.R.id.content);
 
+        Snackbar snackbar = Snackbar
+                .make(parentLayout, "User Info Updated!", Snackbar.LENGTH_LONG);
+        snackbar.show();
+
+        fullnametxt.setText(user.getFirstname() + " " + user.getLastname());
+        fnametxt.setText(user.getFirstname());
+        lnametxt.setText(user.getLastname());
+        addresstxt.setText(user.getLocation());
+        phonetxt.setText(user.getPhone());
     }
 
     @Override

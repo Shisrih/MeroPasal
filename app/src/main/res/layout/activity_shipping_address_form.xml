@@ -37,7 +37,7 @@
             android:drawableRight="@drawable/ic_phone2"
             android:drawablePadding="10dp"
             android:hint="Phone Number"
-            android:inputType="textCapWords"
+            android:inputType="number"
             android:padding="15dp" />
 
     </com.google.android.material.textfield.TextInputLayout>

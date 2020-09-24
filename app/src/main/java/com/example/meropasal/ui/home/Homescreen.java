@@ -65,6 +65,8 @@ public class Homescreen extends Fragment implements HomeContract.View {
             apiCalls();
 
         }
+
+        homePresenter.getExclusiveProducts();
         //Instanciating the image-slider adapter in the buymeds fragment//
         ImageSliderAdapter adapter = new ImageSliderAdapter(root.getContext());
         sliderview.setSliderAdapter(adapter);
@@ -125,7 +127,7 @@ public class Homescreen extends Fragment implements HomeContract.View {
 
     private void apiCalls(){
         homePresenter.getCategories("6");
-        homePresenter.getExclusiveProducts();
+
         homePresenter.getLatestProducts();
     }
 

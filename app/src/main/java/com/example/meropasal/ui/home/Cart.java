@@ -188,6 +188,7 @@ public class Cart extends Fragment implements ShippingAddressContract.View, Sele
          String token = sharedPreferences.getString(Constants.TOKEN, null);
 
 
+
         if(token != null){
             presenter = new ShippingAddressPresenter(this);
             presenter.getShippingAddress(token);

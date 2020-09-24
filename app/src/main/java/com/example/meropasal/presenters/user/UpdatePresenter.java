@@ -15,8 +15,8 @@ public class UpdatePresenter implements UpdateContract.Presenter {
     }
 
 
-    public void updateUser(User user){
-        interactor.updateUser(user);
+    public void updateUser(String token, User user){
+        interactor.updateUser(token, user);
     }
 
 

@@ -213,8 +213,6 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
              helper.addToCart(new CartModel(0, userid, id, name, imgList.get(0) , price, 1, price));
                        Snackbar.make(view, "Product Added To Cart", Snackbar.LENGTH_LONG).show();
 
-
-
                 }else{
                     startActivity(new Intent(getApplicationContext(), Logindashboard.class));
                 }
@@ -222,27 +220,32 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         });
 
 
-        if(helper.checkFav(new FavModel(userid, id))){
-            favbtn.playAnimation();
-            favFlag = 1;
+
+
+        if(token != null){
+            if(helper.checkFav(new FavModel(userid, id))){
+                favbtn.playAnimation();
+                favFlag = 1;
+            }
+
+            favbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(favFlag == 0){
+                        favbtn.playAnimation();
+                        helper.addToFav(new FavModel(0, userid, id, name, imgList.get(0) , price));
+                        Snackbar.make(view, "Product Added To Favourites", Snackbar.LENGTH_LONG).show();
+                        favFlag = 1;
+                    }else{
+                        favbtn.setProgress(0);
+                        helper.unFavourite(new FavModel(userid, id));
+                        favFlag = 0;
+                    }
+
+                }
+            });
         }
 
-        favbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(favFlag == 0){
-                    favbtn.playAnimation();
-                    helper.addToFav(new FavModel(0, userid, id, name, imgList.get(0) , price));
-                    Snackbar.make(view, "Product Added To Favourites", Snackbar.LENGTH_LONG).show();
-                    favFlag = 1;
-                }else{
-                    favbtn.setProgress(0);
-                    helper.unFavourite(new FavModel(userid, id));
-                    favFlag = 0;
-                }
-
-            }
-        });
     }
 
 
@@ -285,6 +288,7 @@ public class ProductView extends AppCompatActivity implements ProductContract.Vi
         addAddressBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 startActivity(new Intent(ProductView.this, ShippingAddressForm.class));
             }
         });
